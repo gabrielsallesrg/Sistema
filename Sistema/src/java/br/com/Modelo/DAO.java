@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-// teste 
+// Fazendo uma alteração
 
 public class DAO {
     private final Connection conn;
@@ -16,5 +16,9 @@ public class DAO {
     public DAO () throws SQLException {
         this.conn = (Connection) FabricaDeConexão.getConnection();
     } //construtor  
+    
+    public void exemplo(){
+        System.out.println("Este é um exemplo de mudança, favor me deletar no futuro.");
+    }
     
 } //class
