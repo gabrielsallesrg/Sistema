@@ -20,12 +20,12 @@ Não pegue fila. Pegue um ticket.
 <tr>
 <td>
 <b>
-<a href="/loja.html">LOJA</a>
+<a href="loja.jsp">LOJA</a>
 </b>
 </td>
 <td>
 <b>
-<a href="cliente.html">CLIENTE</a>
+<a href="cliente.jsp">CLIENTE</a>
 </b>
 </td>
 </tr>
