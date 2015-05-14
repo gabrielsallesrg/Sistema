@@ -18,9 +18,9 @@
             <tr>
             <font size="4" face="verdana">
             <td><a href="consultarToken.jsp" target="central" >Entregar Pedido</a></td>
-            <td><a href="excluirPedido.jsp.html" target="_top" >Cadastrar Produto</a></td>
-            <td><a href="excluirPedido.jsp.html" target="_top" >Cadastrar Cliente</a></td>
-            <td><a href="excluirPedido.jsp.html" target="_top" >Estoque</a></td>
+            <td><a href="cadastrarProduto.jsp" target="central" >Cadastrar Produto</a></td>
+            <td><a href="cadastrarCliente.jsp" target="central" >Cadastrar Cliente</a></td>
+            <td><a href="entradaEstoque.jsp" target="central" >Estoque</a></td>
             <td><a href="index.jsp" target="_top" >Sair</a></td>
             </font>
             </tr>

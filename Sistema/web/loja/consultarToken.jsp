@@ -15,10 +15,13 @@
     <center>
         <h1>Consultar Token...</h1>
         <br>
+        <form action="/cp" method="POST">
         TOKEN - <input type="text">
         <br>
         <br>
-        ~<input type="submit" value="Consultar"/>
+        
+            <input type="submit" value="Consultar"/>
+        </form>   
     </center>
     </body>
 </html>

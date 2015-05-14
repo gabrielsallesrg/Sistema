@@ -8,7 +8,7 @@
             <tr>
             <font size="4" face="verdana">
             <td><a href="realizarPedido.jsp" target="central" >Fazer Pedido!</a></td>
-            <td><a href="excluirPedido.jsp.html" target="_top" >Excluir Pedido</a></td>
+            <td><a href="excluirPedido.jsp" target="central" >Excluir Pedido</a></td>
             <td><a href="index.jsp" target="_top" >Sair</a></td>
             </font>
             </tr>
