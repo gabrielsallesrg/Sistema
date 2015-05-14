@@ -4,12 +4,12 @@
         <title>BlocoH - Não pegue fila, pegue um ticket.</title>
         <br><br><br>
     <center>
-        <table>
+        <table cellspacing='10'>
             <tr>
             <font size="4" face="verdana">
-            <td><a href="pedido.html" target="central" >Fazer Pedido!</a></td>
-            <td><a href="pee.html" target="_top" >Relatório de Pedidos</a></td>
-            <td><a href="index.html" target="_top" >Voltar</a></td>
+            <td><a href="realizarPedido.jsp" target="central" >Fazer Pedido!</a></td>
+            <td><a href="excluirPedido.jsp.html" target="_top" >Excluir Pedido</a></td>
+            <td><a href="index.jsp" target="_top" >Sair</a></td>
             </font>
             </tr>
         </table>

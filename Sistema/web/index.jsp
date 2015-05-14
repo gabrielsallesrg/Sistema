@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<html><body bgcolor ='yellow'>
+<html><body bgcolor ='#DCDCDC'>
         <title>Gakem - Não pegue fila, pegue um ticket.</title>
         <br><br><br><br><br><br><br>
     <center>
@@ -14,12 +14,12 @@
         <tr>
             <td>
                 <b>
-                    <a href="loja.jsp">LOJA</a>
+                    <a href="loja/loja.jsp">LOJA</a>
                 </b>
             </td>
             <td>
                 <b>
-                    <a href="cliente.jsp">CLIENTE</a>
+                    <a href="cliente/cliente.jsp">CLIENTE</a>
                 </b>
             </td>
         </tr>
