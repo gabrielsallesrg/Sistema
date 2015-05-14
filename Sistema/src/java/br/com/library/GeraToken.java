@@ -4,7 +4,7 @@ import java.security.SecureRandom;
 
 public class GeraToken {
     private String codigo;
-    private final int tamToken = 8; //Este define o tamanho do token.
+    private final int tamToken = 5; //Este define o tamanho do token. 5 é bom e fornece 52.521.700 combinações
     private final String[] letras;
     private int i;
     private String TOKEN;

@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Gakem - Portal do Cliente</title>
     </head>
    
         <FRAMESET ROWS="15%,*" FRAMEBORDER="1" FRAMESPACING="3">
