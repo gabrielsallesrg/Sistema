@@ -1,6 +1,6 @@
 package br.com.Modelo;
 
-public class pedido {
+public class pedido { //faltando idProduto?
     int idPedido, quantidade;
     double valor;
     char situacao;
@@ -9,13 +9,13 @@ public class pedido {
     public pedido(int idPedido, int quantidade, double valor, char situacao, String emissao, String retirada, String pagamento, String token) {
         this.idPedido = idPedido;
         this.quantidade = quantidade;
-        this.valor = valor;
+        this.valor = valor; //RETIRAR? - primeira normativa.
         this.situacao = situacao;
         this.emissao = emissao;
         this.retirada = retirada;
         this.pagamento = pagamento;
         this.token = token;
-    } //construtor
+    } //construtor    
 
     public int getIdPedido() {
         return idPedido;

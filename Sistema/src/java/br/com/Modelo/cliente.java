@@ -1,10 +1,11 @@
 package br.com.Modelo;
 
 public class cliente {
-    int idCliente, telefone;
+    int idCliente;
+    String telefone;
     String nome, sobrenome, endereco, cidade, email;
 
-    public cliente(int idCliente, int telefone, String nome, String sobrenome, String endereco, String cidade, String email) {
+    public cliente(int idCliente, String telefone, String nome, String sobrenome, String endereco, String cidade, String email) {
         this.idCliente = idCliente;
         this.telefone = telefone;
         this.nome = nome;
@@ -13,6 +14,14 @@ public class cliente {
         this.cidade = cidade;
         this.email = email;
     } //construtor completo
+    public cliente(String telefone, String nome, String sobrenome, String endereco, String cidade, String email) {
+        this.telefone = telefone;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.endereco = endereco;
+        this.cidade = cidade;
+        this.email = email;
+    } //construtor sem idCliente
 
     public int getIdCliente() {
         return idCliente;
@@ -20,10 +29,10 @@ public class cliente {
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
     public String getNome() {
