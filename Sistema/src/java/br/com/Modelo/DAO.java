@@ -62,5 +62,46 @@ public class DAO {
     }
     
     
+    public List<pedido> listaPedidos(int $cliente){
+        
+        
+        try{
+            String SQL = " SELECT * FROM PEDIDOS ";
+            if ($cliente > 0) { 
+                SQL += " WHILE Cliente_idCliente = '" + $cliente + " ' ";
+            }
+            
+            List<pedido> aut = new ArrayList<pedido>();
+            
+            PreparedStatement stmt = this.conn.prepareStatement(SQL);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                pedido ped = new pedido();
+                
+                ped.setEmissao(rs.getDate("emissao"));
+                ped.setIdPedido(rs.getInt("idPedido"));
+                ped.setPagamento(rs.getString("pagamento"));
+                ped.setQuantidade(rs.getInt("quantidade"));
+                ped.setRetirada(rs.getDate("retirada"));
+                ped.setToken(rs.getString("token"));
+                ped.setValor(rs.getFloat("valor"));
+                
+                
+                aut.add(ped);
+            }
+            rs.close();
+            stmt.close();
+            return aut;
+            
+            
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
+        
+        
+    }
+    
     
 } //class

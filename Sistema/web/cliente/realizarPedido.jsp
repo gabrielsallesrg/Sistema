@@ -32,7 +32,7 @@
                    <%
                     while (pli.hasNext()) {
                         produtos a = (produtos) pli.next();
-                %> 
+                    %> 
             <tbody>
 
                 <tr>

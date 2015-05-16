@@ -5,6 +5,11 @@ public class pedido { //faltando idProduto?
     double valor;
     char situacao;
     String emissao, retirada, pagamento, token;
+    
+    
+    public pedido(){
+        
+    }
 
     public pedido(int idPedido, int quantidade, double valor, char situacao, String emissao, String retirada, String pagamento, String token) {
         this.idPedido = idPedido;
