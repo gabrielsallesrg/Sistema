@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class FabricaDeConexão {
-    private static final String BANCODADOS = "Sistema";
+    private static final String BANCODADOS = "SISTEMA";
     private static final String URL = "jdbc:mysql://localhost/"+BANCODADOS;
     private static final String USUARIO = "root";
     private static final String SENHA = "123456";

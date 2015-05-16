@@ -4,9 +4,17 @@
         <servlet-name>criarCliente</servlet-name>
         <servlet-class>br.com.Controle.criarCliente</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>realizaPedido</servlet-name>
+        <servlet-class>br.com.Controle.realizaPedido</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>criarCliente</servlet-name>
         <url-pattern>/CC</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>realizaPedido</servlet-name>
+        <url-pattern>/RP</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

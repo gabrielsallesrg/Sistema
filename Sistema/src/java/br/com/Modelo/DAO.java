@@ -32,4 +32,35 @@ public class DAO {
             throw new RuntimeException(e);
         } //catch
     }
+    
+    public List<produtos> listaProdutos() { 
+      
+            
+        try {
+            List<produtos> aut = new ArrayList<produtos>();
+            String SQL = "SELECT * FROM PRODUTOS";
+            PreparedStatement stmt = this.conn.prepareStatement(SQL);
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                produtos prod = new produtos();
+                
+                prod.setDescricao(rs.getString("descricao"));
+                prod.setEstoque(rs.getInt("estoque"));
+                prod.setIdProduto(rs.getInt("idProdutos"));
+                prod.setUnidades(rs.getString("unidade"));
+                prod.setValor(rs.getFloat("valor"));
+                aut.add(prod);
+            }
+            rs.close();
+            stmt.close();
+            return aut;
+        } //try
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        } //catch
+    }
+    
+    
+    
 } //class

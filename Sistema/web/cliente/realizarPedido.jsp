@@ -1,4 +1,5 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="br.com.Modelo.DAO"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="java.util.*, br.com.Modelo.*, br.com.Controle.*, java.net.*, java.text.*"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,8 +9,16 @@
     <body>
         <h1>Realize um pedido</h1>
         
-        <br>
+        <%
+            DAO adao = new DAO();
+            List listaProdutos = adao.listaProdutos();
+            Iterator pli = listaProdutos.iterator();
+        %>
         
+        <br>
+    <center>
+        
+        <form name="realizaPedido" action="RP" method="POST">
         <table border="1" cellspacing="2">
             <thead>
                 <tr>
@@ -20,16 +29,27 @@
                     <th>Valor</th>
                 </tr>
             </thead>
+                   <%
+                    while (pli.hasNext()) {
+                        produtos a = (produtos) pli.next();
+                %> 
             <tbody>
+
                 <tr>
-                    <td><input type="checkbox"> </td>
-                    <td>codigo</td>
-                    <td>descrição</td>
-                    <td><input type="text"></td>
-                    <td>Valor</td>
+                    <td><input type="checkbox" name="checado" value="<%= a.getIdProduto() %>"> </td>
+                    <td> <%= a.getIdProduto() %>   </td>
+                    <td> <%= a.getDescricao() %> </td>
+                    <td> <input type="text" name="quantidade">  </td>
+                    <td> <%= a.getValor()  %></td>
                 </tr>
+                <% } %>
             </tbody>
         </table>
+            
+            <input type="submit" name="Realizar" >
+            
+        </form>
+    </center>
 
         
         <br>
