@@ -1,48 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.Controle;
 
+import br.com.Modelo.DAO;
 import br.com.Modelo.produtos;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Alan
- */
-@WebServlet(name = "realizaPedido", urlPatterns = {"/RP"})
-public class realizaPedido extends HttpServlet {
-
+public class consultarIdProduto extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-        HttpSession session = request.getSession(true);
+        try {
             if (session.isNew()) {
-                String incomingURL = request.getRequestURL().toString();
-                String URLwithID = response.encodeRedirectURL(incomingURL);
-                response.setHeader("Custom-newURL", URLwithID);
-            }
-            try{
-                List<produtos> aut = new ArrayList<produtos>();
-                int checado = Integer.parseInt(request.getParameter("checado")) ;
-                System.out.println(checado);
-            }catch (Exception e){
-            }
-        }
+                    String incomingURL = request.getRequestURL().toString();
+                    String URLwithID = response.encodeRedirectURL(incomingURL);
+                    response.setHeader("Custom=newURL",URLwithID);                   
+                } //if
+            int idProdutos = Integer.parseInt(request.getParameter("idProdutos"));
+            if (idProdutos < 1) {
+                response.sendRedirect("erroEstoque.jsp");
+                idProdutos = 0;
+            } //if
+            else {
+                DAO dao = new DAO();
+                produtos p = new produtos();
+                p.setIdProduto(idProdutos);
+                List<produtos> listaProdutos = dao.consultaIdProduto(p);
+                request.setAttribute("listaProdutos", listaProdutos);
+                RequestDispatcher rd = request.getRequestDispatcher("/loja/alterarProduto.jsp");
+                rd.forward(request, response);
+            } //else
+        } //try
+        catch (Exception e) {
+            e.printStackTrace();
+            e.getMessage();
+            String urlErro = "/erroEstoque.jsp";
+            ServletContext sc = getServletContext();
+            RequestDispatcher rd = sc.getRequestDispatcher(urlErro);
+            rd.forward(request, response);        
+        } //catch
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

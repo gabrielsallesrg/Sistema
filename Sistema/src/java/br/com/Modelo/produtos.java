@@ -3,15 +3,12 @@ package br.com.Modelo;
 public class produtos {
     //Campos da tabela "produtos"
     int idProduto, estoque;
-    float valor;
+    double valor;
     String descricao,unidades;
     char situacao;
     
-    public produtos(){
-        
-    }
-    
-    public produtos(int idProduto, int estoque, String unidades, float valor, String descricao, char situacao) {
+    public produtos(){   }    
+    public produtos(int idProduto, int estoque, String unidades, double valor, String descricao, char situacao) {
         this.idProduto = idProduto;
         this.estoque = estoque;
         this.unidades = unidades;
@@ -19,10 +16,18 @@ public class produtos {
         this.descricao = descricao;
         this.situacao = situacao;
     } //construtor completo
-    public produtos(int idProduto, int estoque, String unidades) {
+    public produtos(int idProduto, int estoque, double valor, String descricao, char situacao) {
         this.idProduto = idProduto;
         this.estoque = estoque;
-        this.unidades = unidades;
+        this.valor = valor;
+        this.descricao = descricao;
+        this.situacao = situacao;
+    } //construtor completo
+    public produtos(char situacao, int estoque, String descricao, double valor) {
+        this.situacao = situacao;
+        this.estoque = estoque;
+        this.valor = valor;
+        this.descricao = descricao;
     } //construtor para manipular o estoque    
     
     //setters e getters
@@ -44,10 +49,10 @@ public class produtos {
     public void setUnidades(String unidades) {
         this.unidades = unidades;
     }
-    public float getValor() {
+    public double getValor() {
         return valor;
     }
-    public void setValor(float valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
     public String getDescricao() {

@@ -15,6 +15,7 @@ public class DAO {
         this.conn = (Connection) FabricaDeConexão.getConnection();
     } //construtor     
     
+    /////////////////ADICIONAR TABELAS////////////////////
     public void adicionaCliente (cliente Cliente) { //rever a string sql. idCliente deve ter auto-incremento
         String SQL = "INSERT INTO Cliente (Nome, Sobrenome, Endereco, Telefone, Cidade, Email)"+" VALUES (?,?,?,?,?,?)";
         try {
@@ -31,25 +32,41 @@ public class DAO {
         catch (SQLException e) {
             throw new RuntimeException(e);
         } //catch
-    }
+    } //adicionarCliente
     
-    public List<produtos> listaProdutos() { 
-      
-            
+    public void cadastroProduto (produtos Produto) {
+        String SQL = "INSERT INTO Produtos (descricao, valor, estoque, Situacao)"+" VALUES (?,?,?,?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(SQL);
+            ps.setString(1, Produto.getDescricao());
+            String aux = Double.toString(Produto.getValor());
+            ps.setString(2, aux);
+            aux = Integer.toString(Produto.getEstoque());
+            ps.setString(3, aux);
+            aux = "" + Produto.getSituacao();
+            ps.setString(4, aux);
+            ps.execute();
+            ps.close();
+        } //try
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        } //catch
+    } //cadastrarProduto
+    
+    ////////////////////LISTAR E CONSULTAR TABELAS///////////////
+    public List<produtos> listaProdutos() {            
         try {
             List<produtos> aut = new ArrayList<produtos>();
-            String SQL = "SELECT * FROM PRODUTOS";
+            String SQL = "SELECT * FROM Produtos";
             PreparedStatement stmt = this.conn.prepareStatement(SQL);
-            ResultSet rs = stmt.executeQuery();
-            
+            ResultSet rs = stmt.executeQuery();            
             while(rs.next()){
-                produtos prod = new produtos();
-                
+                produtos prod = new produtos();                
                 prod.setDescricao(rs.getString("descricao"));
                 prod.setEstoque(rs.getInt("estoque"));
                 prod.setIdProduto(rs.getInt("idProdutos"));
                 prod.setUnidades(rs.getString("unidade"));
-                prod.setValor(rs.getFloat("valor"));
+                prod.setValor(rs.getDouble("valor"));
                 aut.add(prod);
             }
             rs.close();
@@ -59,49 +76,79 @@ public class DAO {
         catch (SQLException e) {
             throw new RuntimeException(e);
         } //catch
-    }
+    } //listaProdutos
     
-    
-    public List<pedido> listaPedidos(int $cliente){
-        
-        
+    public List<pedido> listaPedidos(int $cliente){        
         try{
-            String SQL = " SELECT * FROM PEDIDOS ";
+            String SQL = " SELECT * FROM Pedidos ";
             if ($cliente > 0) { 
                 SQL += " WHILE Cliente_idCliente = '" + $cliente + " ' ";
-            }
-            
-            List<pedido> aut = new ArrayList<pedido>();
-            
-            PreparedStatement stmt = this.conn.prepareStatement(SQL);
-            
-            ResultSet rs = stmt.executeQuery();
-            
+            }            
+            List<pedido> aut = new ArrayList<pedido>();            
+            PreparedStatement stmt = this.conn.prepareStatement(SQL);            
+            ResultSet rs = stmt.executeQuery();            
             while(rs.next()){
-                pedido ped = new pedido();
-                
+                pedido ped = new pedido();                
                 ped.setEmissao(rs.getDate("emissao"));
                 ped.setIdPedido(rs.getInt("idPedido"));
                 ped.setPagamento(rs.getString("pagamento"));
                 ped.setQuantidade(rs.getInt("quantidade"));
                 ped.setRetirada(rs.getDate("retirada"));
                 ped.setToken(rs.getString("token"));
-                ped.setValor(rs.getFloat("valor"));
-                
-                
+                ped.setValor(rs.getFloat("valor"));                
                 aut.add(ped);
             }
             rs.close();
             stmt.close();
-            return aut;
-            
-            
+            return aut;            
         }catch(Exception e){
             throw new RuntimeException(e);
-        }
-        
-        
+        }    
+    } //listaPedidos
+    
+    public List<produtos> consultaIdProduto (produtos Produto) {
+        try {
+            int idProdutos = Produto.getIdProduto();
+            List<produtos> listaProdutos = new ArrayList<produtos>(); //cria uma lista do tipo Autores
+            String SQL = "SELECT * FROM Produtos WHERE idProdutos LIKE ?";  //frase SQL          
+            PreparedStatement st = this.conn.prepareStatement(SQL); //manda a frase para o banco
+            st.setString(1,Integer.toString(idProdutos));
+            ResultSet rs = st.executeQuery(); //executa a frase SQL e recebe o resultado do retorno do banco
+            while (rs.next()) { //enquanto houver item na lista
+                produtos po = new produtos(); //cria um novo objeto                
+                po.setDescricao(rs.getString("descricao"));
+                po.setEstoque(rs.getInt("estoque"));
+                po.setIdProduto(rs.getInt("idProdutos"));
+                po.setSituacao(rs.getString("Situacao").charAt(0)); //função que recebe o index 1 da String "rs.getString("Situacao").
+                po.setValor(rs.getDouble("valor"));                
+                listaProdutos.add(po); //adiciona o objeto à lista
+            } //while
+            rs.close();
+            st.close();
+            return listaProdutos;
+        } //try
+        catch (SQLException erro) {
+            throw new RuntimeException(erro);
+        } //catch
     }
     
-    
+    ////////////ALTERAR TABELAS/////////////
+    public void alteraProduto (produtos Produto) {
+        String SQL = "UPDATE Produtos SET descricao=?, valor=?, estoque=?, situacao=? WHERE idProdutos LIKE ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(SQL);
+            ps.setString(1, Produto.getDescricao());
+            String aux = Double.toString(Produto.getValor());
+            ps.setString(2, aux);
+            aux = Integer.toString(Produto.getEstoque());
+            ps.setString(3, aux);
+            aux = "" + Produto.getSituacao();
+            ps.setString(4, aux);
+            ps.execute();
+            ps.close();
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        } //catch
+    } //alteraProduto
 } //class

@@ -8,6 +8,18 @@
         <servlet-name>realizaPedido</servlet-name>
         <servlet-class>br.com.Controle.realizaPedido</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cadastrarProduto</servlet-name>
+        <servlet-class>br.com.Controle.cadastrarProduto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>alterarProduto</servlet-name>
+        <servlet-class>br.com.Controle.alterarProduto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>consultarIdProduto</servlet-name>
+        <servlet-class>br.com.Controle.consultarIdProduto</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>criarCliente</servlet-name>
         <url-pattern>/CC</url-pattern>
@@ -15,6 +27,18 @@
     <servlet-mapping>
         <servlet-name>realizaPedido</servlet-name>
         <url-pattern>/RP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cadastrarProduto</servlet-name>
+        <url-pattern>/CP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>alterarProduto</servlet-name>
+        <url-pattern>/AP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>consultarIdProduto</servlet-name>
+        <url-pattern>/CIP</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
