@@ -89,11 +89,11 @@ public class DAO {
             ResultSet rs = stmt.executeQuery();            
             while(rs.next()){
                 pedido ped = new pedido();                
-                ped.setEmissao(rs.getDate("emissao"));
+                ped.setEmissao(rs.getDate("emissao").toString());
                 ped.setIdPedido(rs.getInt("idPedido"));
                 ped.setPagamento(rs.getString("pagamento"));
                 ped.setQuantidade(rs.getInt("quantidade"));
-                ped.setRetirada(rs.getDate("retirada"));
+                ped.setRetirada(rs.getDate("retirada").toString());
                 ped.setToken(rs.getString("token"));
                 ped.setValor(rs.getFloat("valor"));                
                 aut.add(ped);
@@ -131,6 +131,38 @@ public class DAO {
             throw new RuntimeException(erro);
         } //catch
     }
+    
+    
+    public List<pedido> listaPedidobyToken(pedido pedid) {            
+        try {
+            List<pedido> aut = new ArrayList<pedido>();
+            String SQL = "SELECT * FROM pedido WHILE token = ?";
+            
+            PreparedStatement stmt = this.conn.prepareStatement(SQL);  
+            stmt.setString(1, pedid.getToken());
+            ResultSet rs = stmt.executeQuery();            
+            
+            
+            while(rs.next()){
+                pedido ped = new pedido();                
+                ped.setEmissao(rs.getDate("emissao").toString());
+                ped.setIdPedido(rs.getInt("idPedido"));
+                ped.setPagamento(rs.getString("pagamento"));
+                ped.setQuantidade(rs.getInt("quantidade"));
+                ped.setRetirada(rs.getDate("retirada").toString());
+                ped.setToken(rs.getString("token"));
+                ped.setValor(rs.getFloat("valor"));                
+                aut.add(ped);
+            }
+            
+            rs.close();
+            stmt.close();
+            return aut;
+        } //try
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        } //catch
+    } //listaProdutos
     
     ////////////ALTERAR TABELAS/////////////
     public void alteraProduto (produtos Produto) {
