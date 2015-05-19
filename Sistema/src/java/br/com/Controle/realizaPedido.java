@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,6 +43,13 @@ public class realizaPedido extends HttpServlet {
                 int checado = Integer.parseInt(request.getParameter("checado")) ;
                 System.out.println(checado);
             }catch (Exception e){
+                
+            e.printStackTrace(); //imprime no log do servidor
+            e.getMessage(); //recebe a mensagem para que possa ser utilizada em alguma página.
+            String urlErro = "/erroCliente.jsp";
+            ServletContext sc = getServletContext(); //variável sc recebe o contexto do servlet (uma página jsp, outro servlet, uma conexão...)
+            RequestDispatcher rd = sc.getRequestDispatcher(urlErro); //redireciona o contexto para a url urlErro(string).
+            rd.forward(request, response);
             }
         }
     }

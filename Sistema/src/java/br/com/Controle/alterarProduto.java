@@ -3,10 +3,13 @@ package br.com.Controle;
 import br.com.Modelo.DAO;
 import br.com.Modelo.produtos;
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class alterarProduto extends HttpServlet {
 
@@ -14,16 +17,19 @@ public class alterarProduto extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
+            HttpSession session = request.getSession(true);
             if (session.isNew()) { //verificar se essa sessão já existe ou não
                 String incomingURL = request.getRequestURL().toString();
                 String URLwithID = response.encodeRedirectURL(incomingURL);  //coloca um número de identificação na string (ID da sesão)
                 response.setHeader("Custom=newURL", URLwithID); //setta o cabeçalho dos documentos de url que rodam no servidor com as novas configurações de identificação do novo usuário da nova sessão
             } //if
+            
             int idProdutos = Integer.parseInt(request.getParameter("idProdutos"));
             String descricao = request.getParameter("descricao");
             double valor = Double.parseDouble(request.getParameter("valor"));
             int estoque = Integer.parseInt(request.getParameter("estoque"));
-            char situacao = (request.getParameter("situacao"));
+ 
+    //        char situacao = request.getParameter("situacao");
             if (descricao.isEmpty() || descricao == null) {
                 descricao = "";
                 response.sendRedirect("/erroAlterar.jsp");
@@ -36,11 +42,14 @@ public class alterarProduto extends HttpServlet {
                 estoque = 0;
                 response.sendRedirect("/erroAlterar.jsp");
             }
-            else if (situacao != '1' && situacao != '0') {
+      /*      else if (situacao != '1' && situacao != '0') {
                 situacao = ' ';
                 response.sendRedirect("/erroAlterar.jsp");
-            }
+            }*/
             else {
+                
+                char situacao = '0';
+                
                 produtos Produto = new produtos(idProdutos, estoque, valor, descricao, situacao);
                 DAO dao = new DAO();
                 dao.alteraProduto(Produto);

@@ -4,7 +4,9 @@
     Author     : Alan
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"
+            import="br.com.Controle.*, br.com.Modelo.*, br.com.library.*"
+        %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,8 +16,8 @@
     <body>
     <center>
         <h1>Cadastrar Cliente</h1>
-        
-        <form name="cadastrarCliente" action="CC" method="POST">
+
+        <form name="criarCliente" action="CC" method="POST">
         
         <table border="0">
             <thead>
@@ -41,7 +43,7 @@
         </table>
 
         
-        <input type="submit" name="Cadastrar">
+        <input type="submit" value="cadastrarCliente" name="Cadastrar">
                 
         </form>
     </center>

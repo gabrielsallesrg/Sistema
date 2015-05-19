@@ -12,13 +12,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class consultarToken extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
         response.setContentType("text/html;charset=UTF-8");
         try { 
+            HttpSession session = request.getSession(true);
             if (session.isNew()) {
                     String incomingURL = request.getRequestURL().toString();
                     String URLwithID = response.encodeRedirectURL(incomingURL);
@@ -32,7 +35,7 @@ public class consultarToken extends HttpServlet {
                 
                 ped.setToken(token);
                 
-                 List<pedido> listaPedidobyToken = dao.listaPedidobyToken(ped);
+                List<pedido> listaPedidobyToken = dao.listaPedidobyToken(ped);
                 
                 
                 request.setAttribute("listaPedidobyToken", token);

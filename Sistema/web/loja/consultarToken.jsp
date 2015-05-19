@@ -15,7 +15,7 @@
     <center>
         <h1>Consultar Token...</h1>
         <br>
-        <form action="/cp" method="POST">
+        <form action="CP" method="POST">
         TOKEN - <input type="text">
         <br>
         <br>

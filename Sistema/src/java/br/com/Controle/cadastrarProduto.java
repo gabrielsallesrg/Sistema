@@ -4,10 +4,13 @@ import br.com.Modelo.DAO;
 import br.com.Modelo.produtos;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class cadastrarProduto extends HttpServlet {
 
@@ -15,6 +18,7 @@ public class cadastrarProduto extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
+            HttpSession session = request.getSession(true);
             if (session.isNew()) { //verificar se essa sessão já existe ou não
                 String incomingURL = request.getRequestURL().toString();
                 String URLwithID = response.encodeRedirectURL(incomingURL);  //coloca um número de identificação na string (ID da sesão)
@@ -45,9 +49,9 @@ public class cadastrarProduto extends HttpServlet {
                 DAO dao = new DAO();
                 dao.cadastroProduto(Produto);
                 String urlOK = "/loja/produtoCadastrado.jsp";
-                ServletContext sc = getServletContext();
-                RequestDispatcher rd = sc.getRequestDispatcher(urlOK);
-                rd.forward(request, response);
+        //        ServletContext sc = getServletContext();
+        //        RequestDispatcher rd = sc.getRequestDispatcher(urlOK);
+        //        rd.forward(request, response);
                 descricao = "";
                 valor = 0d;
                 estoque = 0;
@@ -57,7 +61,7 @@ public class cadastrarProduto extends HttpServlet {
         catch (Exception erro) {
             erro.printStackTrace(); //imprime no log do servidor
             erro.getMessage(); //recebe a mensagem para que possa ser utilizada em alguma página.
-            String urlErro = "/erroEstoque.jsp";
+           String urlErro = "/erroEstoque.jsp";
             ServletContext sc = getServletContext(); //variável sc recebe o contexto do servlet (uma página jsp, outro servlet, uma conexão...)
             RequestDispatcher rd = sc.getRequestDispatcher(urlErro); //redireciona o contexto para a url urlErro(string).
             rd.forward(request, response);

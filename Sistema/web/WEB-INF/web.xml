@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>criarCliente</servlet-name>
-        <servlet-class>br.com.Controle.criarCliente</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>realizaPedido</servlet-name>
         <servlet-class>br.com.Controle.realizaPedido</servlet-class>
     </servlet>
@@ -20,10 +16,10 @@
         <servlet-name>consultarIdProduto</servlet-name>
         <servlet-class>br.com.Controle.consultarIdProduto</servlet-class>
     </servlet>
-    <servlet-mapping>
+    <servlet>
         <servlet-name>criarCliente</servlet-name>
-        <url-pattern>/CC</url-pattern>
-    </servlet-mapping>
+        <servlet-class>br.com.Controle.criarCliente</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>realizaPedido</servlet-name>
         <url-pattern>/RP</url-pattern>
@@ -39,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>consultarIdProduto</servlet-name>
         <url-pattern>/CIP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>criarCliente</servlet-name>
+        <url-pattern>/CC</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

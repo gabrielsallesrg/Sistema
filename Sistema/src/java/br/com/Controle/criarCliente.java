@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 public class criarCliente extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
         try {
             HttpSession session = request.getSession(true); //definindo que a sessão é verdadeira
@@ -65,7 +65,7 @@ public class criarCliente extends HttpServlet {
             String urlErro = "/erroCliente.jsp";
             ServletContext sc = getServletContext(); //variável sc recebe o contexto do servlet (uma página jsp, outro servlet, uma conexão...)
             RequestDispatcher rd = sc.getRequestDispatcher(urlErro); //redireciona o contexto para a url urlErro(string).
-            rd.forward(request, response);
+            //rd.forward(request, response);
         } //catch
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
