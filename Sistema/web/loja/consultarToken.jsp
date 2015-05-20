@@ -4,7 +4,9 @@
     Author     : ti
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"
+            import="br.com.Controle.*, br.com.Modelo.*, br.com.library.*"
+        %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,13 +16,13 @@
     <body>
     <center>
         <h1>Consultar Token...</h1>
-        <br>
-        <form action="CP" method="POST">
-        TOKEN - <input type="text">
+        <form name="consultarToken" action="../CT" method="POST">
+        <br>    
+        TOKEN - <input type="text" name="token">
         <br>
         <br>
         
-            <input type="submit" value="Consultar"/>
+            <input type="submit" value="Consultar" name="consultarToken"/>
         </form>   
     </center>
     </body>

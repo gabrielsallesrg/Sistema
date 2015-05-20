@@ -29,6 +29,8 @@ public class consultarToken extends HttpServlet {
                 } //if
             String token = request.getParameter("token");
             
+            System.out.println("Token = " + token);
+            
 
                 DAO dao = new DAO();
                 pedido ped = new pedido();
