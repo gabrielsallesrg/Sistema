@@ -4,7 +4,9 @@
     Author     : Alan
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"
+            import="br.com.Controle.*, br.com.Modelo.*, br.com.library.*"
+            %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,6 +16,11 @@
     <body>
         <center>
         <h1>Cadastrar Produto</h1>
+        <%
+            System.out.println("cadastrarProduto.jsp");
+        %>
+        
+        <form name="cadastrarProduto" action="../CP" method="POST">
         <br>
     
         <table border="1" cellspacing="2">
@@ -26,15 +33,15 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
+                    <td><input type="text" name="descricao"></td>
+                    <td><input type="text" name="estoque"></td>
+                    <td><input type="text" name="valor"></td>
                 </tr>
             </tbody>
         </table>
     
         <br>
-        <input type="submit" name="Cadastrar">
+        <input type="submit" value="Cadastrar" name="cadastrarProduto">
     </center>    
     </body>
 </html>

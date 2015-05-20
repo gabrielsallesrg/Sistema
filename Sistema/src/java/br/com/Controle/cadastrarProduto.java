@@ -24,25 +24,53 @@ public class cadastrarProduto extends HttpServlet {
                 String URLwithID = response.encodeRedirectURL(incomingURL);  //coloca um número de identificação na string (ID da sesão)
                 response.setHeader("Custom=newURL", URLwithID); //setta o cabeçalho dos documentos de url que rodam no servidor com as novas configurações de identificação do novo usuário da nova sessão
             } //if
+            
+            System.out.println("cadastrarProduto.java");
+            
             String descricao = request.getParameter("descricao");
-            double valor = Double.parseDouble(request.getParameter("valor"));
-            int estoque = Integer.parseInt(request.getParameter("estoque"));
+            //double valor = Double.parseDouble(request.getParameter("valor"));
+            double valor;
+            String aux_valor = request.getParameter("valor");
+            if (aux_valor == null || aux_valor.isEmpty()){
+                valor = -1; // -1 enviará para a página de erroEstoque.jsp
+            }
+            else{
+                valor = Double.parseDouble(aux_valor);
+            }
+            //int estoque = Integer.parseInt(request.getParameter("estoque"));
+            int estoque;
+            String aux_estoque = request.getParameter("valor");
+            if (aux_estoque == null || aux_estoque.isEmpty()){
+                estoque = -1; // -1 enviará para a página de erroEstoque.jsp
+            }
+            else{
+                estoque = Integer.parseInt(aux_estoque);
+            }
             char situacao = ' ';
+            
+            RequestDispatcher dispatcher;
+            ServletContext servletContext = getServletContext();
+            dispatcher = servletContext.getRequestDispatcher("/erroEstoque.jsp");
+            
+            System.out.println("Descrição = " + descricao);
+            System.out.println("Estoque = " + estoque);
+            System.out.println("Valor = " + valor);
+            
             if (estoque > 0)
                 situacao = '1'; //Produto automaticamente settado como ativo.
             else if (estoque == 0)
                 situacao = '0'; //produto inativo.
             if (descricao.isEmpty() || descricao == null) {
                 descricao = "";
-                response.sendRedirect("/erroEstoque.jsp");
+                dispatcher.forward(request, response);
             }
             else if (valor < 0) {
                 valor = 0d;
-                response.sendRedirect("/erroEstoque.jsp");
+                dispatcher.forward(request, response);
             }
             else if (estoque < 0) {
                 estoque = 0;
-                response.sendRedirect("/erroEstoque.jsp");
+                dispatcher.forward(request, response);
             }
             else {
                 produtos Produto = new produtos(situacao, estoque, descricao, valor);
