@@ -17,33 +17,33 @@
     <center>
         <h1>Cadastrar Cliente</h1>
 
-        <form name="criarCliente" action="CC" method="POST">
+        <form name="criarCliente" action="../CC" method="POST">
         
         <table border="0">
             <thead>
                 <tr>
-                    <th>primeiroNome</th>
-                    <th>segundoNome</th>
-                    <th>endereco</th>
-                    <th>telefone</th>
-                    <th>cidade</th>
-                    <th>email</th>
+                    <th>Primeiro Nome</th>
+                    <th>Segundo Nome</th>
+                    <th>Endereço</th>
+                    <th>Telefone</th>
+                    <th>Cidade</th>
+                    <th>Email</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
-                    <td><input type="text"></td>
+                    <td><input type="text" name="primeiroNome"></td>
+                    <td><input type="text" name="segundoNome"></td>
+                    <td><input type="text" name="endereco"></td>
+                    <td><input type="text" name="telefone"></td>
+                    <td><input type="text" name="cidade"></td>
+                    <td><input type="text" name="email"></td>
                 </tr>
             </tbody>
         </table>
-
         
-        <input type="submit" value="cadastrarCliente" name="Cadastrar">
+        
+            <input type="submit" value="Cadastrar Cliente" name="Cadastrar">
                 
         </form>
     </center>

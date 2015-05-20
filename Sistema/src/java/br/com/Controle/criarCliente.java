@@ -13,9 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class criarCliente extends HttpServlet {
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
+        
         try {
             HttpSession session = request.getSession(true); //definindo que a sessão é verdadeira
             if (session.isNew()) { //verificar se essa sessão já existe ou não
@@ -23,6 +24,7 @@ public class criarCliente extends HttpServlet {
                 String URLwithID = response.encodeRedirectURL(incomingURL);  //coloca um número de identificação na string (ID da sesão)
                 response.setHeader("Custom=newURL", URLwithID); //setta o cabeçalho dos documentos de url que rodam no servidor com as novas configurações de identificação do novo usuário da nova sessão
             } //if
+            
             //Formulário do cliente
             String pNome = request.getParameter("primeiroNome"); //obrigatório
             String sNome = request.getParameter("segundoNome"); //obrigatório
@@ -30,21 +32,26 @@ public class criarCliente extends HttpServlet {
             String telefone = request.getParameter("telefone"); //obrigatório
             String cidade = request.getParameter("cidade"); //obrigatório
             String email = request.getParameter("email");            
+    
+            RequestDispatcher dispatcher;
+            ServletContext servletContext = getServletContext();
+            dispatcher = servletContext.getRequestDispatcher("/erroCliente.jsp");
+            
             if (pNome == null || pNome.isEmpty()) {
                 pNome = "";
-                response.sendRedirect("/erroCliente.jsp");
+                dispatcher.forward(request, response);
             } //if
             else if (sNome == null || sNome.isEmpty()) {
                 sNome = "";
-                response.sendRedirect("/erroCliente.jsp");
+                dispatcher.forward(request, response);
             } //else if
             else if (telefone == null || telefone.isEmpty() || (telefone.length() != 11 && telefone.length() != 10)) {
                 telefone = "";
-                response.sendRedirect("/erroCliente.jsp");
+                dispatcher.forward(request, response);
             } //else if
             else if (cidade == null || cidade.isEmpty()) {
                 cidade = "";
-                response.sendRedirect("/erroCliente.jsp");
+                dispatcher.forward(request, response);
             } //else if
             else {
                 cliente Cliente = new cliente(telefone, pNome, sNome, endereco, cidade, email); //obj. cliente settado.
