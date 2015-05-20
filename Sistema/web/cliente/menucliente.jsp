@@ -9,7 +9,7 @@
             <td><a href="realizarPedido.jsp" target="central" >Fazer Pedido!</a></td>
             <td><a href="relatorioPedido.jsp" target="central" >Relatório</a></td>
             <td><a href="excluirPedido.jsp" target="central" >Excluir Pedido</a></td>
-            <td><a href="index.jsp" target="_top" >Sair</a></td>
+            <td><a href="../index.jsp" target="_top" >Sair</a></td>
             </font>
             </tr>
         </table>

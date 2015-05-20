@@ -21,7 +21,7 @@
             <td><a href="cadastrarProduto.jsp" target="central" >Cadastrar Produto</a></td>
             <td><a href="cadastrarCliente.jsp" target="central" >Cadastrar Cliente</a></td>
             <td><a href="entradaEstoque.jsp" target="central" >Estoque</a></td>
-            <td><a href="index.jsp" target="_top" >Sair</a></td>
+            <td><a href="../index.jsp" target="_top" >Sair</a></td>
             </font>
             </tr>
         </table>
