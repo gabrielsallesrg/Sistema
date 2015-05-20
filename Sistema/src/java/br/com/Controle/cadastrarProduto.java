@@ -49,9 +49,9 @@ public class cadastrarProduto extends HttpServlet {
                 DAO dao = new DAO();
                 dao.cadastroProduto(Produto);
                 String urlOK = "/loja/produtoCadastrado.jsp";
-        //        ServletContext sc = getServletContext();
-        //        RequestDispatcher rd = sc.getRequestDispatcher(urlOK);
-        //        rd.forward(request, response);
+                ServletContext sc = getServletContext();
+                RequestDispatcher rd = sc.getRequestDispatcher(urlOK);
+                rd.forward(request, response);
                 descricao = "";
                 valor = 0d;
                 estoque = 0;

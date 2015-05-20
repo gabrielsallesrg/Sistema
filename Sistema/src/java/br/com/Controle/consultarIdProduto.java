@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,9 +45,9 @@ public class consultarIdProduto extends HttpServlet {
             e.printStackTrace();
             e.getMessage();
             String urlErro = "/erroEstoque.jsp";
-        //    ServletContext sc = getServletContext();
-        //    RequestDispatcher rd = sc.getRequestDispatcher(urlErro);
-        //    rd.forward(request, response);        
+            ServletContext sc = getServletContext();
+            RequestDispatcher rd = sc.getRequestDispatcher(urlErro);
+            rd.forward(request, response);        
         } //catch
     }
 
