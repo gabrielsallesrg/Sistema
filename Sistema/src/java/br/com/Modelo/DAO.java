@@ -164,6 +164,34 @@ public class DAO {
         } //catch
     } //listaProdutos
     
+    public List<pedido> consultaByCliente(int $cliente) {            
+        try{
+            String SQL = " SELECT * FROM Pedidos ";
+            if ($cliente > 0) { 
+                SQL += " WHILE Cliente_idCliente = '" + $cliente + " ' AND WHERE Situacao LIKE 'A';";
+            }            
+            List<pedido> aut = new ArrayList<pedido>();            
+            PreparedStatement stmt = this.conn.prepareStatement(SQL);            
+            ResultSet rs = stmt.executeQuery();            
+            while(rs.next()){
+                pedido ped = new pedido();                
+                ped.setEmissao(rs.getDate("emissao").toString());
+                ped.setIdPedido(rs.getInt("idPedido"));
+                ped.setPagamento(rs.getString("pagamento"));
+                ped.setQuantidade(rs.getInt("quantidade"));
+                ped.setRetirada(rs.getDate("retirada").toString());
+                ped.setToken(rs.getString("token"));
+                ped.setValor(rs.getFloat("valor"));                
+                aut.add(ped);
+            }
+            rs.close();
+            stmt.close();
+            return aut;            
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }    
+    } //listaProdutos
+    
     ////////////ALTERAR TABELAS/////////////
     public void alteraProduto (produtos Produto) {
         String SQL = "UPDATE Produtos SET descricao=?, valor=?, estoque=?, situacao=? WHERE idProdutos LIKE ?";

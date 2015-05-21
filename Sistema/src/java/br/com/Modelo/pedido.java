@@ -1,7 +1,7 @@
 package br.com.Modelo;
 
-public class pedido { //faltando idProduto?
-    int idPedido, quantidade;
+public class pedido {
+    int idPedido, quantidade, idCliente;
     double valor;
     char situacao;
     String emissao, retirada, pagamento, token;
@@ -70,5 +70,10 @@ public class pedido { //faltando idProduto?
     public void setToken(String token) {
         this.token = token;
     } 
-    
+    public int getIdCliente() {
+        return idCliente;
+    }
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
 }
