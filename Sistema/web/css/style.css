@@ -1,0 +1,243 @@
+/*
+Trabalho Linguagem Programação 3
+Description: Sistema de Ticket
+Autor: Alan, Gabriel, Kelvin, Murilo
+Version: 1.0;
+*/
+
+*{margin:0; padding: 0;}
+html, body, span, p, form, img, a, ul, ol, li, table, tr, td, div{
+    margin: 0;
+    padding: 0; 
+    border:none; 
+    outline:none;
+    list-style-type:none;
+}
+
+body{
+    font-family:'Copse',Helvetica,sans-serif; 
+    text-align: center;
+    background: #f6de70;
+}
+
+
+/* --------------------------- Index.jsp - LOGO ---------------------- */
+
+#logo{
+    margin-top: 6%;
+    float: center;
+}
+
+/*------------------------ Index.jsp - TEXTO DA LOGO-------------------*/
+#texto{
+    margin-top: 1%;
+}
+#texto p{
+    font-weight: bold;
+    font-family: Montserrat;
+}
+
+/*------------------------ Index.jsp - MENU INICIO --------------------*/
+#menu-inicio{
+    margin-top: 2%;
+    font-family: Montserrat;
+}
+#menu-inicio ul{
+    margin-top: 2%;
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+}
+#menu-inicio ul li{
+    display: inline;
+}
+#menu-inicio ul li a{
+    padding: 2px 10px;
+    display: inline-block;
+
+    /* visual do link */
+
+    color: #000;
+    text-decoration: none;
+}
+#menu-inicio ul li a:hover{
+    background-color:#f5ae00;
+    color: #000;
+    border-bottom:2px solid #EA0000;
+}
+
+
+/*--------------------------------------------------------------------
+
+    OS ARQUIVOS SEGUINTES ESTAO NA PASTA /cliente
+
+----------------------------------------------------------------------*/
+
+
+
+/*-------------------- menucliente.jsp - MENU CLIENTE --------------- */
+frame{
+    background: #87CEEB;
+}
+#menucliente{
+    font-family: Montserrat;
+}
+#menucliente ul{
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+}
+#menucliente ul li{
+    display: inline;
+}
+#menucliente ul li a{
+    margin-top: 3%;
+    padding: 2px 10px;
+    display: inline-block;
+
+    /* visual do link */
+
+    color: #000;
+    text-decoration: none;
+}
+#menucliente ul li a:hover{
+    background-color:#f5ae00;
+    color: #000;
+    border-bottom:2px solid #EA0000;
+}
+
+/*--------------------------- main.jsp - MAIN ------------------------*/
+#bemvindo{
+    float: left;
+    padding-top: 2%;
+    margin-left: 2%;
+}
+#bemvindo h1{
+    font-family: Montserrat;
+}
+
+/*----------------- excluirPedido.jsp - EXCLUIR PEDIDO-----------------*/
+#excluirpedido{
+    float: left;
+    padding-top: 2%;	
+    margin-left: 2%;
+}
+#excluirpedido h1{
+    font-family: Montserrat;
+}
+
+/*---------------- erroAlterar.jsp - ERRO ALTERAR ---------------------*/
+#texto-erroalterar{
+    margin-top: 20%;
+}
+#texto-erroalterar h1{
+    font-family: Montserrat;
+}
+#opcaoerro ul li a{
+    margin-top: 2%;
+    padding: 2px 10px;
+    display: inline-block;
+
+    /* visual do link */
+
+    color: #000;
+    text-decoration: none;
+}
+#opcaoerro ul li a:hover{
+    background-color:#f5ae00;
+    color: #000;
+    border-bottom:2px solid #EA0000;
+
+}
+
+
+
+/*--------------------------------------------------------------------
+
+    OS ARQUIVOS SEGUINTES ESTAO NA PASTA /loja
+
+----------------------------------------------------------------------*/
+
+
+
+/*-------------------- menuloja.jsp - MENU LOJA ----------------------*/
+
+#menuloja{
+
+    font-family: Montserrat;
+}
+#menuloja ul{
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+}
+#menuloja ul li{
+    display: inline;
+}
+#menuloja ul li a{
+    margin-top: 3%;
+    padding: 2px 10px;
+    display: inline-block;
+
+    /* visual do link */
+
+    color: #000;
+    text-decoration: none;
+}
+#menuloja ul li a:hover{
+    background-color:#f5ae00;
+    color: #000;
+    border-bottom:2px solid #EA0000;
+}
+
+/*-------------------- alteracaoRealizada.jsp - Alteracao -------------*/
+#texto-alteracao{
+    margin-top: 20%;
+}
+#texto-alteracao h1{
+    font-family: Montserrat;
+}
+
+/*-------------------cadastrarProduto.jsp - Cadastrar Prod ------------*/
+#cad-produto{
+    margin-top: 2%;
+}
+#cad-produto h1{
+    font-family: Montserrat;
+}
+#tab-cadproduto{
+    font-family: Montserrat;
+    margin-top: 2%;
+}
+/*----------------- consultarToken.jsp - Consulta Token ---------------*/
+#consulta-token{
+    margin-top: 2%;
+}
+#consulta-token h1{
+    font-family: Montserrat;
+}
+#form-consultatoken{
+    font-family: Montserrat;
+    margin-top: 2%;
+}
+/*---------------- cadastrarCliente.jsp- Cadastrar Cliente ------------*/
+#cadastrarclienteh1{
+    margin-top: 2%;
+}
+#cadastrarclienteh1 h1{
+    font-family: Montserrat;
+}
+#form-cadastro {
+    font-family: Montserrat;
+    position: absolute;   
+    margin-top: 2%;
+    margin-left: 25%;    
+}
+
+/*------------------ entradaEstoque.jsp - Estoque ---------------------*/
+#estoqueh1{
+    margin-top: 2%;
+}
+#estoqueh1 h1{
+    font-family: Montserrat;
+}

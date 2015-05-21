@@ -1,21 +1,36 @@
 <%-- 
     Document   : cliente
-    Created on : 14/05/2015, 17:45:30
-    Author     : ti
+    Created on : 17/05/2015, 19:53:00
+    Author     : kelvin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Gakem - Portal do Cliente</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <title>.:Gakem | Portal do Cliente:.</title>
+
+        <link rel="shortcut icon" href="../images/favicon.ico">
+
+        <!-- Google fonts -->
+        <link href="http://fonts.googleapis.com/css?family=Copse|Montserrat:400,700" rel="stylesheet" type="text/css">
+
+        <!--css-->
+        <link rel="stylesheet" type="text/css" href="../css/style.css" />
     </head>
-   
+
+
         <FRAMESET ROWS="15%,*" FRAMEBORDER="1" FRAMESPACING="3">
-        <FRAME SRC="menucliente.jsp" NAME="superior" NORESIZE SCROLLING="NO">
-        <FRAME SRC="main.jsp" NAME="central" MARGINWIDTH="2" MARGINHEIGHT="3" NORESIZE SCROLLING="YES">
+            <FRAME SRC="menucliente.jsp" NAME="superior" NORESIZE SCROLLING="NO">
+                 <FRAME SRC="main.jsp" NAME="central" MARGINWIDTH="2" MARGINHEIGHT="3" NORESIZE SCROLLING="YES">
         </FRAMESET>
-     <body>
-    </body>
+
+  
 </html>
