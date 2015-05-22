@@ -164,12 +164,9 @@ public class DAO {
         } //catch
     } //listaProdutos
     
-    public List<pedido> consultaByCliente(int $cliente) {            
+    public List<pedido> consultaByCliente(pedido p) {            
         try{
-            String SQL = " SELECT * FROM Pedidos ";
-            if ($cliente > 0) { 
-                SQL += " WHILE Cliente_idCliente = '" + $cliente + " ' AND WHERE Situacao LIKE 'A';";
-            }            
+            String SQL = " SELECT * FROM Pedidos  WHILE Cliente_idCliente = '" +p.getIdCliente()+ "' AND WHERE Situacao LIKE 'A'";   
             List<pedido> aut = new ArrayList<pedido>();            
             PreparedStatement stmt = this.conn.prepareStatement(SQL);            
             ResultSet rs = stmt.executeQuery();            
@@ -187,10 +184,27 @@ public class DAO {
             rs.close();
             stmt.close();
             return aut;            
-        }catch(Exception e){
+        }
+        catch(Exception e){
             throw new RuntimeException(e);
         }    
     } //listaProdutos
+    
+    public int getIdSessao(login log) { //PEGAR O IDCLIENTE COM LOGIN
+        try{
+            String SQL = " SELECT Cliente_idClient FROM Login WHERE account LIKE ?";              
+            PreparedStatement stmt = this.conn.prepareStatement(SQL);
+            stmt.setString(1, log.getAccount());
+            ResultSet rs = stmt.executeQuery();
+            log.setIdCliente(rs.getInt("account"));
+            rs.close();
+            stmt.close();
+            return log.getIdCliente();            
+        }
+        catch(Exception e){
+            throw new RuntimeException(e);
+        }    
+    } //getIdSessao
     
     ////////////ALTERAR TABELAS/////////////
     public void alteraProduto (produtos Produto) {

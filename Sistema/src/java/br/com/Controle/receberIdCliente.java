@@ -1,58 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.Controle;
 
 import br.com.Modelo.DAO;
-import br.com.Modelo.pedido;
-import br.com.Modelo.produtos;
+import br.com.Modelo.login;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Murilo RM
- */
-@WebServlet(name = "consultarByCliente", urlPatterns = {"/CBC"})
-public class consultarByCliente extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+public class receberIdCliente extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
+        try {            
             HttpSession session = request.getSession(true);
             if (session.isNew()) {
                     String incomingURL = request.getRequestURL().toString();
                     String URLwithID = response.encodeRedirectURL(incomingURL);
                     response.setHeader("Custom=newURL",URLwithID);                   
                 } //if
-            //DIFICULDADE: pegar o idCliente da sessão pelo login do usuário.
-            int idCliente=0; //criado para fins de teste.
+            String login = request.getParameter("login");
             DAO dao = new DAO();
-            pedido p = new pedido();
-            p.setIdCliente(idCliente);
-            List<pedido> listaPedidos = dao.consultaByCliente(p);
-            request.setAttribute("listaPedidos", listaPedidos);
-            RequestDispatcher rd = request.getRequestDispatcher("/loja/consultarByCliente.jsp");
+            login log = new login();
+            log.setAccount(login);
+            int idCliente = dao.getIdSessao(log); //recebe o id do cliente pelo login da sessão            
+            RequestDispatcher rd = request.getRequestDispatcher("/cliente/menucliente.jsp"); //Mudar url? 
             rd.forward(request, response);
         } //try
         catch (Exception e) {
@@ -62,8 +38,8 @@ public class consultarByCliente extends HttpServlet {
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher(urlErro);
             rd.forward(request, response);        
-        } //catch        
-    } //function
+        } //catch
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
