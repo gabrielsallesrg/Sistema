@@ -62,6 +62,8 @@
             <ul>
                 <li><a href="consultarToken.jsp"   target="central" >Entregar Pedido</a></li>
                 <li><a href="cadastrarProduto.jsp" target="central" >Cadastrar Produto</a></li>
+                <li><a href="alterarProduto.jsp" target="central" >Alterar Produto</a></li>
+                <li><a href="alterarEstoque.jsp" target="central" >Alterar Estoque</a></li>
                 <li><a href="cadastrarCliente.jsp" target="central" >Cadastrar Cliente</a></li>
                 <li><a href="entradaEstoque.jsp"   target="central" >Estoque</a></li>
                 <li><a href="../index.jsp"         target="_top" >Sair</a></li>

@@ -4,6 +4,10 @@
     Author     : Kelvin 
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="br.com.Modelo.DAO"%>
+<%@page import="br.com.Modelo.pedido"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -28,5 +32,39 @@
         <div id="excluirpedido">
             <h1>Excluir Pedido</h1>
         </div><!--excluirpedido-->
+        <%
+            int idCliente=1; //criado para fins de teste
+            DAO adao = new DAO();
+            List listaPedidos = adao.listaPedidos(idCliente); //pegar o ID do cliente da sessão e enviar como parâmetro
+            Iterator pli = listaPedidos.iterator();
+        %>      
+        <form name="excluirPedido" action="EP" method="POST">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Emissao</th>
+                        <th>Quantidade</th>
+                        <th>Valor</th>
+                        <th>TOKEN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                    while (pli.hasNext()) {
+                        pedido a = (pedido) pli.next();
+                    %> 
+                    <tr>
+                        <td><input type="radio" name="excluirPedido" value="<%=a.getIdPedido()%>" />"></td>
+                        <td><%= a.getEmissao() %></td>
+                        <td><%= a.getQuantidade() %></td>
+                        <td><%= a.getValor() %></td>
+                        <td><%= a.getToken() %></td>
+                    </tr>
+                    <%}%>
+                </tbody>            
+            </table>  
+                <input type="submit" value="Excluir" name="Excluir" />
+        </form>
     </body>
 </html>

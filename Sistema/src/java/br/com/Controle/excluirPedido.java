@@ -1,57 +1,47 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.Controle;
 
-import br.com.Modelo.produtos;
+import br.com.Modelo.DAO;
+import br.com.Modelo.pedido;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Alan
- */
-@WebServlet(name = "realizaPedido", urlPatterns = {"/RP"})
-public class realizaPedido extends HttpServlet {
-
+public class excluirPedido extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-        HttpSession session = request.getSession(true);
-            if (session.isNew()) {
+        HttpSession session = request.getSession(true); //definindo que a sessão é verdadeira
+        try {    
+            if (session.isNew()) { //verificar se essa sessão já existe ou não
                 String incomingURL = request.getRequestURL().toString();
-                String URLwithID = response.encodeRedirectURL(incomingURL);
-                response.setHeader("Custom-newURL", URLwithID);
-            }
-            try{
-                List<produtos> aut = new ArrayList<produtos>();
-                int checado = Integer.parseInt(request.getParameter("checado")) ;
-                System.out.println(checado);
-            }catch (Exception e){
-                
-            e.printStackTrace(); //imprime no log do servidor
-            e.getMessage(); //recebe a mensagem para que possa ser utilizada em alguma página.
-            String urlErro = "/erroCliente.jsp";
+                String URLwithID = response.encodeRedirectURL(incomingURL);  //coloca um número de identificação na string (ID da sesão)
+                response.setHeader("Custom=newURL", URLwithID); //setta o cabeçalho dos documentos de url que rodam no servidor com as novas configurações de identificação do novo usuário da nova sessão
+            } //if 
+            int item = Integer.parseInt(request.getParameter("excluirPedido"));
+            pedido p = new pedido();
+            DAO dao = new DAO();
+            p.setIdPedido(item);
+            dao.removerPedido(p);            
+            String URL = "/cliente/menucliente.jsp";
+            ServletContext sc = getServletContext();
+            RequestDispatcher rd = sc.getRequestDispatcher(URL);
+            rd.forward(request, response); 
+        }
+        catch (Exception erro) {
+            erro.printStackTrace(); //imprime no log do servidor
+            erro.getMessage(); //recebe a mensagem para que possa ser utilizada em alguma página.
+            String urlErro = "/erroGenerico.jsp";
             ServletContext sc = getServletContext(); //variável sc recebe o contexto do servlet (uma página jsp, outro servlet, uma conexão...)
             RequestDispatcher rd = sc.getRequestDispatcher(urlErro); //redireciona o contexto para a url urlErro(string).
             rd.forward(request, response);
-            }
-        }
+        } //erro
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

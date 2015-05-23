@@ -1,10 +1,13 @@
 package br.com.Modelo;
 
+import java.util.Date;
+
 public class pedido { //faltando idProduto?
-    int idPedido, quantidade, idCliente;
+    int idPedido, quantidade, idCliente, idProduto;
     double valor;
     char situacao;
-    String emissao, retirada, pagamento, token;    
+    String pagamento, token; 
+    Date emissao, retirada;   
     
     public pedido(){   }
 
@@ -13,12 +16,16 @@ public class pedido { //faltando idProduto?
         this.quantidade = quantidade;
         this.valor = valor; 
         this.situacao = situacao;
-        this.emissao = emissao;
-        this.retirada = retirada; //nullable
         this.pagamento = pagamento;
         this.token = token;
     } //construtor    
 
+    public int getIdProduto() {
+        return idProduto;
+    }
+    public void setIdProduto(int idProduto) {
+       this.idProduto = idProduto;
+    }
     public int getIdPedido() {
         return idPedido;
     }
@@ -43,16 +50,16 @@ public class pedido { //faltando idProduto?
     public void setSituacao(char situacao) {
         this.situacao = situacao;
     }
-    public String getEmissao() {
+    public Date getEmissao() {
         return emissao;
     }
-    public void setEmissao(String emissao) {
+    public void setEmissao(Date emissao) {
         this.emissao = emissao;
     }
-    public String getRetirada() {
+    public Date getRetirada() {
         return retirada;
     }
-    public void setRetirada(String retirada) {
+    public void setRetirada(Date retirada) {
         this.retirada = retirada;
     }
     public String getPagamento() {
@@ -67,13 +74,10 @@ public class pedido { //faltando idProduto?
     public void setToken(String token) {
         this.token = token;
     } 
-
     public int getIdCliente() {
         return idCliente;
     }
-
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
-    }
-    
+    }    
 }

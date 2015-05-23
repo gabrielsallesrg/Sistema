@@ -1,5 +1,6 @@
 package br.com.Modelo;
 
+import br.com.library.GeraToken;
 import com.mysql.jdbc.Connection;
 import java.sql.*;
 import java.sql.ResultSet;
@@ -18,6 +19,53 @@ public class DAO {
     } //construtor     
     
     /////////////////ADICIONAR TABELAS////////////////////
+    
+    public void cadastrarPedido(int[] idProduto, int[] quantidade, int idCliente) {
+        final int index = idProduto.length; //recebe o tamanho do vetor
+        double[] precos = new double[index];
+        String SQL;      
+        try {                 
+            for (int i=0; i<index; i++) { //carregando o array preços.
+                SQL = "SELECT valor FROM Produtos WHERE idProduto LIKE ?";
+                PreparedStatement ps = this.conn.prepareStatement(SQL);
+                ps.setInt(1,idProduto[i]);
+                ResultSet rs = ps.executeQuery();
+                precos[i] = rs.getDouble("valor"); //recebe o retorno do select do banco
+                precos[i] *= quantidade[i]; //multiplica o preço pela quantidade para chegar no valor total do pedido.
+                rs.close();
+                ps.close(); 
+                SQL = "";
+            } //for
+            for (int i=0; i<index; i++) { //adiciona os pedidos ao banco de dados.
+                pedido p = new pedido(); //settando a variavel p
+                p.setQuantidade(quantidade[i]);
+                p.setIdCliente(idCliente);
+                java.util.Date data = new java.util.Date();
+                p.setEmissao(data);
+                p.setSituacao('A');
+                p.setPagamento("De");
+                GeraToken gt = new GeraToken();
+                p.setToken(gt.TOKEN());
+                p.setIdProduto(idProduto[i]);
+                SQL = "INSERT INTO Pedido (Produtos_idProduto, Quantidade, Valor, Situacao, Cliente_idCliente, TOKEN, Emissao, Pagamento) VALUES (?,?,?,?,?,?,?,?)";
+                PreparedStatement ps = conn.prepareStatement(SQL);
+                ps.setInt(1, p.getIdProduto());
+                ps.setDouble(2, p.getQuantidade());
+                ps.setDouble(3, p.getValor());
+                ps.setString(4, ""+p.getSituacao());
+                ps.setInt(5, p.getIdCliente());
+                ps.setString(6, p.getToken());
+                ps.setDate(7, convertDate(p.getEmissao()));
+                ps.setString(8, p.getPagamento());
+                ps.execute();
+                ps.close();
+            } 
+        } //try
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        } //catch
+    }
+    
     public void adicionaCliente (cliente Cliente) { //rever a string sql. idCliente deve ter auto-incremento
         String SQL = "INSERT INTO Cliente (Nome, Sobrenome, Endereco, Telefone, Cidade, Email)"+" VALUES (?,?,?,?,?,?)";
         try {
@@ -80,22 +128,20 @@ public class DAO {
         } //catch
     } //listaProdutos
     
-    public List<pedido> listaPedidos(int $cliente){        
+    public List<pedido> listaPedidos(int idCliente){        
         try{
-            String SQL = " SELECT * FROM Pedidos ";
-            if ($cliente > 0) { 
-                SQL += " WHILE Cliente_idCliente = '" + $cliente + " ' ";
-            }            
+            String SQL = " SELECT * FROM Pedido WHERE Cliente_idCliente LIKE ?";          
             List<pedido> aut = new ArrayList<pedido>();            
-            PreparedStatement stmt = this.conn.prepareStatement(SQL);            
+            PreparedStatement stmt = this.conn.prepareStatement(SQL);  
+            stmt.setInt(1,idCliente);
             ResultSet rs = stmt.executeQuery();            
             while(rs.next()){
                 pedido ped = new pedido();                
-                ped.setEmissao(rs.getDate("emissao").toString());
+                ped.setEmissao(rs.getDate("emissao"));
                 ped.setIdPedido(rs.getInt("idPedido"));
                 ped.setPagamento(rs.getString("pagamento"));
                 ped.setQuantidade(rs.getInt("quantidade"));
-                ped.setRetirada(rs.getDate("retirada").toString());
+                ped.setRetirada(rs.getDate("retirada"));
                 ped.setToken(rs.getString("token"));
                 ped.setValor(rs.getFloat("valor"));                
                 aut.add(ped);
@@ -147,16 +193,11 @@ public class DAO {
             
             while(rs.next()){
                 pedido ped = new pedido();                
-                ped.setEmissao(rs.getDate("emissao").toString());
+                ped.setEmissao(rs.getDate("emissao"));
                 ped.setIdPedido(rs.getInt("idPedido"));
                 ped.setPagamento(rs.getString("pagamento"));
                 ped.setQuantidade(rs.getInt("quantidade"));
-                if (rs.getDate("retirada") == null){
-                    ped.setRetirada("");
-                }
-                else{
-                    ped.setRetirada(rs.getDate("retirada").toString());
-                }
+                ped.setRetirada(rs.getDate("retirada"));
                 ped.setToken(rs.getString("token"));
                 ped.setValor(rs.getFloat("valor"));                
                 aut.add(ped);
@@ -177,12 +218,10 @@ public class DAO {
         try {
             PreparedStatement ps = conn.prepareStatement(SQL);
             ps.setString(1, Produto.getDescricao());
-            String aux = Double.toString(Produto.getValor());
-            ps.setString(2, aux);
-            aux = Integer.toString(Produto.getEstoque());
-            ps.setString(3, aux);
-            aux = "" + Produto.getSituacao();
-            ps.setString(4, aux);
+            ps.setDouble(2, Produto.getValor());
+            ps.setInt(3, Produto.getEstoque());
+            ps.setString(4, ""+Produto.getSituacao());
+            ps.setInt(5, Produto.getIdProduto());
             ps.execute();
             ps.close();
         }
@@ -190,4 +229,37 @@ public class DAO {
             throw new RuntimeException(e);
         } //catch
     } //alteraProduto
+    
+    public void alteraEstoque (produtos Produto) {
+        String SQL = "UPDATE Produtos SET estoque=? WHERE idProdutos LIKE ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(SQL);
+            ps.setInt(1, Produto.getEstoque());
+            ps.setInt(2, Produto.getIdProduto());
+            ps.execute();
+            ps.close();
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        } //catch
+    } //alteraProduto
+    
+    /////////MÉTODOS DE REMOÇÃO//////////
+    public void removerPedido(pedido p) {
+        String SQL = "DELETE FROM Pedido WHERE idPedido LIKE ?";
+        try {            
+            PreparedStatement stmt = conn.prepareStatement(SQL);
+            stmt.setInt(1, p.getIdPedido()); //setando o valor "?" da string SQL com o valor correto do objeto que será apagado.
+            stmt.execute();
+            stmt.close();
+        } //try
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        } //catch
+    } //removerAutores
+    
+    /////////Método de conversão http://stackoverflow.com/questions/530012/how-to-convert-java-util-date-to-java-sql-date//////////
+    public java.sql.Date convertDate(java.util.Date date) {
+        return new java.sql.Date(date.getTime());
+    }
 } //class

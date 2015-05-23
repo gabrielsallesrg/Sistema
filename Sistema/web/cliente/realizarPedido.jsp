@@ -34,20 +34,19 @@
                         produtos a = (produtos) pli.next();
                     %> 
             <tbody>
-
                 <tr>
                     <td><input type="checkbox" name="checado" value="<%= a.getIdProduto() %>"> </td>
                     <td> <%= a.getIdProduto() %>   </td>
                     <td> <%= a.getDescricao() %> </td>
-                    <td> <input type="text" name="quantidade">  </td>
+                    <td> <input type="text" name="txtQuantidade<%+%><%=a.getIdProduto()%>">  </td>
                     <td> <%= a.getValor()  %></td>
-                </tr>
-                <% } %>
+                </tr>                
             </tbody>
-        </table>
-            
-            <input type="submit" name="Realizar" >
-            
+            <% 
+                    } //while 
+            %>
+        </table>            
+            <input type="submit" name="Avançar">            
         </form>
     </center>
 
