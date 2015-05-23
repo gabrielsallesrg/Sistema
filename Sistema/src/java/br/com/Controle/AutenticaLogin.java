@@ -40,56 +40,78 @@ public class AutenticaLogin extends HttpServlet {
 
             if ((nome == null || nome.isEmpty())
                     && (senha == null || senha.isEmpty())) {
-                response.sendRedirect("pagina-nao-encontrada.jsp");
+                response.sendRedirect("erroLogin.jsp");
                 nome = "";
                 senha = "";
             } else if ((nome == null || nome.isEmpty())) {
-                response.sendRedirect("pagina-nao-encontrada.jsp");
+                response.sendRedirect("erroLogin.jsp");
                 nome = "";
                 senha = "";
             } else if ((senha == null || senha.isEmpty())) {
-                response.sendRedirect("pagina-nao-encontrada.jsp");
+                response.sendRedirect("erroLogin.jsp");
                 nome = "";
                 senha = "";
             } else {
+                
+ 
+                try{
+                
                 Usuario usuario = new Usuario(nome, senha);
-
                 UsuarioDao udao = new UsuarioDao();
-
-                udao.verificaUsuario(usuario);
-
+                
+                usuario.setNome(nome);
+                usuario.setSenha(senha);
+                
                 if (udao.verificaUsuario(usuario) == true) {
 
                     session.putValue("nome", nome);
                     session.putValue("senha", senha);
                     session.putValue("tipo", udao.getTipo_cliente());
-
+                    
+                    String URLpage = "/loja/loja.jsp";
+                    
         
-                    if (udao.getTipo_cliente() == "C") {
-                        String URL = "cliente/cliente.jsp";
+                    if ("C".equals(udao.getTipo_cliente())) {
+                        URLpage = "/cliente/cliente.jsp";
                         
                     } else {
-                        String URL = "loja/loja.jsp";
+                        URLpage = "/loja/loja.jsp";
                     }
                     
-
-                    ServletContext sc = getServletContext();
-                  RequestDispatcher rd = sc.getRequestDispatcher(senha);
+                    ServletContext sc = getServletContext(); 
+                    RequestDispatcher rd = sc.getRequestDispatcher(URLpage);
                     rd.forward(request, response);
 
                 } else {
-                    System.out.println("Login ou senha ivalidos!!!");
+                    //System.out.println("Login ou senha ivalidos!!!");
                     String URL = "/index.jsp";
                     ServletContext sc = getServletContext();
                     RequestDispatcher rd = sc.getRequestDispatcher(URL);
                     rd.forward(request, response);
                 }
+                
+                }catch(Exception e){
+                    
+                    e.printStackTrace(); // imprime no log do servidor
+                    e.getMessage(); // obtem a mensagem pra trabalhar
+                    System.out.print(e);
+                    String URL = "/erroLogin.jsp";
+                    ServletContext sc = getServletContext(); // contexto do servlet
+                    RequestDispatcher rd = sc.getRequestDispatcher(URL); // redirecionamento
+                    rd.forward(request, response);
+                    
+                }
+                
+                
+                
+                
             }
         } catch (Exception e) {
             // metodo que captura erros ocorridos
             e.printStackTrace(); // imprime no log do servidor
             e.getMessage(); // obtem a mensagem pra trabalhar
-            String URL = "/pagina-nao-encontrada.jsp";
+            System.out.println(e);
+            String URL = "/erroLogin.jsp";
             ServletContext sc = getServletContext(); // contexto do servlet
             RequestDispatcher rd = sc.getRequestDispatcher(URL); // redirecionamento
             rd.forward(request, response);

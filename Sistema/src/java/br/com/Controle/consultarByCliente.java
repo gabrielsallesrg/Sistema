@@ -50,8 +50,8 @@ public class consultarByCliente extends HttpServlet {
             DAO dao = new DAO();
             pedido p = new pedido();
             p.setIdCliente(idCliente);
-            List<pedido> listaPedidos = dao.consultaByCliente(p);
-            request.setAttribute("listaPedidos", listaPedidos);
+ //           List<pedido> listaPedidos = dao.consultaByCliente(p);
+//            request.setAttribute("listaPedidos", listaPedidos);
             RequestDispatcher rd = request.getRequestDispatcher("/loja/consultarByCliente.jsp");
             rd.forward(request, response);
         } //try
