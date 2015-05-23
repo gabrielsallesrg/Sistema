@@ -30,6 +30,7 @@ public class consultarToken extends HttpServlet {
             String token = request.getParameter("token");
             
             System.out.println("Token = " + token);
+            System.out.println("consultarToken.java");
             
 
                 DAO dao = new DAO();
@@ -42,13 +43,14 @@ public class consultarToken extends HttpServlet {
                 
                 request.setAttribute("listaPedidobyToken", token);
                 
-                RequestDispatcher rd = request.getRequestDispatcher("/loja/resultadoPedidobyToken.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/loja/entregarPedido.jsp");
                 rd.forward(request, response);
                 
         } //try
         catch (Exception e) {
             e.printStackTrace();
             e.getMessage();
+            System.out.println("consultarToken.java, catch");
             String urlErro = "/erroEstoque.jsp";
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher(urlErro);

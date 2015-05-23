@@ -59,6 +59,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
         <title>.:Gakem | Entrega de Pedidos:.</title>
+        
+        
+        <% System.out.println("entregarPedido.jsp"); %>
+        
+        
 
         <link rel="shortcut icon" href="../images/favicon.ico">
 
