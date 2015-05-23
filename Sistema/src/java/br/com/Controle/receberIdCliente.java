@@ -27,7 +27,7 @@ public class receberIdCliente extends HttpServlet {
             DAO dao = new DAO();
             login log = new login();
             log.setAccount(login);
-            int idCliente = dao.getIdSessao(log); //recebe o id do cliente pelo login da sessão            
+ //           int idCliente = dao.getIdSessao(log); //recebe o id do cliente pelo login da sessão            
             RequestDispatcher rd = request.getRequestDispatcher("/cliente/menucliente.jsp"); //Mudar url? 
             rd.forward(request, response);
         } //try
