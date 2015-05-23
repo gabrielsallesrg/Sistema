@@ -6,14 +6,12 @@
 package br.com.Controle;
 
 import br.com.Modelo.DAO;
-import br.com.Modelo.pedido;
 import br.com.Modelo.produtos;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,8 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Murilo RM
  */
-@WebServlet(name = "consultarByCliente", urlPatterns = {"/CBC"})
-public class consultarByCliente extends HttpServlet {
+public class alterarEstoque extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,32 +35,34 @@ public class consultarByCliente extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            HttpSession session = request.getSession(true);
-            if (session.isNew()) {
-                    String incomingURL = request.getRequestURL().toString();
-                    String URLwithID = response.encodeRedirectURL(incomingURL);
-                    response.setHeader("Custom=newURL",URLwithID);                   
-                } //if
-            //DIFICULDADE: pegar o idCliente da sessão pelo login do usuário.
-            int idCliente=0; //criado para fins de teste.
+        try {    
+            HttpSession session = request.getSession(true); //definindo que a sessão é verdadeira
+            if (session.isNew()) { //verificar se essa sessão já existe ou não
+                String incomingURL = request.getRequestURL().toString();
+                String URLwithID = response.encodeRedirectURL(incomingURL);  //coloca um número de identificação na string (ID da sesão)
+                response.setHeader("Custom=newURL", URLwithID); //setta o cabeçalho dos documentos de url que rodam no servidor com as novas configurações de identificação do novo usuário da nova sessão
+            } //if 
+            int idProduto = Integer.parseInt(request.getParameter("selecionarProduto"));
+            int estoque = Integer.parseInt(request.getParameter("txtEstoque"));
+            produtos p = new produtos();
             DAO dao = new DAO();
-            pedido p = new pedido();
-            p.setIdCliente(idCliente);
- //           List<pedido> listaPedidos = dao.consultaByCliente(p);
-//            request.setAttribute("listaPedidos", listaPedidos);
-            RequestDispatcher rd = request.getRequestDispatcher("/loja/consultarByCliente.jsp");
-            rd.forward(request, response);
-        } //try
-        catch (Exception e) {
-            e.printStackTrace();
-            e.getMessage();
-            String urlErro = "/erroEstoque.jsp";
+            p.setIdProduto(idProduto);
+            p.setEstoque(estoque);
+            dao.alteraEstoque(p);            
+            String URL = "/cliente/menucliente.jsp";
             ServletContext sc = getServletContext();
-            RequestDispatcher rd = sc.getRequestDispatcher(urlErro);
-            rd.forward(request, response);        
-        } //catch        
-    } //function
+            RequestDispatcher rd = sc.getRequestDispatcher(URL);
+            rd.forward(request, response); 
+        }
+        catch (Exception erro) {
+            erro.printStackTrace(); //imprime no log do servidor
+            erro.getMessage(); //recebe a mensagem para que possa ser utilizada em alguma página.
+            String urlErro = "/erroGenerico.jsp";
+            ServletContext sc = getServletContext(); //variável sc recebe o contexto do servlet (uma página jsp, outro servlet, uma conexão...)
+            RequestDispatcher rd = sc.getRequestDispatcher(urlErro); //redireciona o contexto para a url urlErro(string).
+            rd.forward(request, response);
+        } //erro
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

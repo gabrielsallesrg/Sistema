@@ -3,6 +3,11 @@
     Created on : 17/05/2015, 12:30:52
     Author     : Murilo RM
 --%>
+<%@page import="br.com.Modelo.produtos"%>
+<%@page import="br.com.Modelo.pedido"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="br.com.Modelo.DAO"%>
 <%-- ANTIGO
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -44,6 +49,60 @@
         <link rel="stylesheet" type="text/css" href="../css/style.css" />
     </head>
     <body>
-        <h1>Alterar Produto!</h1>
+        <%
+            DAO dao = new DAO();
+            List listaProdutos = dao.listaProdutos(); //pegar o ID do cliente da sessão e enviar como parâmetro
+            Iterator pli = listaProdutos.iterator();
+        %>      
+        <form name="alterarProduto" action="SP" method="POST">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>ID do produto</th>
+                        <th>Nome</th>
+                        <th>Estoque</th>
+                        <th>Preço</th>
+                        <th>Situação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                    while (pli.hasNext()) {
+                        produtos p = (produtos) pli.next();
+                    %> 
+                    <tr>
+                        <td><input type="radio" name="selecionarProduto" value="<%=p.getIdProduto()%>" />"></td>
+                        <td><%= p.getIdProduto() %></td>
+                        <td><%= p.getDescricao() %></td>
+                        <td><%= p.getEstoque() %></td>
+                        <td><%= p.getValor() %></td>
+                        <td><%= p.getSituacao() %></td>
+                    </tr>
+                    <%}%>
+                </tbody>            
+            </table>  
+            <hr>
+            <p>Insira as novas propriedades do produto:</p>
+            <table border="1" cellspacing="1">
+                <thead>
+                    <tr>
+                        <th>Nome:</th>
+                        <th>Preço:</th>
+                        <th>Estoque:</th>
+                        <th>Situação:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" name="txtDescricao"/></td>
+                        <td><input type="text" name="txtValor"/></td>
+                        <td><input type="text" name="txtEstoque"/></td>
+                        <td><input type="text" name="txtSituacao"/></td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="submit" value="Alterar" name="alterar" />
+        </form>
     </body>
 </html>
