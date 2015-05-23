@@ -14,11 +14,11 @@ public class pedido {
     public pedido(int idPedido, int quantidade, double valor, char situacao, String emissao, String retirada, String pagamento, String token) {
         this.idPedido = idPedido;
         this.quantidade = quantidade;
-        this.valor = valor; //RETIRAR? - primeira normativa.
-        this.situacao = situacao;
-        this.emissao = emissao;
-        this.retirada = retirada;
-        this.pagamento = pagamento;
+        this.valor = valor;
+        this.situacao = situacao; // E:Excluido - A:Aberto - R:Retirada
+        this.emissao = emissao; //data
+        this.retirada = retirada; //nao essencial no cadastro do pedido
+        this.pagamento = pagamento; //nao essencial
         this.token = token;
     } //construtor    
 
