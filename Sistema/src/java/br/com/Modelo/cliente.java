@@ -2,10 +2,9 @@ package br.com.Modelo;
 
 public class cliente {
     int idCliente;
-    String telefone;
-    String nome, sobrenome, endereco, cidade, email;
+    String telefone,nome, sobrenome, endereco, cidade, email,nomeUsuario;
 
-    public cliente(int idCliente, String telefone, String nome, String sobrenome, String endereco, String cidade, String email) {
+    public cliente(int idCliente, String telefone, String nome, String sobrenome, String endereco, String cidade, String email, String usuario) {
         this.idCliente = idCliente;
         this.telefone = telefone; //nullable
         this.nome = nome;
@@ -14,13 +13,14 @@ public class cliente {
         this.cidade = cidade; //nullable
         this.email = email;
     } //construtor completo
-    public cliente(String telefone, String nome, String sobrenome, String endereco, String cidade, String email) {
+    public cliente(String telefone, String nome, String sobrenome, String endereco, String cidade, String email, String usuario) {
         this.telefone = telefone;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.endereco = endereco;
         this.cidade = cidade;
         this.email = email;
+        this.nomeUsuario = usuario;
     } //construtor sem idCliente
 
     public int getIdCliente() {
@@ -65,5 +65,15 @@ public class cliente {
     public void setEmail(String email) {
         this.email = email;
     }   
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
+    }
+    
+    
     
 }

@@ -40,15 +40,15 @@ public class AutenticaLogin extends HttpServlet {
 
             if ((nome == null || nome.isEmpty())
                     && (senha == null || senha.isEmpty())) {
-                response.sendRedirect("erroLogin.jsp");
+                response.sendRedirect("/index.jsp");
                 nome = "";
                 senha = "";
             } else if ((nome == null || nome.isEmpty())) {
-                response.sendRedirect("erroLogin.jsp");
+                response.sendRedirect("/index.jsp");
                 nome = "";
                 senha = "";
             } else if ((senha == null || senha.isEmpty())) {
-                response.sendRedirect("erroLogin.jsp");
+                response.sendRedirect("/index.jsp");
                 nome = "";
                 senha = "";
             } else {
@@ -64,6 +64,7 @@ public class AutenticaLogin extends HttpServlet {
                 
                 if (udao.verificaUsuario(usuario) == true) {
 
+                    
                     session.putValue("nome", nome);
                     session.putValue("senha", senha);
                     session.putValue("tipo", udao.getTipo_cliente());
@@ -95,7 +96,7 @@ public class AutenticaLogin extends HttpServlet {
                     e.printStackTrace(); // imprime no log do servidor
                     e.getMessage(); // obtem a mensagem pra trabalhar
                     System.out.print(e);
-                    String URL = "/erroLogin.jsp";
+                    String URL = "/err.jsp";
                     ServletContext sc = getServletContext(); // contexto do servlet
                     RequestDispatcher rd = sc.getRequestDispatcher(URL); // redirecionamento
                     rd.forward(request, response);

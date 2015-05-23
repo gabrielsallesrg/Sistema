@@ -27,7 +27,9 @@
 
 
     <div id="menucliente">
+        
         <ul>
+            <li>Olá, <%= session.getValue("name") %></li>
             <li><a href="realizarPedido.jsp" target="central" >Fazer Pedido!</a></li>
             <li><a href="relatorioPedido.jsp" target="central" >Relatório</a></li>
             <li><a href="excluirPedido.jsp" target="central" >Excluir Pedido</a></li>

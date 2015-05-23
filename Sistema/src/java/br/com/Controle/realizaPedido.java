@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "realizaPedido", urlPatterns = {"/RP"})
-public class realizaPedido_1 extends HttpServlet {
+public class realizaPedido extends HttpServlet {
 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

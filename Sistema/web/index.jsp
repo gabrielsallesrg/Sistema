@@ -54,7 +54,7 @@
                                        
                                 
 					<tr>
-						<td><a href="inserir-usuario.jsp" id="corpo_form">Cadastrar
+						<td><a href="cadastrarUsuarioCliente.jsp" id="corpo_form">Cadastrar
 								Usuario</a></td>
 					</tr>
 				</tbody>

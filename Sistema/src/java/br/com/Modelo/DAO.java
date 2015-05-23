@@ -18,6 +18,31 @@ public class DAO {
         System.out.println("DAO.java, fim do construtor");
     } //construtor     
     
+    public long retornaIdCliente(String nome){   
+        
+        long idCliente = 0;
+        
+        try{
+            
+            String SQL = " SELECT idCliente from cliente where nomeUsuario = ?";                   
+            PreparedStatement stmt = this.conn.prepareStatement(SQL);  
+            stmt.setString(1,nome);
+            ResultSet rs = stmt.executeQuery();  
+            
+            while(rs.next()){
+                idCliente = rs.getLong("idCliente");
+            }
+            rs.close();
+            stmt.close();
+            
+            return idCliente; 
+            
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }    
+    } //listaPedidos
+    
+    
     /////////////////ADICIONAR TABELAS////////////////////
     
     public void cadastrarPedido(int[] idProduto, int[] quantidade, int idCliente) {
@@ -224,7 +249,7 @@ public class DAO {
             
             while(rs.next()){
                 pedido ped = new pedido();                
-                ped.setEmissao(rs.getDate("emissao").toString);
+                ped.setEmissao(rs.getDate("emissao"));
                 ped.setIdPedido(rs.getInt("idPedido"));
                 ped.setPagamento(rs.getString("pagamento"));
                 ped.setQuantidade(rs.getInt("quantidade"));

@@ -1,7 +1,7 @@
 package br.com.Modelo;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import com.mysql.jdbc.Connection;
+import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,13 +15,13 @@ public class UsuarioDao {
 	 * objetos Java para tipos de dados SQL ou executa comandos SQL.
 	 */
 
-	public static Connection conn; // Variavel do tipo Connection
-	public static ResultSet rs; // Variavel do tipo ResultSet
+        private final Connection conn;
+        private ResultSet rs;  
         private String tipo_cliente; // Variavel do tipo ResultSet
 
 	// Metodo construtor para conectar com o banco
 	public UsuarioDao() throws SQLException {
-		this.conn = FabricaDeConexão.getConnection();
+                this.conn = (Connection) FabricaDeConexão.getConnection();
 	}
 
 	public boolean verificaUsuario(Usuario usuario) {
@@ -30,15 +30,19 @@ public class UsuarioDao {
 		boolean result = false;
 
 		try {
-			String SQL = "SELECT nome,tipo FROM usuario WHERE nome = " + "'" + nome
-					+ "'" + " and senha = " + "'" + senha + "'";
+			String SQL = "SELECT nome,tipo FROM usuario WHERE nome = ? AND senha = ?";
+
 			PreparedStatement stmt = conn.prepareStatement(SQL);
-			ResultSet rs = stmt.executeQuery();
-                         
-                        setTipo_cliente(rs.getString("tipo"));
+			
+                        stmt.setString(1, usuario.getNome());
+                        stmt.setString(2, usuario.getSenha());
+                          
+                       ResultSet rs = stmt.executeQuery();
+                        //setTipo_cliente(rs.getString("tipo"));
                         
 			if (rs.next()) {
 				result = true;
+                                setTipo_cliente("tipo");
 			}
 		} catch (Exception e) {
 		}
@@ -47,12 +51,13 @@ public class UsuarioDao {
 	
 	// Metodo para inserir Usuario no banco de dados
 	public void adicionaUsuario(Usuario usuario) {
-		String SQL = "INSERT INTO usuario (nome, senha, descricao,tipo) VALUES (?,?,?)";
+		String SQL = "INSERT INTO usuario (nome, senha, tipo, Cliente_idCliente) VALUES (?,?,?,?)";
 		try {
 			PreparedStatement ps = conn.prepareStatement(SQL);
 			ps.setString(1, usuario.getNome());
 			ps.setString(2, usuario.getSenha());
-                        ps.setString(4, usuario.getTipo());
+                        ps.setString(3, usuario.getTipo());
+                        ps.setLong(4, usuario.getCliente_idCliente());
 			ps.execute();
 			ps.close();
 		} catch (SQLException e) {

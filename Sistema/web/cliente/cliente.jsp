@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%  
+String contextpath          = request.getContextPath();  
+%> 
 <!DOCTYPE html>
 
 <html>
@@ -28,8 +31,8 @@
 
 
         <FRAMESET ROWS="15%,*" FRAMEBORDER="1" FRAMESPACING="3">
-            <FRAME SRC="menucliente.jsp" NAME="superior" NORESIZE SCROLLING="NO">
-                 <FRAME SRC="main.jsp" NAME="central" MARGINWIDTH="2" MARGINHEIGHT="3" NORESIZE SCROLLING="YES">
+            <FRAME SRC="<%=contextpath%>/cliente/menucliente.jsp" NAME="superior" NORESIZE SCROLLING="NO">
+                 <FRAME SRC="<%=contextpath%>/cliente/main.jsp" NAME="central" MARGINWIDTH="2" MARGINHEIGHT="3" NORESIZE SCROLLING="YES">
         </FRAMESET>
 
   

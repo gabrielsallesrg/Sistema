@@ -1,6 +1,8 @@
 package br.com.Controle;
 
 import br.com.Modelo.DAO;
+import br.com.Modelo.Usuario;
+import br.com.Modelo.UsuarioDao;
 import br.com.Modelo.cliente;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,7 +33,10 @@ public class criarCliente extends HttpServlet {
             String endereco = request.getParameter("endereco"); 
             String telefone = request.getParameter("telefone"); //obrigatório
             String cidade = request.getParameter("cidade"); //obrigatório
+            String tipo = request.getParameter("tipo");
             String email = request.getParameter("email");            
+            String usuario = request.getParameter("usuario");
+            String senha = request.getParameter("senha");
     
             RequestDispatcher dispatcher;
             ServletContext servletContext = getServletContext();
@@ -45,19 +50,31 @@ public class criarCliente extends HttpServlet {
                 sNome = "";
                 dispatcher.forward(request, response);
             } //else if
-            else if (telefone == null || telefone.isEmpty() || (telefone.length() != 11 && telefone.length() != 10)) {
-                telefone = "";
-                dispatcher.forward(request, response);
-            } //else if
-            else if (cidade == null || cidade.isEmpty()) {
-                cidade = "";
+            else if (usuario == null || usuario.isEmpty()) {
+                usuario = "";
                 dispatcher.forward(request, response);
             } //else if
             else {
-                cliente Cliente = new cliente(telefone, pNome, sNome, endereco, cidade, email); //obj. cliente settado.
+                cliente Cliente = new cliente(telefone, pNome, sNome, endereco, cidade, email, usuario); //obj. cliente settado.
                 DAO dao = new DAO();
                 dao.adicionaCliente(Cliente);
-                String urlOK = "/cliente/realizarPedido.jsp";
+                
+                
+                if("C".equals(tipo)){
+                 
+                        Usuario user = new Usuario();
+                        user.setNome(usuario);
+                        user.setSenha(senha);
+                        user.setTipo("C");
+                        user.setIdUsuario(dao.retornaIdCliente(usuario));
+                        UsuarioDao userdao = new UsuarioDao();
+                        userdao.adicionaUsuario(user);
+                    
+                }
+                
+  
+                
+                String urlOK = "/ok.jsp";
                 ServletContext sc = getServletContext();
                 RequestDispatcher rd = sc.getRequestDispatcher(urlOK);
                 rd.forward(request, response);

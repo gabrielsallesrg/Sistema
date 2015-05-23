@@ -2,10 +2,9 @@ package br.com.Modelo;
 
 public class Usuario {
 
-	private Long id_Log;
+	private Long idUsuario,Cliente_idCliente;
 	private String nome;
 	private String senha;
-//	private String descricao;
         private String tipo;
 
 	public Usuario() {
@@ -23,24 +22,24 @@ public class Usuario {
 	}
 
 	public Usuario(Long id_Log, String nome, String senha) {
-		this.id_Log = id_Log;
+		this.idUsuario = id_Log;
 		this.nome = nome;
 		this.senha = senha;
 	}
 
 	public Usuario(Long id_Log, String nome, String senha, String tipo) {
-		this.id_Log = id_Log;
+		this.idUsuario = id_Log;
 		this.nome = nome;
 		this.senha = senha;
 		this.tipo = tipo;
 	}
 
 	public Long getId_Log() {
-		return id_Log;
+		return idUsuario;
 	}
 
 	public void setId_Log(Long id_Log) {
-		this.id_Log = id_Log;
+		this.idUsuario = id_Log;
 	}
 
 
@@ -68,7 +67,24 @@ public class Usuario {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Long getCliente_idCliente() {
+        return Cliente_idCliente;
+    }
+
+    public void setCliente_idCliente(Long Cliente_idCliente) {
+        this.Cliente_idCliente = Cliente_idCliente;
+    }
         
+    
         
 
 }

@@ -38,7 +38,7 @@
                     <td><input type="checkbox" name="checado" value="<%= a.getIdProduto() %>"> </td>
                     <td> <%= a.getIdProduto() %>   </td>
                     <td> <%= a.getDescricao() %> </td>
-                    <td> <input type="text" name="txtQuantidade<%+%><%=a.getIdProduto()%>">  </td>
+
                     <td> <%= a.getValor()  %></td>
                 </tr>                
             </tbody>
