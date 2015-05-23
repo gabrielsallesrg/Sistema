@@ -40,11 +40,19 @@ public class consultarToken extends HttpServlet {
                 
                 List<pedido> listaPedidobyToken = dao.listaPedidobyToken(ped);
                 
-                
-                request.setAttribute("listaPedidobyToken", token);
-                
-                RequestDispatcher rd = request.getRequestDispatcher("/loja/entregarPedido.jsp");
-                rd.forward(request, response);
+                System.out.println("consultarToken.java, tamanho da listaPedidobyToken = " + listaPedidobyToken.size());
+                if (listaPedidobyToken.isEmpty()){
+                    RequestDispatcher dispatcher;
+                    ServletContext servletContext = getServletContext();
+                    dispatcher = servletContext.getRequestDispatcher("/erroToken.jsp");
+                    dispatcher.forward(request, response);
+                }
+                else{
+                    request.setAttribute("listaPedidobyToken", token);
+
+                    RequestDispatcher rd = request.getRequestDispatcher("/loja/entregarPedido.jsp");
+                    rd.forward(request, response);
+                }
                 
         } //try
         catch (Exception e) {

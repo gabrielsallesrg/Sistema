@@ -151,7 +151,12 @@ public class DAO {
                 ped.setIdPedido(rs.getInt("idPedido"));
                 ped.setPagamento(rs.getString("pagamento"));
                 ped.setQuantidade(rs.getInt("quantidade"));
-                ped.setRetirada(rs.getDate("retirada").toString());
+                if (rs.getDate("retirada") == null){
+                    ped.setRetirada("");
+                }
+                else{
+                    ped.setRetirada(rs.getDate("retirada").toString());
+                }
                 ped.setToken(rs.getString("token"));
                 ped.setValor(rs.getFloat("valor"));                
                 aut.add(ped);
