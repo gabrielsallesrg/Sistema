@@ -82,7 +82,7 @@
         <div id="cad-produto">
             <h1>Cadastrar Produto</h1>
         </div><!--cad-produto-->
-
+        <% System.out.println("cadastrarProduto.jsp"); %>
         <div id="tab-cadproduto">
             <center>
                 <form name="cadastrarProduto" action="../CP" method="POST">
@@ -102,10 +102,11 @@
                         </tr>
                     </tbody>
                 </table>
+            </center>
         </div><!--tab-cadproduto-->
         <br>
         <input type="submit" value="Cadastrar">
-    </center>
+    
 
 </body>
 </html>

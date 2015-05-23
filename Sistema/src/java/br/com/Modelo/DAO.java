@@ -110,6 +110,9 @@ public class DAO {
     } //adicionarCliente
     
     public void cadastroProduto (produtos Produto) {
+        
+        // Testar se o produto já está inserido no BD e testar se os dados importantes foram digitados.
+        
         String SQL = "INSERT INTO Produtos (descricao, valor, estoque, Situacao)"+" VALUES (?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(SQL);
@@ -254,10 +257,10 @@ public class DAO {
                 ped.setPagamento(rs.getString("pagamento"));
                 ped.setQuantidade(rs.getInt("quantidade"));
                 if (rs.getDate("retirada") == null){
-                    ped.setRetirada("");
+                    ped.setRetirada(null);
                 }
                 else{
-                    ped.setRetirada(rs.getDate("retirada").toString());
+                    ped.setRetirada(rs.getDate("retirada"));
                 }
                 ped.setToken(rs.getString("token"));
                 ped.setValor(rs.getFloat("valor"));                

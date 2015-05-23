@@ -31,6 +31,7 @@ public class cadastrarProduto extends HttpServlet {
             //double valor = Double.parseDouble(request.getParameter("valor"));
             double valor;
             String aux_valor = request.getParameter("valor");
+            System.out.println(aux_valor);
             if (aux_valor == null || aux_valor.isEmpty()){
                 valor = -1; // -1 enviará para a página de erroEstoque.jsp
             }
@@ -46,7 +47,7 @@ public class cadastrarProduto extends HttpServlet {
             else{
                 estoque = Integer.parseInt(aux_estoque);
             }
-            char situacao = ' ';
+            char situacao = 'A';
             
             RequestDispatcher dispatcher;
             ServletContext servletContext = getServletContext();
@@ -57,22 +58,28 @@ public class cadastrarProduto extends HttpServlet {
             System.out.println("Valor = " + valor);
             
             if (estoque > 0)
-                situacao = '1'; //Produto automaticamente settado como ativo.
+                situacao = 'A'; //Produto automaticamente settado como ativo.
             else if (estoque == 0)
-                situacao = '0'; //produto inativo.
+                situacao = 'B'; //produto inativo.
+            
+            
             if (descricao.isEmpty() || descricao == null) {
+                System.out.println("cadastrarProduto.java, 66");
                 descricao = "";
                 dispatcher.forward(request, response);
             }
             else if (valor < 0) {
+                System.out.println("cadastrarProduto.java, 71");
                 valor = 0d;
                 dispatcher.forward(request, response);
             }
             else if (estoque < 0) {
+                System.out.println("cadastrarProduto.java, 76");
                 estoque = 0;
                 dispatcher.forward(request, response);
             }
             else {
+                System.out.println("cadastrarProduto.java, 81 else");
                 produtos Produto = new produtos(situacao, estoque, descricao, valor);
                 DAO dao = new DAO();
                 dao.cadastroProduto(Produto);
@@ -87,6 +94,7 @@ public class cadastrarProduto extends HttpServlet {
             } //else
         } //try
         catch (Exception erro) {
+            System.out.println("cadastrarProduto.java, catch");
             erro.printStackTrace(); //imprime no log do servidor
             erro.getMessage(); //recebe a mensagem para que possa ser utilizada em alguma página.
            String urlErro = "/erroEstoque.jsp";
