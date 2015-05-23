@@ -171,6 +171,42 @@ public class DAO {
         } //catch
     } //listaProdutos
     
+    
+    public List<pedido> listaPedidobyToken_2(pedido p) {            
+        try {
+            List<pedido> aut = new ArrayList<pedido>();
+            String token = p.getToken();
+            String SQL = "SELECT * FROM Pedido WHERE token = " + token;
+            
+            PreparedStatement stmt = this.conn.prepareStatement(SQL);  
+            ResultSet rs = stmt.executeQuery();            
+            
+            while(rs.next()){
+                pedido ped = new pedido();                
+                ped.setEmissao(rs.getDate("emissao").toString());
+                ped.setIdPedido(rs.getInt("idPedido"));
+                ped.setPagamento(rs.getString("pagamento"));
+                ped.setQuantidade(rs.getInt("quantidade"));
+                if (rs.getDate("retirada") == null){
+                    ped.setRetirada("");
+                }
+                else{
+                    ped.setRetirada(rs.getDate("retirada").toString());
+                }
+                ped.setToken(rs.getString("token"));
+                ped.setValor(rs.getFloat("valor"));                
+                aut.add(ped);
+            }
+            
+            rs.close();
+            stmt.close();
+            return aut;
+        } //try
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        } //catch
+    } //listaProdutos
+    
     ////////////ALTERAR TABELAS/////////////
     public void alteraProduto (produtos Produto) {
         String SQL = "UPDATE Produtos SET descricao=?, valor=?, estoque=?, situacao=? WHERE idProdutos LIKE ?";

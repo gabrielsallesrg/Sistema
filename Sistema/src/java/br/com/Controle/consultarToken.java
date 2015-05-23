@@ -28,7 +28,6 @@ public class consultarToken extends HttpServlet {
                     response.setHeader("Custom=newURL",URLwithID);                   
                 } //if
             String token = request.getParameter("token");
-            
             System.out.println("Token = " + token);
             System.out.println("consultarToken.java");
             
@@ -49,7 +48,8 @@ public class consultarToken extends HttpServlet {
                     dispatcher.forward(request, response);
                 }
                 else{
-                    request.setAttribute("listaPedidobyToken", token);
+                    
+                    request.setAttribute("listaPedidobyToken", listaPedidobyToken);
 
                     RequestDispatcher rd = request.getRequestDispatcher("/loja/entregarPedido.jsp");
                     rd.forward(request, response);

@@ -41,6 +41,9 @@
 </html>
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="br.com.Modelo.*"%>
 <%-- 
     Document   : entradaEstoque
     Created on : 19/05/2015, 17:51:52
@@ -81,6 +84,16 @@
         
         <table border="1" cellspacing="2">
             <thead>
+                <%
+                    String token = request.getParameter("token");
+                    System.out.println("entregarPedido.jsp, token = " + token);
+                    pedido ped = new pedido();
+                    ped.setToken(token);
+                    DAO_2 pdao = new DAO_2();
+                    List<pedido> listaPedidos = pdao.listaPedidobyToken(ped);
+                    Iterator it = listaPedidos.iterator();
+                    int qtdePedidos = listaPedidos.size();
+                %>
                 <tr>
                     <th> - </th>
                     <th>Código</th>
@@ -90,14 +103,18 @@
                     <th>Token</th>
                 </tr>
             </thead>
+            <%
+                while (it.hasNext()) {
+                    pedido p = (pedido) it.next();
+            %>
             <tbody>
                 <tr>
                     <td><input type="checkbox"> </td>
-                    <td>codigo</td>
-                    <td>descrição</td>
-                    <td>quantidade</td>
-                    <td>Valor</td>
-                    <td>Token</td>
+                    <td> <%= p.getToken() %> </td>
+                    <td> <%= p.getRetirada() %> </td>
+                    <td> <%= p.getQuantidade() %> </td>
+                    <td> <%= p.getValor() %> </td>
+                    <td> <%= p.getToken() %> </td>
                 </tr>
             </tbody>
         </table>
