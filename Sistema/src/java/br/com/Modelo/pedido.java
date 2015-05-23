@@ -1,24 +1,21 @@
 package br.com.Modelo;
 
-public class pedido {
+public class pedido { //faltando idProduto?
     int idPedido, quantidade, idCliente;
     double valor;
     char situacao;
-    String emissao, retirada, pagamento, token;
+    String emissao, retirada, pagamento, token;    
     
-    
-    public pedido(){
-        
-    }
+    public pedido(){   }
 
     public pedido(int idPedido, int quantidade, double valor, char situacao, String emissao, String retirada, String pagamento, String token) {
         this.idPedido = idPedido;
         this.quantidade = quantidade;
-        this.valor = valor;
-        this.situacao = situacao; // E:Excluido - A:Aberto - R:Retirada
-        this.emissao = emissao; //data
-        this.retirada = retirada; //nao essencial no cadastro do pedido
-        this.pagamento = pagamento; //nao essencial
+        this.valor = valor; 
+        this.situacao = situacao;
+        this.emissao = emissao;
+        this.retirada = retirada; //nullable
+        this.pagamento = pagamento;
         this.token = token;
     } //construtor    
 
@@ -70,10 +67,13 @@ public class pedido {
     public void setToken(String token) {
         this.token = token;
     } 
+
     public int getIdCliente() {
         return idCliente;
     }
+
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
+    
 }

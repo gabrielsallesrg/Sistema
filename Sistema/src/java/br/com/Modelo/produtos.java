@@ -10,11 +10,11 @@ public class produtos {
     public produtos(){   }    
     public produtos(int idProduto, int estoque, String unidades, double valor, String descricao, char situacao) {
         this.idProduto = idProduto;
-        this.estoque = estoque; //nao essencial
-//        this.unidades = unidades; 
+        this.estoque = estoque; //nullable
+        this.unidades = unidades;
         this.valor = valor;
-        this.descricao = descricao; //unico
-        this.situacao = situacao; //B:Bloqueado D:Disponivel
+        this.descricao = descricao;
+        this.situacao = situacao;
     } //construtor completo
     public produtos(int idProduto, int estoque, double valor, String descricao, char situacao) {
         this.idProduto = idProduto;

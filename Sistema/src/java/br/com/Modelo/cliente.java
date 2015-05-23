@@ -7,11 +7,11 @@ public class cliente {
 
     public cliente(int idCliente, String telefone, String nome, String sobrenome, String endereco, String cidade, String email) {
         this.idCliente = idCliente;
-        this.telefone = telefone; //não essencial
+        this.telefone = telefone; //nullable
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.endereco = endereco; //nao essencial
-        this.cidade = cidade; //nao essencial
+        this.endereco = endereco; //nullable
+        this.cidade = cidade; //nullable
         this.email = email;
     } //construtor completo
     public cliente(String telefone, String nome, String sobrenome, String endereco, String cidade, String email) {

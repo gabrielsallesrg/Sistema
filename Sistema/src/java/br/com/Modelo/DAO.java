@@ -164,48 +164,6 @@ public class DAO {
         } //catch
     } //listaProdutos
     
-    public List<pedido> consultaByCliente(pedido p) {            
-        try{
-            String SQL = " SELECT * FROM Pedidos  WHILE Cliente_idCliente = '" +p.getIdCliente()+ "' AND WHERE Situacao LIKE 'A'";   
-            List<pedido> aut = new ArrayList<pedido>();            
-            PreparedStatement stmt = this.conn.prepareStatement(SQL);            
-            ResultSet rs = stmt.executeQuery();            
-            while(rs.next()){
-                pedido ped = new pedido();                
-                ped.setEmissao(rs.getDate("emissao").toString());
-                ped.setIdPedido(rs.getInt("idPedido"));
-                ped.setPagamento(rs.getString("pagamento"));
-                ped.setQuantidade(rs.getInt("quantidade"));
-                ped.setRetirada(rs.getDate("retirada").toString());
-                ped.setToken(rs.getString("token"));
-                ped.setValor(rs.getFloat("valor"));                
-                aut.add(ped);
-            }
-            rs.close();
-            stmt.close();
-            return aut;            
-        }
-        catch(Exception e){
-            throw new RuntimeException(e);
-        }    
-    } //listaProdutos
-    
-    public int getIdSessao(login log) { //PEGAR O IDCLIENTE COM LOGIN
-        try{
-            String SQL = " SELECT Cliente_idClient FROM Login WHERE account LIKE ?";              
-            PreparedStatement stmt = this.conn.prepareStatement(SQL);
-            stmt.setString(1, log.getAccount());
-            ResultSet rs = stmt.executeQuery();
-            log.setIdCliente(rs.getInt("account"));
-            rs.close();
-            stmt.close();
-            return log.getIdCliente();            
-        }
-        catch(Exception e){
-            throw new RuntimeException(e);
-        }    
-    } //getIdSessao
-    
     ////////////ALTERAR TABELAS/////////////
     public void alteraProduto (produtos Produto) {
         String SQL = "UPDATE Produtos SET descricao=?, valor=?, estoque=?, situacao=? WHERE idProdutos LIKE ?";
