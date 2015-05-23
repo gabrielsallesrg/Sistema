@@ -224,7 +224,7 @@ public class DAO {
             
             while(rs.next()){
                 pedido ped = new pedido();                
-                ped.setEmissao(rs.getDate("emissao").toString());
+                ped.setEmissao(rs.getDate("emissao").toString);
                 ped.setIdPedido(rs.getInt("idPedido"));
                 ped.setPagamento(rs.getString("pagamento"));
                 ped.setQuantidade(rs.getInt("quantidade"));
