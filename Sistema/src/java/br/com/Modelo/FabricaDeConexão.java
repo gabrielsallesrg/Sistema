@@ -13,10 +13,12 @@ public class FabricaDeConexão {
     
     public static Connection getConnection() throws SQLException {
         try {
+            System.out.println("FabricaDeConexão.java, try");
             Class.forName(DRIVER);
             return DriverManager.getConnection(URL, USUARIO, SENHA);            
         } //try
         catch (ClassNotFoundException erro) {
+            System.out.println("FabricaDeConexão.java, catch");
             erro.printStackTrace();
             System.out.println(erro.getMessage());
             throw new SQLException(erro.getMessage());

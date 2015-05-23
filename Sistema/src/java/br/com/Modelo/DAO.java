@@ -12,7 +12,9 @@ public class DAO {
     private ResultSet rs;    
     // método construtor para conectar com o banco
     public DAO () throws SQLException {
+        System.out.println("DAO.java, construtor");
         this.conn = (Connection) FabricaDeConexão.getConnection();
+        System.out.println("DAO.java, fim do construtor");
     } //construtor     
     
     /////////////////ADICIONAR TABELAS////////////////////
@@ -136,7 +138,7 @@ public class DAO {
     public List<pedido> listaPedidobyToken(pedido pedid) {            
         try {
             List<pedido> aut = new ArrayList<pedido>();
-            String SQL = "SELECT * FROM pedido WHILE token = ?";
+            String SQL = "SELECT * FROM Pedido WHERE token = ?";
             
             PreparedStatement stmt = this.conn.prepareStatement(SQL);  
             stmt.setString(1, pedid.getToken());
@@ -149,7 +151,12 @@ public class DAO {
                 ped.setIdPedido(rs.getInt("idPedido"));
                 ped.setPagamento(rs.getString("pagamento"));
                 ped.setQuantidade(rs.getInt("quantidade"));
-                ped.setRetirada(rs.getDate("retirada").toString());
+                if (rs.getDate("retirada") == null){
+                    ped.setRetirada("");
+                }
+                else{
+                    ped.setRetirada(rs.getDate("retirada").toString());
+                }
                 ped.setToken(rs.getString("token"));
                 ped.setValor(rs.getFloat("valor"));                
                 aut.add(ped);
