@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 
 <html>
-    <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -32,12 +31,36 @@
 			<p>Não pegue fila. Pegue um ticket</p>
 		</div><!--texto-->
 	</div><!--logo-->
-
-    <div id="menu-inicio">
-       <ul>
-			<li><a href="loja/loja.jsp">LOJA</a></li>
-			<li><a href="cliente/cliente.jsp">CLIENTE</a></li>
-	   </ul>
-	</div><!--menu-inicio-->
-
-</body></html>
+        
+        <br>
+        
+        <form name="loginUsuario" action="LU" method="POST">
+         
+           
+           <table border="1" cellspacing="1" cellpadding="1">
+                            
+				<tbody>
+					<tr>
+						<td id="corpo_form">Nome do Usuario:</td>
+						<td><input type="text" name="nome" size="6" /></td>
+					</tr>
+					<tr>
+						<td id="corpo_form">Senha:</td>
+						<td><input type="password" name="senha" size="6" /></td>
+                                        <tr align="right" >	
+                                         
+                                            <td></td><td><input type="submit" name="Logar" value="ENTRAR" /></td>
+                                        </tr>
+                                       
+                                
+					<tr>
+						<td><a href="inserir-usuario.jsp" id="corpo_form">Cadastrar
+								Usuario</a></td>
+					</tr>
+				</tbody>
+           </table>
+               
+          </form>
+    </center>
+    </body>
+    </html>
