@@ -31,15 +31,15 @@ public class DAO_2 {
             
             while(rs.next()){
                 pedido ped = new pedido();                
-                ped.setEmissao(rs.getDate("emissao").toString());
+                ped.setEmissao(rs.getDate("emissao"));
                 ped.setIdPedido(rs.getInt("idPedido"));
                 ped.setPagamento(rs.getString("pagamento"));
                 ped.setQuantidade(rs.getInt("quantidade"));
                 if (rs.getDate("retirada") == null){
-                    ped.setRetirada("");
+                    ped.setRetirada(null);
                 }
                 else{
-                    ped.setRetirada(rs.getDate("retirada").toString());
+                    ped.setRetirada(rs.getDate("retirada"));
                 }
                 ped.setToken(rs.getString("token"));
                 ped.setValor(rs.getFloat("valor"));                
@@ -67,15 +67,15 @@ public class DAO_2 {
             
             while(rs.next()){
                 pedido ped = new pedido();                
-                ped.setEmissao(rs.getDate("emissao").toString());
+                ped.setEmissao(rs.getDate("emissao"));
                 ped.setIdPedido(rs.getInt("idPedido"));
                 ped.setPagamento(rs.getString("pagamento"));
                 ped.setQuantidade(rs.getInt("quantidade"));
                 if (rs.getDate("retirada") == null){
-                    ped.setRetirada("");
+                    ped.setRetirada(null);
                 }
                 else{
-                    ped.setRetirada(rs.getDate("retirada").toString());
+                    ped.setRetirada(rs.getDate("retirada"));
                 }
                 ped.setToken(rs.getString("token"));
                 ped.setValor(rs.getFloat("valor"));                
