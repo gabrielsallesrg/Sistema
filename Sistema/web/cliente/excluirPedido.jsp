@@ -29,8 +29,10 @@
 	 <link rel="stylesheet" type="text/css" href="../css/style.css" />
 </head>
     <body>
+    <center>
+        <h1>Excluir Pedido</h1>
         <div id="excluirpedido">
-            <h1>Excluir Pedido</h1>
+            
         </div><!--excluirpedido-->
         <%
             int idCliente=1; //criado para fins de teste
@@ -44,9 +46,9 @@
                     <tr>
                         <th>#</th>
                         <th>Emissao</th>
+                        <th>TOKEN</th>
                         <th>Quantidade</th>
                         <th>Valor</th>
-                        <th>TOKEN</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,16 +57,17 @@
                         pedido a = (pedido) pli.next();
                     %> 
                     <tr>
-                        <td><input type="radio" name="excluirPedido" value="<%=a.getIdPedido()%>" />"></td>
+                        <td><input type="radio" name="excluirPedido" value="<%=a.getIdPedido()%>" />"></td>               
                         <td><%= a.getEmissao() %></td>
-                        <td><%= a.getQuantidade() %></td>
-                        <td><%= a.getValor() %></td>
                         <td><%= a.getToken() %></td>
+                        <td><%= a.getQuantidade() %></td>
+                        <td><%= a.getValor() %></td>                    
                     </tr>
                     <%}%>
                 </tbody>            
             </table>  
-                <input type="submit" value="Excluir" name="Excluir" />
+           <input type="submit" value="Excluir" name="Excluir" />
         </form>
+    </center>
     </body>
 </html>
