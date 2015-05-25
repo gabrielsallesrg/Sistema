@@ -86,10 +86,10 @@
             <thead>
                 <%
                     String token = request.getParameter("token");
-                    System.out.println("entregarPedido.jsp, token = " + token);
+                    System.out.println("entregarPedido.jsp, linha 89, token = " + token);
                     pedido ped = new pedido();
                     ped.setToken(token);
-                    DAO_2 pdao = new DAO_2();
+                    DAO pdao = new DAO();
                     List<pedido> listaPedidos = pdao.listaPedidobyToken(ped);
                     Iterator it = listaPedidos.iterator();
                     int qtdePedidos = listaPedidos.size();
@@ -117,6 +117,9 @@
                     <td> <%= p.getToken() %> </td>
                 </tr>
             </tbody>
+            <%
+                }
+            %>
         </table>
 
         

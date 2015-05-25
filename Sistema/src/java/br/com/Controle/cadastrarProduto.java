@@ -40,7 +40,7 @@ public class cadastrarProduto extends HttpServlet {
             }
             //int estoque = Integer.parseInt(request.getParameter("estoque"));
             int estoque;
-            String aux_estoque = request.getParameter("valor");
+            String aux_estoque = request.getParameter("estoque");
             if (aux_estoque == null || aux_estoque.isEmpty()){
                 estoque = -1; // -1 enviará para a página de erroEstoque.jsp
             }
