@@ -18,7 +18,7 @@ public class UsuarioDao {
         private final Connection conn;
         private ResultSet rs;  
         private String tipo_cliente; // Variavel do tipo ResultSet
-        private long idCliente; // Variavel do tipo ResultSet
+        private int idCliente; // Variavel do tipo ResultSet
 
 	// Metodo construtor para conectar com o banco
 	public UsuarioDao() throws SQLException {
@@ -44,7 +44,7 @@ public class UsuarioDao {
 			if (rs.next()) {
 				result = true;
                                 setTipo_cliente(rs.getString("tipo"));
-                                setIdCliente(rs.getLong("idCliente"));
+                                setIdCliente(rs.getInt("Cliente_idCliente"));
 			}
 		} catch (Exception e) {
 		}
@@ -182,7 +182,7 @@ public class UsuarioDao {
         return idCliente;
     }
 
-    public void setIdCliente(long idCliente) {
+    public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
                 
