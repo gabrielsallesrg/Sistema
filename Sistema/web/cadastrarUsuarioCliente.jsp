@@ -44,8 +44,16 @@
 						<td><input type="text" name="endereco"/></td>
 					</tr>
                                         <tr>
+						<td id="corpo_form">Cidade:</td>
+						<td><input type="text" name="cidade"/></td>
+					</tr>                                        
+                                        <tr>
 						<td id="corpo_form">Telefone:</td>
 						<td><input type="text" name="telefone"/></td>
+					</tr>
+                                        <tr>
+						<td id="corpo_form">E-mail:</td>
+						<td><input type="text" name="email"/></td>
 					</tr>
                                         <tr>
 						<td id="corpo_form">Nome de Usuario:</td>
@@ -55,11 +63,21 @@
 						<td id="corpo_form">Senha:</td>
 						<td><input type="password" name="senha"/></td>
 					</tr>
+                                        
+                                        <% if("L".equals(session.getAttribute("tipo"))) { %>
 					<tr>
-						<td id="corpo_form">Tipo de LOGIN:</td>
-						<td><input type="text" name="tipo" size="1"> 
-						</td>
+                                            <td>
+                                                Tipo de Login:
+                                            </td>
+                                                <td>
+                                                    <select>
+                                                        <option value="C">Cliente</option>
+                                                        <option value="L">Loja</option>
+                                                    </select>
+                                                </td>
+                                                
 					</tr>
+                                        <% } %>
                                        
 					<tr>
 						<td id="corpo_form">Cadastrar:</td>

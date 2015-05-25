@@ -64,10 +64,15 @@ public class AutenticaLogin extends HttpServlet {
                 
                 if (udao.verificaUsuario(usuario) == true) {
 
-                    
+                 /*   
                     session.putValue("nome", nome);
                     session.putValue("senha", senha);
                     session.putValue("tipo", udao.getTipo_cliente());
+                 */
+                    
+                    session.setAttribute("nome", nome);
+                    session.setAttribute("tipo", udao.getTipo_cliente());
+                    
                     
                     String URLpage = "/loja/loja.jsp";
                     

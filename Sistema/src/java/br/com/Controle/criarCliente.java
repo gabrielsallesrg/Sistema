@@ -28,8 +28,8 @@ public class criarCliente extends HttpServlet {
             } //if
             
             //Formulário do cliente
-            String pNome = request.getParameter("primeiroNome"); //obrigatório
-            String sNome = request.getParameter("segundoNome"); //obrigatório
+            String pNome = request.getParameter("nome"); //obrigatório
+            String sNome = request.getParameter("sobrenome"); //obrigatório
             String endereco = request.getParameter("endereco"); 
             String telefone = request.getParameter("telefone"); //obrigatório
             String cidade = request.getParameter("cidade"); //obrigatório
@@ -55,22 +55,26 @@ public class criarCliente extends HttpServlet {
                 dispatcher.forward(request, response);
             } //else if
             else {
-                cliente Cliente = new cliente(telefone, pNome, sNome, endereco, cidade, email, usuario); //obj. cliente settado.
-                DAO dao = new DAO();
-                dao.adicionaCliente(Cliente);
-                
-                
-                if("C".equals(tipo)){
                  
-                        Usuario user = new Usuario();
-                        user.setNome(usuario);
-                        user.setSenha(senha);
+              cliente cli = new cliente(pNome, sNome, endereco, telefone, cidade, email, usuario, senha);
+                DAO dao = new DAO();
+                dao.adicionaCliente(cli);
+                               
+                Usuario user = new Usuario();
+                user.setNome(usuario);
+                user.setSenha(senha);
+                
+                
+                if(session.getAttribute("tipo") == null){
                         user.setTipo("C");
-                        user.setIdUsuario(dao.retornaIdCliente(usuario));
-                        UsuarioDao userdao = new UsuarioDao();
-                        userdao.adicionaUsuario(user);
-                    
+                        user.setIdUsuario(dao.retornaIdCliente(usuario));   
+                }else {
+                    user.setTipo("L");
                 }
+                
+                //grava o usuario também
+                UsuarioDao userdao = new UsuarioDao();
+                userdao.adicionaUsuario(user);
                 
   
                 

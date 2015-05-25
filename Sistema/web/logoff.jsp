@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	import="br.com.Modelo.*, br.com.Controle.*, java.net.*, java.text.*, java.util.*"
 	pageEncoding="ISO-8859-1"%>
+<%  
+String contextpath          = request.getContextPath();  
+%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -33,7 +36,7 @@
 			%>
                         <center>
 			<h2 id="corpo_titulo">VOCE FOI DESCONECTADO</h2>
-			<br /> <br /> <a href="../index.jsp" id="corpo_form">PAGINA DE
+			<br /> <br /> <a href="<%=contextpath%>/index.jsp" id="corpo_form">PAGINA DE
 				LOGIN</a>
                         </center>
 </body>

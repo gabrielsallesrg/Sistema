@@ -21,7 +21,7 @@ public class GeraToken {
         int i;
         SecureRandom gerado = new SecureRandom();
         for (i = 0; i < letras.length; i++) {
-            auxiliar = pegarLetra(gerado.nextInt(23));
+            auxiliar = pegarLetra(gerado.nextInt(letras.length));
             retorno += auxiliar;
         }
         return retorno;

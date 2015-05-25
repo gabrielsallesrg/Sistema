@@ -30,7 +30,7 @@ public class UsuarioDao {
 		boolean result = false;
 
 		try {
-			String SQL = "SELECT nome,tipo FROM usuario WHERE nome = ? AND senha = ?";
+			String SQL = "SELECT * FROM usuario WHERE nome = ? AND senha = ?";
 
 			PreparedStatement stmt = conn.prepareStatement(SQL);
 			
@@ -42,7 +42,7 @@ public class UsuarioDao {
                         
 			if (rs.next()) {
 				result = true;
-                                setTipo_cliente("tipo");
+                                setTipo_cliente(rs.getString("tipo"));
 			}
 		} catch (Exception e) {
 		}
@@ -60,6 +60,7 @@ public class UsuarioDao {
                         ps.setLong(4, usuario.getCliente_idCliente());
 			ps.execute();
 			ps.close();
+                        
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

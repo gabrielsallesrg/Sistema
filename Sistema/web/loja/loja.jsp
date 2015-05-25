@@ -7,6 +7,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%  
 String contextpath          = request.getContextPath();  
+
+
+        if(session.getAttribute("nome") == null){
+            
+                    //precisa colocar aqui para redirecionar para outra página
+        }
+        if( "C".equals(session.getAttribute("tipo"))){
+                //aqui precisa dizer que ele não é CLIENTE
+            }
+
 %> 
 <!DOCTYPE html>
 <html>

@@ -4,9 +4,23 @@
     Author     : kelvin
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"
+        
+        import=" javax.servlet.RequestDispatcher, javax.servlet.ServletContext, javax.servlet.http.HttpServlet "
+        
+        %>
 <%  
-String contextpath          = request.getContextPath();  
+        String contextpath  = request.getContextPath();  
+
+
+        if(session.getAttribute("nome") == null){
+            
+                    //precisa colocar aqui para redirecionar para outra página
+            
+        }
+        if( "L".equals(session.getAttribute("tipo"))){
+                //aqui precisa dizer que ele não é CLIENTE
+            }
 %> 
 <!DOCTYPE html>
 
