@@ -110,26 +110,52 @@ public class DAO {
         } //catch
     } //adicionarCliente
     
-    public void cadastroProduto (produtos Produto) {
+    public void cadastroProduto (produtos Produto) throws SQLException {
         
-        // Testar se o produto já está inserido no BD e testar se os dados importantes foram digitados.
+        // Este metodo testara se o produto ja esta cadastrado.
+        // Caso esteja, ira atualizar os dados.
+        // Caso nao esteja, ira adiciona-lo na tabela Produto.
         
-        String SQL = "INSERT INTO Produtos (descricao, valor, estoque, Situacao)"+" VALUES (?,?,?,?)";
-        try {
-            PreparedStatement ps = conn.prepareStatement(SQL);
-            ps.setString(1, Produto.getDescricao());
-            String aux = Double.toString(Produto.getValor());
-            ps.setString(2, aux);
-            aux = Integer.toString(Produto.getEstoque());
-            ps.setString(3, aux);
-            aux = "" + Produto.getSituacao();
-            ps.setString(4, aux);
-            ps.execute();
-            ps.close();
-        } //try
-        catch (SQLException e) {
-            throw new RuntimeException(e);
-        } //catch
+        List <produtos> listaProd =  new ArrayList<produtos>();
+        String SQL = "SELECT * FROM Produtos WHERE descricao = '" + Produto.getDescricao() + "'";
+        System.out.println("DAO.java, linha 120, SQL = " + SQL);
+        PreparedStatement stmt = this.conn.prepareStatement(SQL);
+        ResultSet rs = stmt.executeQuery();            
+        while(rs.next()){
+            produtos prod = new produtos();                
+            prod.setDescricao(rs.getString("descricao"));
+            prod.setEstoque(rs.getInt("estoque"));
+            prod.setIdProduto(rs.getInt("idProdutos"));
+            prod.setValor(rs.getDouble("valor"));
+            listaProd.add(prod);
+        }
+        rs.close();
+        stmt.close();
+        if (listaProd.size() > 0) {
+            // Se a lista tiver ao menos 1 elemento, o produto ja esta cadastrado e sera atualizado.
+            System.out.println("DAO.java, linha 132, Produto ja na lista");
+            Produto.setIdProduto(listaProd.get(0).getIdProduto());
+            alteraProduto(Produto);
+        }
+        else{
+            // Senao insere o produto
+            SQL = "INSERT INTO Produtos (descricao, valor, estoque, Situacao)"+" VALUES (?,?,?,?)";
+            try {
+                PreparedStatement ps = conn.prepareStatement(SQL);
+                ps.setString(1, Produto.getDescricao());
+                String aux = Double.toString(Produto.getValor());
+                ps.setString(2, aux);
+                aux = Integer.toString(Produto.getEstoque());
+                ps.setString(3, aux);
+                aux = "" + Produto.getSituacao();
+                ps.setString(4, aux);
+                ps.execute();
+                ps.close();
+            } //try
+            catch (SQLException e) {
+                throw new RuntimeException(e);
+            } //catch
+        }
     } //cadastrarProduto
     
     ////////////////////LISTAR E CONSULTAR TABELAS///////////////
@@ -279,18 +305,21 @@ public class DAO {
     
     ////////////ALTERAR TABELAS/////////////
     public void alteraProduto (produtos Produto) {
-        String SQL = "UPDATE Produtos SET descricao=?, valor=?, estoque=?, situacao=? WHERE idProdutos LIKE ?";
+        String SQL = "UPDATE Produtos SET descricao = '" + Produto.getDescricao() + "', valor = " + Produto.getValor() + ", estoque = " + Produto.getEstoque() + " , situacao = '" + Produto.getSituacao() + "' WHERE idProdutos LIKE " + Produto.getIdProduto();
+        System.out.println("DAO.java, 303, SQL = " + SQL);
         try {
+            System.out.println("DAO.java, 305, try");
             PreparedStatement ps = conn.prepareStatement(SQL);
-            ps.setString(1, Produto.getDescricao());
+            /*ps.setString(1, Produto.getDescricao());
             ps.setDouble(2, Produto.getValor());
             ps.setInt(3, Produto.getEstoque());
             ps.setString(4, ""+Produto.getSituacao());
-            ps.setInt(5, Produto.getIdProduto());
+            ps.setInt(5, Produto.getIdProduto()); */
             ps.execute();
             ps.close();
         }
         catch (SQLException e) {
+            System.out.println("DAO.java, 305, catch");
             throw new RuntimeException(e);
         } //catch
     } //alteraProduto
