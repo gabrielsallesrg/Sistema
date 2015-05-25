@@ -18,6 +18,7 @@ public class UsuarioDao {
         private final Connection conn;
         private ResultSet rs;  
         private String tipo_cliente; // Variavel do tipo ResultSet
+        private long idCliente; // Variavel do tipo ResultSet
 
 	// Metodo construtor para conectar com o banco
 	public UsuarioDao() throws SQLException {
@@ -43,6 +44,7 @@ public class UsuarioDao {
 			if (rs.next()) {
 				result = true;
                                 setTipo_cliente(rs.getString("tipo"));
+                                setIdCliente(rs.getLong("idCliente"));
 			}
 		} catch (Exception e) {
 		}
@@ -51,13 +53,15 @@ public class UsuarioDao {
 	
 	// Metodo para inserir Usuario no banco de dados
 	public void adicionaUsuario(Usuario usuario) {
-		String SQL = "INSERT INTO usuario (nome, senha, tipo, Cliente_idCliente) VALUES (?,?,?,?)";
+		String SQL = "INSERT INTO usuario (Cliente_idClientem nome, senha, tipo) VALUES (?,?,?,?)";
 		try {
 			PreparedStatement ps = conn.prepareStatement(SQL);
-			ps.setString(1, usuario.getNome());
-			ps.setString(2, usuario.getSenha());
-                        ps.setString(3, usuario.getTipo());
-                        ps.setLong(4, usuario.getCliente_idCliente());
+                        
+                        ps.setLong(1, usuario.getCliente_idCliente());
+			ps.setString(2, usuario.getNome());
+			ps.setString(3, usuario.getSenha());
+                        ps.setString(4, usuario.getTipo());
+                        
 			ps.execute();
 			ps.close();
                         
@@ -75,9 +79,11 @@ public class UsuarioDao {
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
 					Usuario u = new Usuario();
-					u.setId_Log(rs.getLong("id_Log"));
-					u.setNome(rs.getString("nome"));
+					u.setCliente_idCliente(rs.getInt("Cliente_idCliente"));
+					u.setIdUsuario(rs.getInt("idUsuario"));
+                                        u.setNome(rs.getString("nome"));
 					u.setSenha(rs.getString("senha"));
+                                        u.setTipo(rs.getString("tipo"));
 					usuario.add(u);
 				}
 				rs.close();
@@ -99,7 +105,7 @@ public class UsuarioDao {
 				ResultSet rs = ps.executeQuery();
 				while (rs.next()) {
 					Usuario u = new Usuario();
-					u.setId_Log(rs.getLong("id_Log"));
+					u.setId_Log(rs.getInt("id_Log"));
 					u.setNome(rs.getString("nome"));
 					u.setSenha(rs.getString("senha"));
 					listaUsuario.add(u);
@@ -115,17 +121,17 @@ public class UsuarioDao {
 		// Metodo para buscar na lista Usuario pelo id no banco de dados
 		public List<Usuario> obtemUsuarioById(Usuario usuario) {
 			try {
-				Long id_Log = usuario.getId_Log();
+				int id_Log = usuario.getId_Log();
 
 				List<Usuario> listaUsuario = new ArrayList<Usuario>();
-				String SQL = "SELECT * FROM usuario WHERE id_Log=? ";
+				String SQL = "SELECT * FROM usuario WHERE idUsuario = ? ";
 				PreparedStatement st = this.conn.prepareStatement(SQL);
 				st.setLong(1, id_Log);
 				ResultSet rs = st.executeQuery();
 
 				while (rs.next()) {
 					Usuario u = new Usuario();
-					u.setId_Log(rs.getLong("id_Log"));
+					u.setId_Log(rs.getInt("id_Log"));
 					u.setNome(rs.getString("nome"));
 					u.setSenha(rs.getString("senha"));
 					listaUsuario.add(u);
@@ -162,6 +168,22 @@ public class UsuarioDao {
 
     private void setTipo_cliente(String $tipo_cliente) {
         this.tipo_cliente = $tipo_cliente;
+    }
+
+    public ResultSet getRs() {
+        return rs;
+    }
+
+    public void setRs(ResultSet rs) {
+        this.rs = rs;
+    }
+
+    public long getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(long idCliente) {
+        this.idCliente = idCliente;
     }
                 
                 

@@ -2,7 +2,7 @@ package br.com.Modelo;
 
 public class Usuario {
 
-	private Long idUsuario,Cliente_idCliente;
+        private int idUsuario,Cliente_idCliente;
 	private String nome;
 	private String senha;
         private String tipo;
@@ -21,24 +21,24 @@ public class Usuario {
 		this.tipo = tipo;
 	}
 
-	public Usuario(Long id_Log, String nome, String senha) {
+	public Usuario(int id_Log, String nome, String senha) {
 		this.idUsuario = id_Log;
 		this.nome = nome;
 		this.senha = senha;
 	}
 
-	public Usuario(Long id_Log, String nome, String senha, String tipo) {
+	public Usuario(int id_Log, String nome, String senha, String tipo) {
 		this.idUsuario = id_Log;
 		this.nome = nome;
 		this.senha = senha;
 		this.tipo = tipo;
 	}
 
-	public Long getId_Log() {
+	public int getId_Log() {
 		return idUsuario;
 	}
 
-	public void setId_Log(Long id_Log) {
+	public void setId_Log(int id_Log) {
 		this.idUsuario = id_Log;
 	}
 
@@ -68,19 +68,19 @@ public class Usuario {
         this.tipo = tipo;
     }
 
-    public Long getIdUsuario() {
+    public int getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public Long getCliente_idCliente() {
+    public int getCliente_idCliente() {
         return Cliente_idCliente;
     }
 
-    public void setCliente_idCliente(Long Cliente_idCliente) {
+    public void setCliente_idCliente(int Cliente_idCliente) {
         this.Cliente_idCliente = Cliente_idCliente;
     }
         

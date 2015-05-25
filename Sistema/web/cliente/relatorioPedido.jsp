@@ -36,7 +36,7 @@
         <h1>:: Histórico de pedidos ::</h1>
         
         <%
-            int idCliente=1; //criado para fins de teste
+            int idCliente = Integer.parseInt(session.getAttribute("idCliente").toString()); //criado para fins de teste
             DAO adao = new DAO();
             List listaPedidos = adao.listaPedidos(idCliente); //pegar o ID do cliente da sessão e enviar como parâmetro
             Iterator pli = listaPedidos.iterator();

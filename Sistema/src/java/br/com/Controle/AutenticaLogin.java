@@ -72,6 +72,7 @@ public class AutenticaLogin extends HttpServlet {
                     
                     session.setAttribute("nome", nome);
                     session.setAttribute("tipo", udao.getTipo_cliente());
+                    session.setAttribute("idCliente", udao.getIdCliente());
                     
                     
                     String URLpage = "/loja/loja.jsp";
