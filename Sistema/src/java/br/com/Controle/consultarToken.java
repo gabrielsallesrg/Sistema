@@ -48,10 +48,10 @@ public class consultarToken extends HttpServlet {
                     dispatcher.forward(request, response);
                 }
                 else{
-                    
                     request.setAttribute("listaPedidobyToken", listaPedidobyToken);
 
                     RequestDispatcher rd = request.getRequestDispatcher("/loja/entregarPedido.jsp");
+                    System.out.println("consultarToken.java, 54");
                     rd.forward(request, response);
                 }
                 
