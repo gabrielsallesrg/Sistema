@@ -53,11 +53,11 @@ public class UsuarioDao {
 	
 	// Metodo para inserir Usuario no banco de dados
 	public void adicionaUsuario(Usuario usuario) {
-		String SQL = "INSERT INTO usuario (Cliente_idClientem nome, senha, tipo) VALUES (?,?,?,?)";
+		String SQL = "INSERT INTO usuario (Cliente_idCliente, nome, senha, tipo) VALUES (?,?,?,?) ";
 		try {
 			PreparedStatement ps = conn.prepareStatement(SQL);
                         
-                        ps.setLong(1, usuario.getCliente_idCliente());
+                        ps.setInt(1, usuario.getCliente_idCliente());
 			ps.setString(2, usuario.getNome());
 			ps.setString(3, usuario.getSenha());
                         ps.setString(4, usuario.getTipo());
@@ -105,7 +105,7 @@ public class UsuarioDao {
 				ResultSet rs = ps.executeQuery();
 				while (rs.next()) {
 					Usuario u = new Usuario();
-					u.setId_Log(rs.getInt("id_Log"));
+					u.setId_Log(rs.getInt("idUsuario"));
 					u.setNome(rs.getString("nome"));
 					u.setSenha(rs.getString("senha"));
 					listaUsuario.add(u);
@@ -131,7 +131,7 @@ public class UsuarioDao {
 
 				while (rs.next()) {
 					Usuario u = new Usuario();
-					u.setId_Log(rs.getInt("id_Log"));
+					u.setId_Log(rs.getInt("idUsuario"));
 					u.setNome(rs.getString("nome"));
 					u.setSenha(rs.getString("senha"));
 					listaUsuario.add(u);
@@ -148,13 +148,15 @@ public class UsuarioDao {
 		
 	// Metodo para alterar/atualizar Usuario no banco de dados
 		public void alteraUsuario(Usuario usuario) {
-			String SQL = "UPDATE usuario SET nome=?, senha=?, descricao=? "
-					+ "WHERE id_Log=?  ";
+			String SQL = "UPDATE usuario SET senha=? "
+					+ " WHERE idUsuario = ?  ";
 			try {
 				PreparedStatement st = conn.prepareStatement(SQL);
-				st.setString(1, usuario.getNome());
-				st.setString(2, usuario.getSenha());
-				st.setLong(4, usuario.getId_Log());
+                                
+				//st.setString(1, usuario.getNome());
+				st.setString(1, usuario.getSenha());
+				st.setInt (2, usuario.getId_Log());
+                                
 				st.execute();
 				st.close();
 			} catch (SQLException e) {

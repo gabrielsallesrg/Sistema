@@ -18,9 +18,9 @@ public class DAO {
         System.out.println("DAO.java, fim do construtor");
     } //construtor     
     
-    public long retornaIdCliente(String nome){   
+    public int retornaIdCliente(String nome){   
         
-        long idCliente = 0;
+        int idCliente = 0;
         
         try{
             
@@ -30,7 +30,7 @@ public class DAO {
             ResultSet rs = stmt.executeQuery();  
             
             while(rs.next()){
-                idCliente = rs.getLong("idCliente");
+                idCliente = rs.getInt("idCliente");
             }
             rs.close();
             stmt.close();

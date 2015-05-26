@@ -33,6 +33,7 @@
             <li><a href="realizarPedido.jsp" target="central" >Fazer Pedido!</a></li>
             <li><a href="relatorioPedido.jsp" target="central" >Relatório</a></li>
             <li><a href="excluirPedido.jsp" target="central" >Excluir Pedido</a></li>
+            <li><a href="../alterarCadastro.jsp" target="central" >Alterar Cadastro</a></li>
             <li><a href="../logoff.jsp" target="_top" >Sair</a></li>
         </ul>
     </div><!--menucliente-->

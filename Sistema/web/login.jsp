@@ -14,26 +14,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<link href="css/menu2.css" rel="stylesheet" type="text/css" />
-<meta name="description"
-	content=" 
-              @Copyright (cc) 2015 USC - Linguagem de Programacao III. Alguns direitos reservados" />
-<meta name="author"
-	content="
-              @author Ericsson Roberto de Barros - ericsson.barros@etec.sp.gov.br" />
-<link href="css/menu.css" rel="stylesheet" type="text/css" />
-<link href="css/pagina1.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="css/jquery-ui.css" rel="stylesheet"
-	type="text/css" />
-<script type="text/javascript" src="js/menu.js"></script>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="js/jquery-ui.js"></script>
-<title>LOGIN</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <title>.:Gakem | Não pegue Fila. Pegue um Ticket:.</title>
+
+        <link rel="shortcut icon" href="images/favicon.ico">
+
+        <!-- Google fonts -->
+        <link href="http://fonts.googleapis.com/css?family=Copse|Montserrat:400,700" rel="stylesheet" type="text/css">
+
+        <!--css-->
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
 
 </head>
-<body onload="menuDropDown(14);">
+<body>
 	<div id="conteudo">
 		<div id="topo"></div>
 		<h1 id="corpo_titulo">LOGIN</h1>

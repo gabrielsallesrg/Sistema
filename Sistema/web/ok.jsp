@@ -20,7 +20,7 @@
         <link rel="stylesheet" type="text/css" href="css/style.css" />
     </head>
     <body>
-        <h1>Sua Operação foi realizada com sucesso.</h1>
+        <h1>Sua operação foi realizada com sucesso.</h1>
         <br><br>
     </body>
 </html>

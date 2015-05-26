@@ -15,15 +15,15 @@ String contextpath          = request.getContextPath();
 
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-        <title>.:Gakem:.</title>
+        <title>.:Gakem | Volte Sempre:.</title>
 
-        <link rel="shortcut icon" href="../images/favicon.ico">
+        <link rel="shortcut icon" href="images/favicon.ico">
 
         <!-- Google fonts -->
         <link href="http://fonts.googleapis.com/css?family=Copse|Montserrat:400,700" rel="stylesheet" type="text/css">
 
         <!--css-->
-        <link rel="stylesheet" type="text/css" href="../css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
     </head>
 <body>
 	<div id="texto-alteracao">
@@ -35,7 +35,11 @@ String contextpath          = request.getContextPath();
                             session.invalidate();
 			%>
                         <center>
-			<h2 id="corpo_titulo">VOCE FOI DESCONECTADO</h2>
+			<h2 id="corpo_titulo">Você saiu..</h2>
+                        <br>
+                        <h2 id="corpo_titulo">...Até logo!</h2>
+                        <br>
+                        <h2 id="corpo_titulo">:)</h2>
 			<br /> <br /> <a href="<%=contextpath%>/index.jsp" id="corpo_form">PAGINA DE
 				LOGIN</a>
                         </center>

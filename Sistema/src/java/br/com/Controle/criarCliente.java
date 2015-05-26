@@ -63,15 +63,14 @@ public class criarCliente extends HttpServlet {
                 Usuario user = new Usuario();
                 user.setNome(usuario);
                 user.setSenha(senha);
+                user.setCliente_idCliente(dao.retornaIdCliente(user.getNome()));
                 
-                user.setTipo(tipo);
-                
-                
+              
                 if(session.getAttribute("tipo") == null){
                         user.setTipo("C");
                         user.setIdUsuario((int) dao.retornaIdCliente(usuario));   
                 }else {
-                    user.setTipo("L");
+                    user.setTipo(tipo);
                 }
                 
                 //grava o usuario também
@@ -80,7 +79,7 @@ public class criarCliente extends HttpServlet {
                 
   
                 
-                String urlOK = "/ok.jsp";
+                String urlOK = "../ok.jsp";
                 ServletContext sc = getServletContext();
                 RequestDispatcher rd = sc.getRequestDispatcher(urlOK);
                 rd.forward(request, response);

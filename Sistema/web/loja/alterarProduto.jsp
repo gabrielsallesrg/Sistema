@@ -8,25 +8,6 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="br.com.Modelo.DAO"%>
-<%-- ANTIGO
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Página para alterar o produto</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
---%>
-
-<%-- 
-    Document   : alterarProduto
-    Created on : 17/05/2015, 12:30:52
-    Author     : Murilo RM
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -53,7 +34,11 @@
             DAO dao = new DAO();
             List listaProdutos = dao.listaProdutos(); //pegar o ID do cliente da sessão e enviar como parâmetro
             Iterator pli = listaProdutos.iterator();
-        %>      
+        %>    
+    <center>
+        <div id="cad-produto">
+            <h1>Alterar Produto</h1>
+        </div><!--cad-produto-->
         <form name="alterarProduto" action="SP" method="POST">
             <table border="1">
                 <thead>
@@ -72,7 +57,7 @@
                         produtos p = (produtos) pli.next();
                     %> 
                     <tr>
-                        <td><input type="radio" name="selecionarProduto" value="<%=p.getIdProduto()%>" />"></td>
+                        <td><input type="radio" name="selecionarProduto" value="<%=p.getIdProduto()%>"/></td>
                         <td><%= p.getIdProduto() %></td>
                         <td><%= p.getDescricao() %></td>
                         <td><%= p.getEstoque() %></td>
@@ -104,5 +89,6 @@
             </table>
             <input type="submit" value="Alterar" name="alterar" />
         </form>
+    </center>
     </body>
 </html>

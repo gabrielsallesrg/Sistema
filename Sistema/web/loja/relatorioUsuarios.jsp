@@ -27,8 +27,6 @@
         <link rel="stylesheet" type="text/css" href="../css/style.css" />
     </head>
     <body>
-        <br>
-        <br>
         <%
             UsuarioDao dao = new UsuarioDao();
             List listaUsuario = dao.obtemLista(); //pegar o ID do cliente da sessão e enviar como parâmetro
@@ -36,6 +34,9 @@
         %>      
         
     <center>
+       <div id="cad-produto">
+            <h1>Lista Usuários</h1>
+        </div><!--cad-produto-->
             <table border="1">
                 <thead>
                     <tr>

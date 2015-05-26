@@ -57,7 +57,7 @@
                         pedido a = (pedido) pli.next();
                     %> 
                     <tr>
-                        <td><input type="radio" name="excluirPedido" value="<%=a.getIdPedido()%>" />"></td>               
+                        <td><input type="radio" name="excluirPedido" value="<%=a.getIdPedido()%>" /></td>               
                         <td><%= a.getEmissao() %></td>
                         <td><%= a.getToken() %></td>
                         <td><%= a.getQuantidade() %></td>

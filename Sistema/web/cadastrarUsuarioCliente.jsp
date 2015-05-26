@@ -22,11 +22,11 @@
 
 
 </head>
-<body onload="menuDropDown(14);">
+<body>
 	<div id="conteudo">
 		<div id="topo"></div>
                 <center>
-		<h1 id="corpo_titulo">CADASTRAR USUARIO</h1>
+		<h1 id="corpo_titulo">CADASTRAR Cliente/Usuario</h1>
 		<form name="formLogin" action="CC" method="POST">
 			<table border="1" cellspacing="1" cellpadding="1">
 
@@ -70,8 +70,8 @@
                                                 Tipo de Login:
                                             </td>
                                                 <td>
-                                                    <select>
-                                                        <option value="C">Cliente</option>
+                                                    <select name="tipo">
+                                                        <option value="C" >Cliente</option>
                                                         <option value="L">Loja</option>
                                                     </select>
                                                 </td>
