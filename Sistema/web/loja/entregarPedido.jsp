@@ -89,10 +89,11 @@
                     System.out.println("entregarPedido.jsp, linha 89, token = " + token);
                     pedido ped = new pedido();
                     ped.setToken(token);
-                    DAO pdao = new DAO();
+                    DAO pdao = new DAO();                    
                     List<pedido> listaPedidos = pdao.listaPedidobyToken(ped);
                     Iterator it = listaPedidos.iterator();
                     int qtdePedidos = listaPedidos.size();
+                    System.out.println("qtdePedidos = " + qtdePedidos);
                 %>
                 <tr>
                     <th> - </th>
@@ -110,10 +111,10 @@
             <tbody>
                 <tr>
                     <td><input type="checkbox"> </td>
-                    <td> <%= p.getToken() %> </td>
-                    <td> <%= p.getRetirada() %> </td>
+                    <td> <%= p.getIdPedido() %> </td>
+                    <td> <%= pdao.nomeProdutoByID(p.getIdProduto()) %> </td>
                     <td> <%= p.getQuantidade() %> </td>
-                    <td> <%= p.getValor() %> </td>
+                    <td> R$ <%= p.getValor() %> </td>
                     <td> <%= p.getToken() %> </td>
                 </tr>
             </tbody>
@@ -121,8 +122,6 @@
                 }
             %>
         </table>
-
-        
         <br>
     </body>
 </html>

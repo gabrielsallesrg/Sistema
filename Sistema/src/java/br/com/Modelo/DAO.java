@@ -267,6 +267,24 @@ public class DAO {
         } //catch
     }
     
+       public String nomeProdutoByID(int idProd) {            
+        try {
+            produtos prod = new produtos();
+            String SQL = "SELECT descricao FROM Produtos WHERE idProdutos = " + idProd;
+            PreparedStatement stmt = this.conn.prepareStatement(SQL);  
+            ResultSet rs = stmt.executeQuery();            
+            while(rs.next()){
+                prod.setDescricao(rs.getString("descricao"));
+            }
+            rs.close();
+            stmt.close();
+            return prod.getDescricao();
+        } //try
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        } //catch
+    } //listaProdutos
+    
     
     public List<pedido> listaPedidobyToken(pedido pedid) {            
         try {
@@ -282,6 +300,7 @@ public class DAO {
                 pedido ped = new pedido();                
                 ped.setEmissao(rs.getDate("emissao"));
                 ped.setIdPedido(rs.getInt("idPedido"));
+                ped.setIdProduto(rs.getInt("Produtos_idProdutos"));
                 ped.setPagamento(rs.getString("pagamento"));
                 ped.setQuantidade(rs.getInt("quantidade"));
                 ped.setRetirada(rs.getDate("retirada"));
