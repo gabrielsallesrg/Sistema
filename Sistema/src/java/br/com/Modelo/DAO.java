@@ -12,6 +12,7 @@ public class DAO {
     private final Connection conn;
     private ResultSet rs;    
     // método construtor para conectar com o banco
+    
     public DAO () throws SQLException {
         System.out.println("DAO.java, construtor");
         this.conn = (Connection) FabricaDeConexão.getConnection();
@@ -36,6 +37,37 @@ public class DAO {
             stmt.close();
             
             return idCliente; 
+            
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }    
+    } //listaPedidos
+    
+     public cliente retornaCadastroCliente(Usuario user){   
+        
+      
+        try{
+            
+            String SQL = " SELECT * from cliente where nomeUsuario = ?";                   
+            PreparedStatement stmt = this.conn.prepareStatement(SQL);  
+            stmt.setString(1,user.getNome());
+            ResultSet rs = stmt.executeQuery();  
+            
+            cliente client = new cliente();
+            
+            while(rs.next()){
+                client.setIdCliente(rs.getInt("idCliente"));
+               client.setCidade(rs.getString("cidade"));
+                client.setEmail(rs.getString("Email"));
+                client.setEndereco(rs.getString("endereco"));
+                client.setNome(rs.getString("nome"));
+                client.setSobrenome(rs.getString("sobrenome"));
+                client.setTelefone(rs.getString("telefone"));
+            }
+            rs.close();
+            stmt.close();
+            
+            return client; 
             
         }catch(Exception e){
             throw new RuntimeException(e);

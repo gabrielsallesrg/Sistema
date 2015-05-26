@@ -111,7 +111,7 @@ public class UsuarioDao {
 		}
 	
 	// Metodo para buscar na lista Usuario pelo nome no banco de dados
-		public List<Usuario> obtemUsuario(Usuario usuario) {
+		public Usuario obtemUsuario(Usuario usuario) {
 			try {
 				String nome = usuario.getNome();
 				List<Usuario> listaUsuario = new ArrayList<Usuario>();
@@ -119,16 +119,21 @@ public class UsuarioDao {
 				PreparedStatement ps = this.conn.prepareStatement(SQL);
 				ps.setString(1, "%" + nome + "%");
 				ResultSet rs = ps.executeQuery();
+                                
+                                Usuario u = new Usuario();
+                                
 				while (rs.next()) {
-					Usuario u = new Usuario();
+					
 					u.setId_Log(rs.getInt("idUsuario"));
 					u.setNome(rs.getString("nome"));
 					u.setSenha(rs.getString("senha"));
-					listaUsuario.add(u);
+					
 				}
+                               
+                                
 				rs.close();
 				ps.close();
-				return listaUsuario;
+				return u;
 			} catch (SQLException e) {
 				throw new RuntimeException();
 			}
