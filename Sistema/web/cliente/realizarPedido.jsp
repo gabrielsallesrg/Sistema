@@ -33,7 +33,7 @@
         <br>
     <center>
         
-        <form name="realizaPedido" action="RP" method="POST">
+        <form name="realizaPedido" action="../RP" method="POST">
         <table border="1" cellspacing="2">
             <thead>
                 <tr>

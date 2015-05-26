@@ -49,9 +49,11 @@ public class alterarEstoque extends HttpServlet {
             p.setIdProduto(idProduto);
             p.setEstoque(estoque);
             dao.alteraEstoque(p);            
-            String URL = "/cliente/menucliente.jsp";
+            String URL = "/ok.jsp";
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher(URL);
+            
+            request.setAttribute("operacao", "O estoque do produto " + p.getIdProduto() + ", foi alterado com sucesso!");
             rd.forward(request, response); 
         }
         catch (Exception erro) {

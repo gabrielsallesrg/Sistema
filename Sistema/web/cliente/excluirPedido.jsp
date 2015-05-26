@@ -40,7 +40,7 @@
             List listaPedidos = adao.listaPedidos(idCliente); //pegar o ID do cliente da sessão e enviar como parâmetro
             Iterator pli = listaPedidos.iterator();
         %>      
-        <form name="excluirPedido" action="EP" method="POST">
+        <form name="excluirPedido" action="../EP" method="POST">
             <table border="1">
                 <thead>
                     <tr>

@@ -36,18 +36,23 @@
             <center>
                 <form name="cadastrarProduto" action="../CP" method="POST">
                 <table border="1" cellspacing="2">
-                    <thead>
-                        <tr>
-                            <th>Descrição</th>
-                            <th>Quantidade</th>
-                            <th>Valor</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         <tr>
+                            <tr>
+                            <td>Descrição: </td>
                             <td><input type="text" name="descricao"></td>
+                            </tr>
+                            <tr>
+                            <td>Estoque: </td>    
                             <td><input type="text" name="estoque"></td>
+                            </tr>
+                            <tr>
+                            <td>Valor: </td>
                             <td><input type="text" name="valor"></td>
+                            <tr>
+                            <td>Status: </td>
+                            <td><input type="text" name="status" size="1"></td>
+                            <tr>
                         </tr>
                     </tbody>
                 </table>

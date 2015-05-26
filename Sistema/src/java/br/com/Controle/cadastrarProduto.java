@@ -47,7 +47,7 @@ public class cadastrarProduto extends HttpServlet {
             else{
                 estoque = Integer.parseInt(aux_estoque);
             }
-            char situacao = 'A';
+            String situacao = "A";
             
             RequestDispatcher dispatcher;
             ServletContext servletContext = getServletContext();
@@ -58,9 +58,9 @@ public class cadastrarProduto extends HttpServlet {
             System.out.println("Valor = " + valor);
             
             if (estoque > 0)
-                situacao = 'A'; //Produto automaticamente settado como ativo.
+                situacao = "A"; //Produto automaticamente settado como ativo.
             else if (estoque == 0)
-                situacao = 'B'; //produto inativo.
+                situacao = "B"; //produto inativo.
             
             
             if (descricao.isEmpty() || descricao == null) {
@@ -90,7 +90,7 @@ public class cadastrarProduto extends HttpServlet {
                 descricao = "";
                 valor = 0d;
                 estoque = 0;
-                situacao = ' ';
+                situacao = "";
             } //else
         } //try
         catch (Exception erro) {

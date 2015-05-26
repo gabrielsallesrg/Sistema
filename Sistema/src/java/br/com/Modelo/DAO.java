@@ -202,8 +202,9 @@ public class DAO {
                 prod.setDescricao(rs.getString("descricao"));
                 prod.setEstoque(rs.getInt("estoque"));
                 prod.setIdProduto(rs.getInt("idProdutos"));
-                prod.setUnidades(rs.getString("unidade"));
+//                prod.setUnidades(rs.getString("unidade"));
                 prod.setValor(rs.getDouble("valor"));
+                prod.setSituacao(rs.getString("situacao"));
                 aut.add(prod);
             }
             rs.close();
@@ -254,7 +255,7 @@ public class DAO {
                 po.setDescricao(rs.getString("descricao"));
                 po.setEstoque(rs.getInt("estoque"));
                 po.setIdProduto(rs.getInt("idProdutos"));
-                po.setSituacao(rs.getString("Situacao").charAt(0)); //função que recebe o index 1 da String "rs.getString("Situacao").
+                po.setSituacao(rs.getString("Situacao")); //função que recebe o index 1 da String "rs.getString("Situacao").
                 po.setValor(rs.getDouble("valor"));                
                 listaProdutos.add(po); //adiciona o objeto à lista
             } //while

@@ -41,6 +41,14 @@
         <servlet-name>alterarCadastro</servlet-name>
         <servlet-class>br.com.Controle.alterarCadastro</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>excluirPedido</servlet-name>
+        <servlet-class>br.com.Controle.excluirPedido</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>alterarEstoque</servlet-name>
+        <servlet-class>br.com.Controle.alterarEstoque</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>realizaPedido</servlet-name>
         <url-pattern>/RP</url-pattern>
@@ -48,10 +56,6 @@
     <servlet-mapping>
         <servlet-name>cadastrarProduto</servlet-name>
         <url-pattern>/CP</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>alterarProduto</servlet-name>
-        <url-pattern>/AP</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>consultarIdProduto</servlet-name>
@@ -80,6 +84,18 @@
     <servlet-mapping>
         <servlet-name>alterarCadastro</servlet-name>
         <url-pattern>/AU</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>excluirPedido</servlet-name>
+        <url-pattern>/EP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>alterarProduto</servlet-name>
+        <url-pattern>/SP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>alterarEstoque</servlet-name>
+        <url-pattern>/AE</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

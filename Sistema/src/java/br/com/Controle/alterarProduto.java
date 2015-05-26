@@ -30,7 +30,7 @@ public class alterarProduto extends HttpServlet {
             int estoque = Integer.parseInt(request.getParameter("estoque"));
  
             String situacao_aux = request.getParameter("situacao");
-            char situacao = situacao_aux.charAt(0);
+            String situacao = situacao_aux;
             if (descricao.isEmpty() || descricao == null) {
                 descricao = "";
                 response.sendRedirect("/erroAlterar.jsp");
@@ -43,13 +43,13 @@ public class alterarProduto extends HttpServlet {
                 estoque = 0;
                 response.sendRedirect("/erroAlterar.jsp");
             }
-            else if (situacao != '1' && situacao != '0') {
-                situacao = ' ';
+            else if (situacao != "A" && situacao != "B") {
+                situacao = "";
                 response.sendRedirect("/erroAlterar.jsp");
             }
             else {
                 
-                situacao = '0';
+                situacao = "A";
                 
                 produtos Produto = new produtos(idProdutos, estoque, valor, descricao, situacao);
                 DAO dao = new DAO();
@@ -61,7 +61,7 @@ public class alterarProduto extends HttpServlet {
                 descricao = "";
                 valor = 0d;
                 estoque = 0;
-                situacao = ' ';
+                situacao = "";
             } //else
         } //try
         catch (Exception erro) {

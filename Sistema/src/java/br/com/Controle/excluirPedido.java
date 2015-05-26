@@ -29,9 +29,11 @@ public class excluirPedido extends HttpServlet {
             DAO dao = new DAO();
             p.setIdPedido(item);
             dao.removerPedido(p);            
-            String URL = "/cliente/menucliente.jsp";
+            String URL = "/cliente/ok.jsp";
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher(URL);
+            
+            request.setAttribute("operacao", "Seu pedido foi excluído com sucesso");
             rd.forward(request, response); 
         }
         catch (Exception erro) {

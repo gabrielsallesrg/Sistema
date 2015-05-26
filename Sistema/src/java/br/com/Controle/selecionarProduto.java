@@ -29,7 +29,7 @@ public class selecionarProduto extends HttpServlet {
             String descricao = (request.getParameter("txtDescricao"));
             double valor = Double.parseDouble(request.getParameter("txtValor"));
             int estoque = Integer.parseInt(request.getParameter("txtEstoque"));
-            char situacao = (request.getParameter("txtSituacao")).charAt(0);
+            String situacao = (request.getParameter("txtSituacao"));
             produtos p = new produtos();
             DAO dao = new DAO();
             p.setIdProduto(idProduto);

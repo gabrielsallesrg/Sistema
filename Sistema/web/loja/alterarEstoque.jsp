@@ -39,7 +39,7 @@
         <div id="cad-produto">
             <h1>Alterar Estoque</h1>
         </div><!--cad-produto-->
-        <form name="alterarProduto" action="AE" method="POST">
+        <form name="alterarProduto" action="../AE" method="POST">
             <table border="1">
                 <thead>
                     <tr>

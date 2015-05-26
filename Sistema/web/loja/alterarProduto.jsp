@@ -39,7 +39,7 @@
         <div id="cad-produto">
             <h1>Alterar Produto</h1>
         </div><!--cad-produto-->
-        <form name="alterarProduto" action="SP" method="POST">
+        <form name="alterarProduto" action="../SP" method="POST">
             <table border="1">
                 <thead>
                     <tr>
