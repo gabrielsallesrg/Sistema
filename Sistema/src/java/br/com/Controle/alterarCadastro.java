@@ -1,6 +1,5 @@
 package br.com.Controle;
 
-import br.com.Modelo.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -9,33 +8,51 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-public class receberIdCliente extends HttpServlet {
+
+public class alterarCadastro extends HttpServlet {
+
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {            
-            HttpSession session = request.getSession(true);
-            if (session.isNew()) {
-                    String incomingURL = request.getRequestURL().toString();
-                    String URLwithID = response.encodeRedirectURL(incomingURL);
-                    response.setHeader("Custom=newURL",URLwithID);                   
-                } //if
-            String login = request.getParameter("login");
-            DAO dao = new DAO();
-
-            RequestDispatcher rd = request.getRequestDispatcher("/cliente/menucliente.jsp"); //Mudar url? 
-            rd.forward(request, response);
-        } //try
-        catch (Exception e) {
-            e.printStackTrace();
+        try (PrintWriter out = response.getWriter()) {
+                
+            try{
+                
+             String pNome = request.getParameter("nome"); //obrigatório
+            String sNome = request.getParameter("sobrenome"); //obrigatório
+            String endereco = request.getParameter("endereco"); 
+            String telefone = request.getParameter("telefone"); //obrigatório
+            String cidade = request.getParameter("cidade"); //obrigatório
+            String tipo = request.getParameter("tipo");
+            String email = request.getParameter("email");            
+            String usuario = request.getParameter("usuario");
+            String senha = request.getParameter("senha");
+            
+            
+            System.out.println(pNome);
+            System.out.println(email);
+            
+                String urlOK = "/ok.jsp";
+                ServletContext sc = getServletContext();
+                
+                request.setAttribute("operacao", "Foi alterado o login/senha. Verifique");
+                
+                RequestDispatcher rd = sc.getRequestDispatcher(urlOK);                
+                rd.forward(request, response);
+                
+                
+            }catch(Exception e){
+                            e.printStackTrace();
             e.getMessage();
+            System.out.println("consultarToken.java, catch");
             String urlErro = "/erroEstoque.jsp";
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher(urlErro);
-            rd.forward(request, response);        
-        } //catch
+            rd.forward(request, response);  
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -77,9 +77,12 @@ public class criarCliente extends HttpServlet {
                 userdao.adicionaUsuario(user);
   
                 
-                String urlOK = "../ok.jsp";
+                String urlOK = "/ok.jsp";
                 ServletContext sc = getServletContext();
                 RequestDispatcher rd = sc.getRequestDispatcher(urlOK);
+                
+                request.setAttribute("operacao", "Seu login é: "+user.getNome());
+                
                 rd.forward(request, response);
                 pNome = sNome = telefone = cidade = "";
                 email = "";

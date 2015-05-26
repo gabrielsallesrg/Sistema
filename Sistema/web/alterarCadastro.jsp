@@ -32,15 +32,24 @@
     </head>
      <body>
        <%
-        String nomesession = session.getAttribute("nome").toString();
+           
+           String nomeParam = "";   
+           
+           if("L".equals(session.getAttribute("tipo")))
+           {
+              nomeParam = request.getParameter("nome").toString();
+           }else{
+               nomeParam = session.getAttribute("nome").toString();
+           }
+        
         
         UsuarioDao udao = new UsuarioDao();
         Usuario usuario = new Usuario();
         cliente cli = new cliente();
         DAO adao = new DAO();
         
-        usuario.setNome(nomesession);
-        
+        usuario.setNome(nomeParam);       
+               
               
         usuario = udao.obtemUsuario(usuario);
         cli = adao.retornaCadastroCliente(usuario);
@@ -51,7 +60,7 @@
 		<div id="topo"></div>
                 <center>
 		<h1 id="corpo_titulo">CADASTRAR Cliente/Usuario</h1>
-		<form name="formLogin" action="AC" method="POST">
+		<form name="formLogin" action="AU" method="POST">
                     <div id="conteudo">
 			<table border="1" cellspacing="1" cellpadding="1">
 
@@ -90,11 +99,11 @@
 					</tr>
                                         <tr>
                                             <td id="corpo_form">Usuario</td>
-                                            <td><input type="text" name="usuario" value="<%= usuario.getNome() %>"/></td>
+                                            <td><input type="text" name="usuario" disabled="" value="<%= usuario.getNome() %>" /></td>
 					</tr>
 					<tr>
 						<td id="corpo_form">Senha:</td>
-						<td><input type="password" name="senha" value="<%= usuario.getSenha() %>"/></td>
+                                                <td><input  type="password" name="senha" value="<%= usuario.getSenha() %>"/></td>
 					</tr>
                                                                            
 					<tr>

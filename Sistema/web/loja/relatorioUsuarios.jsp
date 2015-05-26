@@ -37,6 +37,7 @@
        <div id="cad-produto">
             <h1>Lista Usuários</h1>
         </div><!--cad-produto-->
+        <form name="AlteraUsuario" action="../alterarCadastro.jsp" method="POST">
             <table border="1">
                 <thead>
                     <tr>
@@ -46,13 +47,16 @@
                         <th>idCliente</th>
                     </tr>
                 </thead>
+                
                 <tbody>
                     <%
                     while (pli.hasNext()) {
                         Usuario us = (Usuario) pli.next();
                     %> 
+
                     <tr>
-                        <td><%= us.getIdUsuario() %></td>
+                        
+                        <td><input type="radio" name="nome" value="<%= us.getNome() %>"></td>
                         <td><%= us.getNome() %></td>
                         <td><%= us.getTipo() %></td>
                         <td><%= us.getCliente_idCliente() %></td>
@@ -60,6 +64,10 @@
                     <%}%>
                 </tbody>            
             </table>  
+
+            <input type="submit">
+           </form>
+
     </center>
     </body>
 </html>

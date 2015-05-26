@@ -37,6 +37,10 @@
         <servlet-name>loginUsuario</servlet-name>
         <servlet-class>br.com.Controle.AutenticaLogin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>alterarCadastro</servlet-name>
+        <servlet-class>br.com.Controle.alterarCadastro</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>realizaPedido</servlet-name>
         <url-pattern>/RP</url-pattern>
@@ -72,6 +76,10 @@
     <servlet-mapping>
         <servlet-name>loginUsuario</servlet-name>
         <url-pattern>/LU</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>alterarCadastro</servlet-name>
+        <url-pattern>/AU</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

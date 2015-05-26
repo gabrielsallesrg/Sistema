@@ -20,7 +20,13 @@
         <link rel="stylesheet" type="text/css" href="css/style.css" />
     </head>
     <body>
+        <br>
+        <br>
         <h1>Sua operação foi realizada com sucesso.</h1>
         <br><br>
+        <div>
+            <p> - <%= request.getAttribute("operacao") %> </p>
+        </div>
+            
     </body>
 </html>
