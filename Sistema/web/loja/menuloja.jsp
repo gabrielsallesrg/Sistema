@@ -33,7 +33,7 @@
                 <li><a href="cadastrarProduto.jsp" target="central" >Cadastrar Produto</a></li>
                 <li><a href="alterarProduto.jsp" target="central" >Alterar Produto</a></li>
                 <li><a href="alterarEstoque.jsp" target="central" >Alterar Estoque</a></li>
-                <li><a href="../cadastrarUsuarioCliente.jsp" target="central" >Cadastrar Cliente</a></li>
+                <li><a href="../cadastrarUsuarioCliente.jsp" target="central" >Cadastrar Usuário/Cliente</a></li>
                 <li><a href="relatorioUsuarios.jsp" target="central" >Relatorio Usuários</a></li>                
                 <li><a href="../logoff.jsp"         target="_top" >Sair</a></li>
             </ul>

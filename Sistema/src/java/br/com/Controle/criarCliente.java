@@ -56,17 +56,12 @@ public class criarCliente extends HttpServlet {
             } //else if
             else {
                  
-              cliente cli = new cliente(pNome, sNome, endereco, telefone, cidade, email, usuario, senha);
-                DAO dao = new DAO();
-                dao.adicionaCliente(cli);
-                               
+                cliente cli = new cliente(pNome, sNome, endereco, telefone, cidade, email, usuario, senha);
+                DAO dao = new DAO();                        
                 Usuario user = new Usuario();
-                user.setNome(usuario);
-                user.setSenha(senha);
-                user.setCliente_idCliente(dao.retornaIdCliente(user.getNome()));
-                
-              
-                if(session.getAttribute("tipo") == null){
+                 
+                if((session.getAttribute("tipo") == null) || ("C".equals(tipo))){
+                        dao.adicionaCliente(cli);
                         user.setTipo("C");
                         user.setIdUsuario((int) dao.retornaIdCliente(usuario));   
                 }else {
@@ -74,9 +69,12 @@ public class criarCliente extends HttpServlet {
                 }
                 
                 //grava o usuario também
+
+                user.setNome(usuario);
+                user.setSenha(senha);
+                user.setCliente_idCliente(dao.retornaIdCliente(user.getNome()));
                 UsuarioDao userdao = new UsuarioDao();
                 userdao.adicionaUsuario(user);
-                
   
                 
                 String urlOK = "../ok.jsp";

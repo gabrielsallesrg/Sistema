@@ -53,22 +53,38 @@ public class UsuarioDao {
 	
 	// Metodo para inserir Usuario no banco de dados
 	public void adicionaUsuario(Usuario usuario) {
-		String SQL = "INSERT INTO usuario (Cliente_idCliente, nome, senha, tipo) VALUES (?,?,?,?) ";
-		try {
-			PreparedStatement ps = conn.prepareStatement(SQL);
-                        
-                        ps.setInt(1, usuario.getCliente_idCliente());
-			ps.setString(2, usuario.getNome());
-			ps.setString(3, usuario.getSenha());
-                        ps.setString(4, usuario.getTipo());
-                        
-			ps.execute();
-			ps.close();
+            
+		String SQL = "";
+		    
+                try {
+                    
+                    
+                if("C".equals(usuario.getTipo())){
+                     SQL = "INSERT INTO usuario (nome, senha, tipo, Cliente_idCliente) VALUES (?,?,?,?) ";
+                     PreparedStatement ps = conn.prepareStatement(SQL);
+                     ps.setString(1, usuario.getNome());
+		     ps.setString(2, usuario.getSenha());
+                     ps.setString(3, usuario.getTipo());
+                     ps.setInt(4, usuario.getCliente_idCliente());
+                     ps.execute();
+                     ps.close();
+                }
+                else{
+                    SQL = "INSERT INTO usuario (nome, senha, tipo) VALUES (?,?,?) ";
+                    PreparedStatement ps = conn.prepareStatement(SQL);   
+                        ps.setString(1, usuario.getNome());
+			ps.setString(2, usuario.getSenha());
+                        ps.setString(3, usuario.getTipo());
+                        ps.execute();
+                        ps.close();
+                 } 
+	
                         
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}
+        
 	
 	// Metodo para criar uma lista de Usuarios no banco de dados
 		public List<Usuario> obtemLista() {
