@@ -65,14 +65,19 @@
 			<table border="1" cellspacing="1" cellpadding="1">
 
 				<tbody>
-                                    <% if("C".equals(session.getAttribute("tipo") == null )) {
-                                        
-                                    %>
                                     	<tr>
 						<td id="corpo_form">#</td>
-                                                <td><input type="text" name="nome" value="<%= usuario.getId_Log() %>"/></td>
+                                                <td><input type="hidden" name="idCliente" value="<%= cli.getIdCliente() %>"/></td>
 					</tr>
-                                     <% } %>
+                                        <tr>
+						<td id="corpo_form">#</td>
+                                                <td><input type="hidden" name="idUsuario" value="<%= usuario.getId_Log() %>"/></td>
+					</tr>
+                                                                                <tr>
+					<td id="corpo_form">#</td>
+                                                <td><input type="hidden" name="tipo" value="<%= usuario.getTipo() %>"/></td>
+					</tr>
+                                        
 					<tr>
 						<td id="corpo_form">Nome:</td>
 						<td><input type="text" name="nome" value="<%= usuario.getNome() %>"/></td>

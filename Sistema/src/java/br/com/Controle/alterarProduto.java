@@ -25,17 +25,19 @@ public class alterarProduto extends HttpServlet {
             } //if
             
             int idProdutos = Integer.parseInt(request.getParameter("idProdutos"));
-            String descricao = request.getParameter("descricao");
+//            String descricao = request.getParameter("descricao");
             double valor = Double.parseDouble(request.getParameter("valor"));
-            int estoque = Integer.parseInt(request.getParameter("estoque"));
+           int estoque = Integer.parseInt(request.getParameter("estoque"));
  
-            String situacao_aux = request.getParameter("situacao");
-            String situacao = situacao_aux;
+           String situacao = request.getParameter("situacao");
+//            String situacao = situacao_aux;
+/*
             if (descricao.isEmpty() || descricao == null) {
                 descricao = "";
                 response.sendRedirect("/erroAlterar.jsp");
             }
-            else if (valor < 0) {
+*/            
+            if (valor < 0) {
                 valor = 0d;
                 response.sendRedirect("/erroAlterar.jsp");
             }
@@ -43,10 +45,12 @@ public class alterarProduto extends HttpServlet {
                 estoque = 0;
                 response.sendRedirect("/erroAlterar.jsp");
             }
+            /*
             else if (situacao != "A" && situacao != "B") {
                 situacao = "";
                 response.sendRedirect("/erroAlterar.jsp");
             }
+            */
             else {
                 
                 situacao = "A";
@@ -58,7 +62,7 @@ public class alterarProduto extends HttpServlet {
                 String urlOK = "/loja/alteracaoRealizada.jsp";
                 RequestDispatcher rd = request.getRequestDispatcher(urlOK);
                 rd.forward(request, response);
-                descricao = "";
+//                descricao = "";
                 valor = 0d;
                 estoque = 0;
                 situacao = "";
