@@ -5,6 +5,7 @@ import com.mysql.jdbc.Connection;
 import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -65,7 +66,7 @@ public class DAO {
         String SQL;  
         listap.toArray(); //converte a lista em array        
         try {                 
-            for (int i=0; i<listap.size(); i++) { //carregando o preço de cada produto por idProduto
+           /* for (int i=0; i<listap.size(); i++) { //carregando o preço de cada produto por idProduto
                 pedido p = new pedido(); //o objeto é criado dentro do loop de modo a ser destruido e reconstruido a cada volta
                 SQL = "SELECT valor FROM Produtos WHERE idProduto LIKE ?";
                 PreparedStatement ps = this.conn.prepareStatement(SQL);
@@ -76,28 +77,46 @@ public class DAO {
                 ps.close(); 
                 SQL = "";
             } //for
+                   */
             GeraToken gt = new GeraToken();
             String token = gt.TOKEN(); //carrega o token da função gt.TOKEN().
-            token = verificaToken(token); //função que verifica no banco de dados a existencia do token gerado.
+//            token = verificaToken(token); //função que verifica no banco de dados a existencia do token gerado.
                 java.util.Date data = new java.util.Date();
-                SQL = "INSERT INTO Pedido (Produtos_idProduto, Quantidade, Valor, Situacao, Cliente_idCliente, TOKEN, Emissao, Pagamento) VALUES (?,?,?,'A',"+listap.get(0).idCliente+","+token+","+data+",?)";
+                
+                String dataFormata = new SimpleDateFormat("yyyy-MM-dd").format(data);               
+                
+                
+                SQL = "INSERT INTO Pedido (Produtos_idProdutos, Quantidade, Valor, Situacao, Cliente_idCliente, TOKEN, Emissao, Pagamento) "
+                
+                        
+                + " VALUES ("+listap.get(0).idProduto+","+listap.get(0).quantidade+",(SELECT valor FROM Produtos WHERE idProdutos = "+listap.get(0).idProduto+"),'A',"+listap.get(0).idCliente+",'"+token+"','"+dataFormata+"','CR')  ";
+                
+                for (int i=1; i<listap.size(); i++){ //concatenação da string SQL para cada objeto do tipo listap.
+                   SQL += " ,("+listap.get(0).idProduto+","+listap.get(0).quantidade+",(SELECT valor FROM Produtos WHERE idProdutos = "+listap.get(0).idProduto+"),'A',"+listap.get(0).idCliente+",'"+token+"','"+dataFormata+"','CR')";
+
+                }
+                
                 PreparedStatement ps = conn.prepareStatement(SQL);
-                ps.setInt(1, listap.get(0).idProduto);
-                ps.setInt(2, listap.get(0).quantidade);
-                ps.setDouble(3, listap.get(0).valor);
-                ps.setString(4,listap.get(0).pagamento);                
-                int index=5; //index para utilizar no ps.setType(index, parameter)
+             //   ps.setInt(1, listap.get(0).idProduto);
+             //   ps.setInt(2, listap.get(0).quantidade);
+//                ps.setDouble(3, listap.get(0).valor);
+            //    ps.setInt(3, listap.get(0).idProduto);
+            //    ps.setString(4,listap.get(0).pagamento);                
+             //   int index=5; //index para utilizar no ps.setType(index, parameter)
+             /*  
                 for (int i=1; i<listap.size(); i++){ //concatenação da string SQL para cada objeto do tipo listap.
                    SQL += ", (?,?,?,'A',"+listap.get(0).idCliente+","+token+","+data+",?)";
                    ps.setInt(index, listap.get(0).idProduto);
                    index++;
                    ps.setInt(index, listap.get(0).quantidade);
                    index++;
-                   ps.setDouble(index, listap.get(0).valor);
+                   //ps.setDouble(index, listap.get(0).valor);
+                   ps.setInt(index, listap.get(0).idProduto);
                    index++;
                    ps.setString(index,listap.get(0).pagamento);
                    index++;
                 }
+            */
                 ps.execute();
                 ps.close();
         } //try

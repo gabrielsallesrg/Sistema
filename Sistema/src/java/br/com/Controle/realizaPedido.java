@@ -46,7 +46,7 @@ public class realizaPedido extends HttpServlet {
                 }
                 DAO dao = new DAO();
                 dao.cadastrarPedido(listap);
-                String URL = "/cliente/menucliente.jsp";
+                String URL = "/ok.jsp";
                 ServletContext sc = getServletContext();
                 RequestDispatcher rd = sc.getRequestDispatcher(URL);
                 rd.forward(request, response); 

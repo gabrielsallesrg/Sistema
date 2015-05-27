@@ -20,7 +20,7 @@ public class GeraToken {
         String auxiliar = "";
         int i;
         SecureRandom gerado = new SecureRandom();
-        for (i = 0; i < letras.length; i++) {
+        for (i = 0; i < tamToken; i++) {
             auxiliar = pegarLetra(gerado.nextInt(letras.length));
             retorno += auxiliar;
         }
