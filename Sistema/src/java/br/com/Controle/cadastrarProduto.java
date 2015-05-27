@@ -3,7 +3,6 @@ package br.com.Controle;
 import br.com.Modelo.DAO;
 import br.com.Modelo.produtos;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -24,75 +23,45 @@ public class cadastrarProduto extends HttpServlet {
                 String URLwithID = response.encodeRedirectURL(incomingURL);  //coloca um número de identificação na string (ID da sesão)
                 response.setHeader("Custom=newURL", URLwithID); //setta o cabeçalho dos documentos de url que rodam no servidor com as novas configurações de identificação do novo usuário da nova sessão
             } //if
-            
-            System.out.println("cadastrarProduto.java");
-            
+
             String descricao = request.getParameter("descricao").toUpperCase();
             double valor;
             String aux_valor = request.getParameter("valor");
-            System.out.println("Descrição = " + descricao);
-            System.out.println(aux_valor);
-            if (aux_valor == null || aux_valor.isEmpty()){
-                System.out.println("linha 36");
+            if (aux_valor == null || aux_valor.isEmpty()) {
                 valor = -1; // -1 enviará para a página de erroEstoque.jsp
-            }
-            else{
+            } else {
                 valor = Double.parseDouble(aux_valor);
-                System.out.println("linha 41");
             }
             int estoque;
-            System.out.println("linha 44");
             String aux_estoque = request.getParameter("estoque");
-            System.out.println("linha 46");
-            if (aux_estoque == null || aux_estoque.isEmpty()){
-                System.out.println("linha 48");
+            if (aux_estoque == null || aux_estoque.isEmpty()) {
                 estoque = -1; // -1 enviará para a página de erroEstoque.jsp
-            }
-            else{
-                System.out.println("linha 52");
+            } else {
                 estoque = Integer.parseInt(aux_estoque);
-                System.out.println("linha 54");
             }
-            System.out.println("linha 56");
+
             String situacao = request.getParameter("status").toUpperCase();
-            System.out.println("linha 58");
-            
-            System.out.println("Descrição = " + descricao);
-            System.out.println("Estoque = " + estoque);
-            System.out.println("Valor = " + valor);
-            System.out.println("Situacao = " + situacao);
-            
+
             RequestDispatcher dispatcher;
             ServletContext servletContext = getServletContext();
             dispatcher = servletContext.getRequestDispatcher("/erroEstoque.jsp");
-            
-            System.out.println("Descrição = " + descricao);
-            System.out.println("Estoque = " + estoque);
-            System.out.println("Valor = " + valor);
-            
-            if (estoque > 0)
+
+            if (estoque > 0) {
                 situacao = "A"; //Produto automaticamente settado como ativo.
-            else if (estoque == 0)
+            } else if (estoque == 0) {
                 situacao = "B"; //produto inativo.
-            
-            
+            }
+
             if (descricao.isEmpty() || descricao == null) {
-                System.out.println("cadastrarProduto.java, 66");
                 descricao = "";
                 dispatcher.forward(request, response);
-            }
-            else if (valor < 0) {
-                System.out.println("cadastrarProduto.java, 71");
+            } else if (valor < 0) {
                 valor = 0d;
                 dispatcher.forward(request, response);
-            }
-            else if (estoque < 0) {
-                System.out.println("cadastrarProduto.java, 76");
+            } else if (estoque < 0) {
                 estoque = 0;
                 dispatcher.forward(request, response);
-            }
-            else {
-                System.out.println("cadastrarProduto.java, 81 else");
+            } else {
                 produtos Produto = new produtos(situacao, estoque, descricao, valor);
                 DAO dao = new DAO();
                 dao.cadastroProduto(Produto);
@@ -107,10 +76,9 @@ public class cadastrarProduto extends HttpServlet {
             } //else
         } //try
         catch (Exception erro) {
-            System.out.println("cadastrarProduto.java, catch");
             erro.printStackTrace(); //imprime no log do servidor
             erro.getMessage(); //recebe a mensagem para que possa ser utilizada em alguma página.
-           String urlErro = "/erroEstoque.jsp";
+            String urlErro = "/erroEstoque.jsp";
             ServletContext sc = getServletContext(); //variável sc recebe o contexto do servlet (uma página jsp, outro servlet, uma conexão...)
             RequestDispatcher rd = sc.getRequestDispatcher(urlErro); //redireciona o contexto para a url urlErro(string).
             rd.forward(request, response);

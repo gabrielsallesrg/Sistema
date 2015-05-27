@@ -2,9 +2,7 @@ package br.com.Controle;
 
 import br.com.Modelo.DAO;
 import br.com.Modelo.pedido;
-import br.com.Modelo.produtos;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -18,52 +16,45 @@ public class consultarToken extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
         response.setContentType("text/html;charset=UTF-8");
-        try { 
+        try {
             HttpSession session = request.getSession(true);
             if (session.isNew()) {
-                    String incomingURL = request.getRequestURL().toString();
-                    String URLwithID = response.encodeRedirectURL(incomingURL);
-                    response.setHeader("Custom=newURL",URLwithID);                   
-                } //if
+                String incomingURL = request.getRequestURL().toString();
+                String URLwithID = response.encodeRedirectURL(incomingURL);
+                response.setHeader("Custom=newURL", URLwithID);
+            } //if
             String token = request.getParameter("token");
-            System.out.println("Token = " + token);
-            System.out.println("consultarToken.java");
-            
 
-                DAO dao = new DAO();
-                pedido ped = new pedido();
-                
-                ped.setToken(token);
-                
-                List<pedido> listaPedidobyToken = dao.listaPedidobyToken(ped);
-                
-                
-                System.out.println("consultarToken.java, tamanho da listaPedidobyToken = " + listaPedidobyToken.size());
-                if (listaPedidobyToken.isEmpty()){
-                    RequestDispatcher dispatcher;
-                    ServletContext servletContext = getServletContext();
-                    dispatcher = servletContext.getRequestDispatcher("/erroToken.jsp");
-                    dispatcher.forward(request, response);
-                }
-                else{
-                    request.setAttribute("listaPedidobyToken", listaPedidobyToken);
+            DAO dao = new DAO();
+            pedido ped = new pedido();
 
-                    RequestDispatcher rd = request.getRequestDispatcher("/loja/entregarPedido.jsp");
-                    System.out.println("consultarToken.java, 54");
-                    rd.forward(request, response);
-                }
-                
+            ped.setToken(token);
+
+            List<pedido> listaPedidobyToken = dao.listaPedidobyToken(ped);
+
+            System.out.println("consultarToken.java, tamanho da listaPedidobyToken = " + listaPedidobyToken.size());
+            if (listaPedidobyToken.isEmpty()) {
+                RequestDispatcher dispatcher;
+                ServletContext servletContext = getServletContext();
+                dispatcher = servletContext.getRequestDispatcher("/erroToken.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                request.setAttribute("listaPedidobyToken", listaPedidobyToken);
+
+                RequestDispatcher rd = request.getRequestDispatcher("/loja/entregarPedido.jsp");
+                rd.forward(request, response);
+            }
+
         } //try
         catch (Exception e) {
             e.printStackTrace();
             e.getMessage();
-            System.out.println("consultarToken.java, catch");
             String urlErro = "/erroEstoque.jsp";
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher(urlErro);
-            rd.forward(request, response);        
+            rd.forward(request, response);
         } //catch
     }
 

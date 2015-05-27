@@ -5,7 +5,6 @@ import br.com.Modelo.Usuario;
 import br.com.Modelo.UsuarioDao;
 import br.com.Modelo.cliente;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

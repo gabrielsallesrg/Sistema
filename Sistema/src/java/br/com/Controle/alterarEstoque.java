@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.Controle;
 
 import br.com.Modelo.DAO;
 import br.com.Modelo.produtos;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -23,19 +17,10 @@ import javax.servlet.http.HttpSession;
  */
 public class alterarEstoque extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {    
+        try {
             HttpSession session = request.getSession(true); //definindo que a sessão é verdadeira
             if (session.isNew()) { //verificar se essa sessão já existe ou não
                 String incomingURL = request.getRequestURL().toString();
@@ -48,15 +33,14 @@ public class alterarEstoque extends HttpServlet {
             DAO dao = new DAO();
             p.setIdProduto(idProduto);
             p.setEstoque(estoque);
-            dao.alteraEstoque(p);            
+            dao.alteraEstoque(p);
             String URL = "/ok.jsp";
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher(URL);
-            
+
             request.setAttribute("operacao", "O estoque do produto " + p.getIdProduto() + ", foi alterado com sucesso!");
-            rd.forward(request, response); 
-        }
-        catch (Exception erro) {
+            rd.forward(request, response);
+        } catch (Exception erro) {
             erro.printStackTrace(); //imprime no log do servidor
             erro.getMessage(); //recebe a mensagem para que possa ser utilizada em alguma página.
             String urlErro = "/erroGenerico.jsp";

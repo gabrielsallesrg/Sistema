@@ -4,10 +4,10 @@ public class produtos {
     //Campos da tabela "produtos"
     int idProduto, estoque;
     double valor;
-    String descricao,situacao;
-//    String situacao;
+    String descricao, situacao;
     
     public produtos(){   }    
+   
     public produtos(int idProduto, int estoque, double valor, String situacao) {
         
         this.idProduto = idProduto;
@@ -16,6 +16,7 @@ public class produtos {
         this.situacao = situacao;
         
     } //construtor completo
+    
     public produtos(int idProduto, int estoque, double valor, String descricao, String situacao) {
         this.idProduto = idProduto;
         this.estoque = estoque;
@@ -23,6 +24,7 @@ public class produtos {
         this.descricao = descricao;
         this.situacao = situacao;
     } //construtor completo
+    
     public produtos(String situacao, int estoque, String descricao, double valor) {
         this.situacao = situacao;
         this.estoque = estoque;

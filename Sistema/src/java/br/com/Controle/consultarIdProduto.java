@@ -3,7 +3,6 @@ package br.com.Controle;
 import br.com.Modelo.DAO;
 import br.com.Modelo.produtos;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;

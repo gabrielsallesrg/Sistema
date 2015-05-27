@@ -14,9 +14,7 @@ public class DAO {
     // método construtor para conectar com o banco
     
     public DAO () throws SQLException {
-        System.out.println("DAO.java, construtor");
         this.conn = (Connection) FabricaDeConexão.getConnection();
-        System.out.println("DAO.java, fim do construtor");
     } //construtor     
     
     public int retornaIdCliente(String nome){   
@@ -150,7 +148,6 @@ public class DAO {
         
         List <produtos> listaProd =  new ArrayList<produtos>();
         String SQL = "SELECT * FROM Produtos WHERE descricao = '" + Produto.getDescricao() + "'";
-        System.out.println("DAO.java, linha 120, SQL = " + SQL);
         PreparedStatement stmt = this.conn.prepareStatement(SQL);
         ResultSet rs = stmt.executeQuery();            
         while(rs.next()){
@@ -165,11 +162,8 @@ public class DAO {
         stmt.close();
         if (listaProd.size() > 0) {
             // Se a lista tiver ao menos 1 elemento, o produto ja esta cadastrado.
-            System.out.println("DAO.java, linha 132, Produto ja na lista");
             SQLException e = new SQLException("Produto ja no BD");
             throw new RuntimeException(e);
-            //Produto.setIdProduto(listaProd.get(0).getIdProduto());
-            //alteraProduto(Produto);
         }
         else{
             // Senao insere o produto
@@ -377,20 +371,12 @@ public class DAO {
     ////////////ALTERAR TABELAS/////////////
     public void alteraProduto (produtos Produto) {
         String SQL = "UPDATE Produtos SET valor = " + Produto.getValor() + ", estoque = " + Produto.getEstoque() + " , situacao = '" + Produto.getSituacao() + "' WHERE idProdutos LIKE " + Produto.getIdProduto();
-        System.out.println("DAO.java, 303, SQL = " + SQL);
         try {
-            System.out.println("DAO.java, 305, try");
             PreparedStatement ps = conn.prepareStatement(SQL);
-            /*ps.setString(1, Produto.getDescricao());
-            ps.setDouble(2, Produto.getValor());
-            ps.setInt(3, Produto.getEstoque());
-            ps.setString(4, ""+Produto.getSituacao());
-            ps.setInt(5, Produto.getIdProduto()); */
             ps.execute();
             ps.close();
         }
         catch (SQLException e) {
-            System.out.println("DAO.java, 305, catch");
             throw new RuntimeException(e);
         } //catch
     } //alteraProduto
