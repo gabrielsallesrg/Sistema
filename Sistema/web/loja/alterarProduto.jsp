@@ -70,21 +70,21 @@
             <hr>
             <p>Insira as novas propriedades do produto:</p>
             <table border="1" cellspacing="1">
-                <thead>
-                    <tr>
-                        <th>Nome:</th>
-                        <th>Preço:</th>
-                        <th>Estoque:</th>
-                        <th>Situação:</th>
-                    </tr>
-                </thead>
                 <tbody>
                     <tr>
-                    <!--    <td><input type="text" name="txtDescricao"/></td> -->
+                        <td>Preço:</td>
                         <td><input type="text" name="Valor"/></td>
-                        <td><input type="text" name="Estoque"/></td>
-                        <td><input type="text" name="Situacao"/></td>
+
                     </tr>
+                    <tr>
+                         <td>Estoque:</td>
+                         <td><input type="text" name="Estoque"/></td>
+                    </tr>
+                    <tr>
+                        <td>Situacao</td>
+                        <td><input type="text" name="Situacao" size="1"/></td>
+                    </tr>
+                        
                 </tbody>
             </table>
             <input type="submit" value="Alterar" name="alterar" />

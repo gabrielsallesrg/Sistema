@@ -359,7 +359,7 @@ public class DAO {
     
     ////////////ALTERAR TABELAS/////////////
     public void alteraProduto (produtos Produto) {
-        String SQL = "UPDATE Produtos SET descricao = '" + Produto.getDescricao() + "', valor = " + Produto.getValor() + ", estoque = " + Produto.getEstoque() + " , situacao = '" + Produto.getSituacao() + "' WHERE idProdutos LIKE " + Produto.getIdProduto();
+        String SQL = "UPDATE Produtos SET valor = " + Produto.getValor() + ", estoque = " + Produto.getEstoque() + " , situacao = '" + Produto.getSituacao() + "' WHERE idProdutos LIKE " + Produto.getIdProduto();
         System.out.println("DAO.java, 303, SQL = " + SQL);
         try {
             System.out.println("DAO.java, 305, try");

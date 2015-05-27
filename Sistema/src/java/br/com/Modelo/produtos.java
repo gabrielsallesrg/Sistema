@@ -4,17 +4,17 @@ public class produtos {
     //Campos da tabela "produtos"
     int idProduto, estoque;
     double valor;
-    String descricao,unidades,situacao;
+    String descricao,situacao;
 //    String situacao;
     
     public produtos(){   }    
-    public produtos(int idProduto, int estoque, String unidades, double valor, String descricao, String situacao) {
+    public produtos(int idProduto, int estoque, double valor, String situacao) {
+        
         this.idProduto = idProduto;
         this.estoque = estoque; //nullable
-        this.unidades = unidades;
         this.valor = valor;
-        this.descricao = descricao;
         this.situacao = situacao;
+        
     } //construtor completo
     public produtos(int idProduto, int estoque, double valor, String descricao, String situacao) {
         this.idProduto = idProduto;
@@ -29,6 +29,7 @@ public class produtos {
         this.valor = valor;
         this.descricao = descricao;
     } //construtor para manipular o estoque    
+
     
     //setters e getters
     public int getIdProduto() {
@@ -43,12 +44,7 @@ public class produtos {
     public void setEstoque(int estoque) {
         this.estoque = estoque;
     }
-    public String getUnidades() {
-        return unidades;
-    }
-    public void setUnidades(String unidades) {
-        this.unidades = unidades;
-    }
+
     public double getValor() {
         return valor;
     }

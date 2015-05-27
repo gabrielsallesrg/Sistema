@@ -24,19 +24,14 @@ public class alterarProduto extends HttpServlet {
                 response.setHeader("Custom=newURL", URLwithID); //setta o cabeçalho dos documentos de url que rodam no servidor com as novas configurações de identificação do novo usuário da nova sessão
             } //if
             
-            int idProdutos = Integer.parseInt(request.getParameter("idProdutos"));
+            int idProdutos = Integer.parseInt(request.getParameter("idProduto"));
 //            String descricao = request.getParameter("descricao");
-            double valor = Double.parseDouble(request.getParameter("valor"));
-           int estoque = Integer.parseInt(request.getParameter("estoque"));
+            double valor = Double.parseDouble(request.getParameter("Valor"));
+            int estoque = Integer.parseInt(request.getParameter("Estoque"));
  
-           String situacao = request.getParameter("situacao");
-//            String situacao = situacao_aux;
-/*
-            if (descricao.isEmpty() || descricao == null) {
-                descricao = "";
-                response.sendRedirect("/erroAlterar.jsp");
-            }
-*/            
+            String situacao = request.getParameter("Situacao");
+
+           
             if (valor < 0) {
                 valor = 0d;
                 response.sendRedirect("/erroAlterar.jsp");
@@ -44,29 +39,26 @@ public class alterarProduto extends HttpServlet {
             else if (estoque < 0) {
                 estoque = 0;
                 response.sendRedirect("/erroAlterar.jsp");
-            }
+            }      
             /*
             else if (situacao != "A" && situacao != "B") {
                 situacao = "";
                 response.sendRedirect("/erroAlterar.jsp");
             }
             */
-            else {
                 
-                situacao = "A";
-                
-                produtos Produto = new produtos(idProdutos, estoque, valor, descricao, situacao);
+                produtos Produto = new produtos(idProdutos, estoque, valor, situacao);
                 DAO dao = new DAO();
                 dao.alteraProduto(Produto);
                 request.setAttribute("listaProdutos", dao); //NOME DA ARRAYLIST. LEMBRAR DE FAZER USO DO MESMO NOME NO JSP!
-                String urlOK = "/loja/alteracaoRealizada.jsp";
+                String urlOK = "/ok.jsp";
                 RequestDispatcher rd = request.getRequestDispatcher(urlOK);
                 rd.forward(request, response);
 //                descricao = "";
                 valor = 0d;
                 estoque = 0;
                 situacao = "";
-            } //else
+
         } //try
         catch (Exception erro) {
             erro.printStackTrace(); //imprime no log do servidor
