@@ -27,27 +27,40 @@ public class cadastrarProduto extends HttpServlet {
             
             System.out.println("cadastrarProduto.java");
             
-            String descricao = request.getParameter("descricao");
-            //double valor = Double.parseDouble(request.getParameter("valor"));
+            String descricao = request.getParameter("descricao").toUpperCase();
             double valor;
             String aux_valor = request.getParameter("valor");
+            System.out.println("Descrição = " + descricao);
             System.out.println(aux_valor);
             if (aux_valor == null || aux_valor.isEmpty()){
+                System.out.println("linha 36");
                 valor = -1; // -1 enviará para a página de erroEstoque.jsp
             }
             else{
                 valor = Double.parseDouble(aux_valor);
+                System.out.println("linha 41");
             }
-            //int estoque = Integer.parseInt(request.getParameter("estoque"));
             int estoque;
+            System.out.println("linha 44");
             String aux_estoque = request.getParameter("estoque");
+            System.out.println("linha 46");
             if (aux_estoque == null || aux_estoque.isEmpty()){
+                System.out.println("linha 48");
                 estoque = -1; // -1 enviará para a página de erroEstoque.jsp
             }
             else{
+                System.out.println("linha 52");
                 estoque = Integer.parseInt(aux_estoque);
+                System.out.println("linha 54");
             }
-            String situacao = "A";
+            System.out.println("linha 56");
+            String situacao = request.getParameter("status").toUpperCase();
+            System.out.println("linha 58");
+            
+            System.out.println("Descrição = " + descricao);
+            System.out.println("Estoque = " + estoque);
+            System.out.println("Valor = " + valor);
+            System.out.println("Situacao = " + situacao);
             
             RequestDispatcher dispatcher;
             ServletContext servletContext = getServletContext();

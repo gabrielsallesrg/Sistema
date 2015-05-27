@@ -164,10 +164,12 @@ public class DAO {
         rs.close();
         stmt.close();
         if (listaProd.size() > 0) {
-            // Se a lista tiver ao menos 1 elemento, o produto ja esta cadastrado e sera atualizado.
+            // Se a lista tiver ao menos 1 elemento, o produto ja esta cadastrado.
             System.out.println("DAO.java, linha 132, Produto ja na lista");
-            Produto.setIdProduto(listaProd.get(0).getIdProduto());
-            alteraProduto(Produto);
+            SQLException e = new SQLException("Produto ja no BD");
+            throw new RuntimeException(e);
+            //Produto.setIdProduto(listaProd.get(0).getIdProduto());
+            //alteraProduto(Produto);
         }
         else{
             // Senao insere o produto
