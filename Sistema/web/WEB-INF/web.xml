@@ -49,6 +49,10 @@
         <servlet-name>alterarEstoque</servlet-name>
         <servlet-class>br.com.Controle.alterarEstoque</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>removerPedido</servlet-name>
+        <servlet-class>br.com.Controle.removerPedido</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>realizaPedido</servlet-name>
         <url-pattern>/RP</url-pattern>
@@ -96,6 +100,10 @@
     <servlet-mapping>
         <servlet-name>alterarEstoque</servlet-name>
         <url-pattern>/AE</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>removerPedido</servlet-name>
+        <url-pattern>/RMP</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

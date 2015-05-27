@@ -81,7 +81,7 @@
         <h1>Cheque os pedidos para dar baixa</h1>
         
         <br>
-        
+        <form name="entregarPedido" action="RMP" method="POST">
         <table border="1" cellspacing="2">
             <thead>
                 <%
@@ -110,7 +110,8 @@
             %>
             <tbody>
                 <tr>
-                    <td><input type="checkbox"> </td>
+                    <%--<td><input type="checkbox"> </td>--%>
+                    <td><input type="radio" name="selecionarPedido" value="<%= p.getIdPedido() %>"> </td>
                     <td> <%= p.getIdPedido() %> </td>
                     <td> <%= pdao.nomeProdutoByID(p.getIdProduto()) %> </td>
                     <td> <%= p.getQuantidade() %> </td>
@@ -122,6 +123,7 @@
                 }
             %>
         </table>
+        <input type="submit" value="Retirar" name="option" />
         <br>
     </body>
 </html>

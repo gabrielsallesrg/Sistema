@@ -192,6 +192,23 @@ public class DAO {
         }
     } //cadastrarProduto
     
+    public void removerPedido (int idPedido) throws SQLException {
+        
+        // Apos a retirada do pedido no estabelecimento, sera removido o pedido da tabela
+        // delete from Pedido where idPedido = 3
+        
+        String SQL = "DELETE FROM Pedido WHERE idPedido = " + idPedido;
+        try {
+            PreparedStatement ps = conn.prepareStatement(SQL);
+            ps.execute();
+            ps.close();
+        } //try
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        } //catch
+        
+    } //removerPedido
+    
     ////////////////////LISTAR E CONSULTAR TABELAS///////////////
     public List<produtos> listaProdutos() {            
         try {
