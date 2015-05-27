@@ -31,7 +31,7 @@ public class realizaPedido extends HttpServlet {
                 response.setHeader("Custom-newURL", URLwithID);
             }
             try {
-                int idCliente = Integer.parseInt(session.getattribute("idCliente").tostring());                          
+                int idCliente = Integer.parseInt(session.getAttribute("idCliente").tostring());                          
                 String[] checado = (request.getParameterValues("checado")); //recebe os parâmetros como string
                 int[] quantidades = Integer.parseInt((request.getParameterValues("quantidade")));
                 List<pedido> listap = new ArrayList<pedido>();
