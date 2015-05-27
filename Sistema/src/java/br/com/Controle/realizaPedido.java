@@ -1,6 +1,7 @@
 package br.com.Controle;
 
 import br.com.Modelo.DAO;
+import br.com.Modelo.pedido;
 import br.com.Modelo.produtos;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,17 +31,19 @@ public class realizaPedido extends HttpServlet {
                 response.setHeader("Custom-newURL", URLwithID);
             }
             try {
-                int idCliente = 0; //variável de teste.
-                List<produtos> aut = new ArrayList<produtos>();                
+                int idCliente = Integer.parseInt(session.getattribute("idCliente").tostring());                          
                 String[] checado = (request.getParameterValues("checado")); //recebe os parâmetros como string
-                int[] idProdutos = new int[checado.length]; //array com o tamanho de checado[]
-                int[] quantidade = new int[checado.length];
+                int[] quantidades = Integer.parseInt((request.getParameterValues("quantidade")));
+                List<pedido> listap = new ArrayList<pedido>();
+                pedido p = new pedido();
                 for (int i=0; i<checado.length; i++) {
-                    idProdutos[i] = Integer.parseInt(checado[i]); //recebe os valores do vetor checado convertido para inteiro
-                    quantidade[i] = Integer.parseInt(request.getParameter("txtQuantidade"+idProdutos[i]));
+                    p.setIdProduto(Integer.parseInt(checado[i]));
+                    p.setQuantidade(quantidades[i]);
+                    p.setIdCliente(idCliente);
+                    listap.add(p);
                 }
                 DAO dao = new DAO();
-                dao.cadastrarPedido(idProdutos, quantidade, idCliente);
+                dao.cadastrarPedido(listap);
                 String URL = "/cliente/menucliente.jsp";
                 ServletContext sc = getServletContext();
                 RequestDispatcher rd = sc.getRequestDispatcher(URL);

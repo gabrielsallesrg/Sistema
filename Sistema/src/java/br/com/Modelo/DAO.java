@@ -6,6 +6,7 @@ import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class DAO {
@@ -17,42 +18,31 @@ public class DAO {
         this.conn = (Connection) FabricaDeConexão.getConnection();
     } //construtor     
     
-    public int retornaIdCliente(String nome){   
-        
-        int idCliente = 0;
-        
-        try{
-            
+    public int retornaIdCliente(String nome){           
+        int idCliente = 0;        
+        try{            
             String SQL = " SELECT idCliente from cliente where nomeUsuario = ?";                   
             PreparedStatement stmt = this.conn.prepareStatement(SQL);  
             stmt.setString(1,nome);
-            ResultSet rs = stmt.executeQuery();  
-            
+            ResultSet rs = stmt.executeQuery();              
             while(rs.next()){
                 idCliente = rs.getInt("idCliente");
             }
             rs.close();
-            stmt.close();
-            
-            return idCliente; 
-            
+            stmt.close();            
+            return idCliente;             
         }catch(Exception e){
             throw new RuntimeException(e);
         }    
     } //listaPedidos
     
-     public cliente retornaCadastroCliente(Usuario user){   
-        
-      
-        try{
-            
+     public cliente retornaCadastroCliente(Usuario user){       
+        try{            
             String SQL = " SELECT * from cliente where nomeUsuario = ?";                   
             PreparedStatement stmt = this.conn.prepareStatement(SQL);  
             stmt.setString(1,user.getNome());
-            ResultSet rs = stmt.executeQuery();  
-            
-            cliente client = new cliente();
-            
+            ResultSet rs = stmt.executeQuery();             
+            cliente client = new cliente();            
             while(rs.next()){
                 client.setIdCliente(rs.getInt("idCliente"));
                 client.setCidade(rs.getString("cidade"));
@@ -63,58 +53,53 @@ public class DAO {
                 client.setTelefone(rs.getString("telefone"));
             }
             rs.close();
-            stmt.close();
-            
-            return client; 
-            
+            stmt.close();            
+            return client;             
         }catch(Exception e){
             throw new RuntimeException(e);
         }    
-    } //listaPedidos
+    } //listaPedidos    
     
-    
-    /////////////////ADICIONAR TABELAS////////////////////
-    
-    public void cadastrarPedido(int[] idProduto, int[] quantidade, int idCliente) {
-        final int index = idProduto.length; //recebe o tamanho do vetor
-        double[] precos = new double[index];
-        String SQL;      
+    /////////////////ADICIONAR TABELAS////////////////////    
+    public void cadastrarPedido(List<pedido> listap) {
+        String SQL;  
+        listap.toArray(); //converte a lista em array        
         try {                 
-            for (int i=0; i<index; i++) { //carregando o array preços.
+            for (int i=0; i<listap.size(); i++) { //carregando o preço de cada produto por idProduto
+                pedido p = new pedido(); //o objeto é criado dentro do loop de modo a ser destruido e reconstruido a cada volta
                 SQL = "SELECT valor FROM Produtos WHERE idProduto LIKE ?";
                 PreparedStatement ps = this.conn.prepareStatement(SQL);
-                ps.setInt(1,idProduto[i]);
+                ps.setInt(1,listap.get(i).idProduto);
                 ResultSet rs = ps.executeQuery();
-                precos[i] = rs.getDouble("valor"); //recebe o retorno do select do banco
-                precos[i] *= quantidade[i]; //multiplica o preço pela quantidade para chegar no valor total do pedido.
+                listap.get(i).valor = rs.getDouble("valor") * listap.get(i).quantidade; //valor do pedido é o preço do produto * quantidade desejada.
                 rs.close();
                 ps.close(); 
                 SQL = "";
             } //for
-            for (int i=0; i<index; i++) { //adiciona os pedidos ao banco de dados.
-                pedido p = new pedido(); //settando a variavel p
-                p.setQuantidade(quantidade[i]);
-                p.setIdCliente(idCliente);
+            GeraToken gt = new GeraToken();
+            String token = gt.TOKEN(); //carrega o token da função gt.TOKEN().
+            token = verificaToken(token); //função que verifica no banco de dados a existencia do token gerado.
                 java.util.Date data = new java.util.Date();
-                p.setEmissao(data);
-                p.setSituacao('A');
-                p.setPagamento("De");
-                GeraToken gt = new GeraToken();
-                p.setToken(gt.TOKEN());
-                p.setIdProduto(idProduto[i]);
-                SQL = "INSERT INTO Pedido (Produtos_idProduto, Quantidade, Valor, Situacao, Cliente_idCliente, TOKEN, Emissao, Pagamento) VALUES (?,?,?,?,?,?,?,?)";
+                SQL = "INSERT INTO Pedido (Produtos_idProduto, Quantidade, Valor, Situacao, Cliente_idCliente, TOKEN, Emissao, Pagamento) VALUES (?,?,?,'A',"+listap.get(0).idCliente+","+token+","+data+",?)";
                 PreparedStatement ps = conn.prepareStatement(SQL);
-                ps.setInt(1, p.getIdProduto());
-                ps.setDouble(2, p.getQuantidade());
-                ps.setDouble(3, p.getValor());
-                ps.setString(4, ""+p.getSituacao());
-                ps.setInt(5, p.getIdCliente());
-                ps.setString(6, p.getToken());
-                ps.setDate(7, convertDate(p.getEmissao()));
-                ps.setString(8, p.getPagamento());
+                ps.setInt(1, listap.get(0).idProduto);
+                ps.setInt(2, listap.get(0).quantidade);
+                ps.setDouble(3, listap.get(0).valor);
+                ps.setString(4,listap.get(0).pagamento);                
+                int index=5; //index para utilizar no ps.setType(index, parameter)
+                for (int i=1; i<listap.size(); i++){ //concatenação da string SQL para cada objeto do tipo listap.
+                   SQL += ", (?,?,?,'A',"+listap.get(0).idCliente+","+token+","+data+",?)";
+                   ps.setInt(index, listap.get(0).idProduto);
+                   index++;
+                   ps.setInt(index, listap.get(0).quantidade);
+                   index++;
+                   ps.setDouble(index, listap.get(0).valor);
+                   index++;
+                   ps.setString(index,listap.get(0).pagamento);
+                   index++;
+                }
                 ps.execute();
                 ps.close();
-            } 
         } //try
         catch (SQLException e) {
             throw new RuntimeException(e);
@@ -297,19 +282,15 @@ public class DAO {
         catch (SQLException e) {
             throw new RuntimeException(e);
         } //catch
-    } //listaProdutos
-    
+    } //listaProdutos    
     
     public List<pedido> listaPedidobyToken(pedido pedid) {            
         try {
             List<pedido> aut = new ArrayList<pedido>();
             String SQL = "SELECT * FROM Pedido WHERE token = ?";
-            
             PreparedStatement stmt = this.conn.prepareStatement(SQL);  
             stmt.setString(1, pedid.getToken());
-            ResultSet rs = stmt.executeQuery();            
-            
-            
+            ResultSet rs = stmt.executeQuery(); 
             while(rs.next()){
                 pedido ped = new pedido();                
                 ped.setEmissao(rs.getDate("emissao"));
@@ -321,8 +302,7 @@ public class DAO {
                 ped.setToken(rs.getString("token"));
                 ped.setValor(rs.getFloat("valor"));                
                 aut.add(ped);
-            }
-            
+            }            
             rs.close();
             stmt.close();
             return aut;
@@ -337,11 +317,9 @@ public class DAO {
         try {
             List<pedido> aut = new ArrayList<pedido>();
             String token = p.getToken();
-            String SQL = "SELECT * FROM Pedido WHERE token = " + token;
-            
+            String SQL = "SELECT * FROM Pedido WHERE token = " + token;            
             PreparedStatement stmt = this.conn.prepareStatement(SQL);  
-            ResultSet rs = stmt.executeQuery();            
-            
+            ResultSet rs = stmt.executeQuery();             
             while(rs.next()){
                 pedido ped = new pedido();                
                 ped.setEmissao(rs.getDate("emissao"));
@@ -357,8 +335,7 @@ public class DAO {
                 ped.setToken(rs.getString("token"));
                 ped.setValor(rs.getFloat("valor"));                
                 aut.add(ped);
-            }
-            
+            }            
             rs.close();
             stmt.close();
             return aut;
@@ -432,6 +409,38 @@ public class DAO {
     
     /////////Método de conversão http://stackoverflow.com/questions/530012/how-to-convert-java-util-date-to-java-sql-date//////////
     public java.sql.Date convertDate(java.util.Date date) {
-        return new java.sql.Date(date.getTime());
+        return new java.sql.Date(date.getTime());   
     }
+    public String verificaToken(String token) { //método de verificação de token antes de cadastrar um novo.
+        String SQL = "SELECT TOKEN FROM Pedido";
+        String SQLCount = "SELECT COUNT(TOKEN) FROM Pedido";
+        String [] aToken;
+        int quantidade;
+        try {
+            PreparedStatement ps = conn.prepareStatement(SQLCount);
+            ResultSet rs = ps.executeQuery();
+            quantidade = rs.getInt(1); //O 1 significa o número da coluna cujo parâmetro deseja ser resgatado do banco de acordo com a string SQLCount.
+            aToken = new String[quantidade]; //cria uma String para receber <quantidade> tokens.
+            rs.close();
+            ps.close();
+            PreparedStatement psSQL = conn.prepareStatement(SQL);            
+            ResultSet rsSQL = psSQL.executeQuery();
+            int index = 0;
+            while(rsSQL.next()) {
+                aToken[index] = rsSQL.getString(1); //1 se refere ao índice do select.
+                index++;
+            } //while
+            for (int i=0; i<index; i++) {
+                if (token.equals(aToken[i])) { //se o parâmetro for igual a um dos itens do array, é gerado um novo token.
+                    GeraToken gt = new GeraToken();
+                    token = gt.TOKEN();
+                    i = 0;
+                } //if
+            } //for
+            return token;
+        } //try
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        } //catch
+    } //verificaToken
 } //class
