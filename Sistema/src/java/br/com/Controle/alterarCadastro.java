@@ -1,5 +1,9 @@
 package br.com.Controle;
 
+import br.com.Modelo.DAO;
+import br.com.Modelo.Usuario;
+import br.com.Modelo.UsuarioDao;
+import br.com.Modelo.cliente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -20,7 +24,9 @@ public class alterarCadastro extends HttpServlet {
                 
             try{
                 
-             String pNome = request.getParameter("nome"); //obrigatório
+            int idCliente = Integer.parseInt(request.getParameter("idCliente").toString());
+            int idUsuario = Integer.parseInt(request.getParameter("idUsuario").toString());
+            String pNome = request.getParameter("nome"); //obrigatório
             String sNome = request.getParameter("sobrenome"); //obrigatório
             String endereco = request.getParameter("endereco"); 
             String telefone = request.getParameter("telefone"); //obrigatório
@@ -29,14 +35,30 @@ public class alterarCadastro extends HttpServlet {
             String email = request.getParameter("email");            
             String usuario = request.getParameter("usuario");
             String senha = request.getParameter("senha");
+         
+                Usuario user = new Usuario(sNome, senha, tipo);   
+                
+             
+                UsuarioDao udao = new UsuarioDao();
+                
+                if("C".equals(tipo)){
+                    DAO dao = new DAO();
+                    cliente cli = new cliente(sNome, sNome, endereco, telefone, cidade, email, usuario, senha);
+                    
+                    cli.setIdCliente(idCliente); // precisa passar o id do cliente
+                    dao.alteraCliente(cli);
+                    udao.setIdCliente(idCliente);
+                }
+                
+                user.setIdUsuario(idUsuario);
+                udao.alteraUsuario(user);
+                
             
-            
-            System.out.println(pNome);
-            System.out.println(email);
+
             
                 String urlOK = "/ok.jsp";
                 ServletContext sc = getServletContext();
-                
+
                 request.setAttribute("operacao", "Foi alterado o login/senha. Verifique");
                 
                 RequestDispatcher rd = sc.getRequestDispatcher(urlOK);                
@@ -44,13 +66,12 @@ public class alterarCadastro extends HttpServlet {
                 
                 
             }catch(Exception e){
-                            e.printStackTrace();
+            e.printStackTrace();
             e.getMessage();
-            System.out.println("consultarToken.java, catch");
-            String urlErro = "/erroEstoque.jsp";
+            String urlErro = "/erro.jsp";
             ServletContext sc = getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher(urlErro);
-            rd.forward(request, response);  
+            rd.forward(request, response); 
             }
         }
     }

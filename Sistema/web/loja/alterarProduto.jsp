@@ -57,7 +57,7 @@
                         produtos p = (produtos) pli.next();
                     %> 
                     <tr>
-                        <td><input type="radio" name="selecionarProduto" value="<%=p.getIdProduto()%>"/></td>
+                        <td><input type="radio" name="idProduto" value="<%=p.getIdProduto()%>"/></td>
                         <td><%= p.getIdProduto() %></td>
                         <td><%= p.getDescricao() %></td>
                         <td><%= p.getEstoque() %></td>
@@ -80,10 +80,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" name="txtDescricao"/></td>
-                        <td><input type="text" name="txtValor"/></td>
-                        <td><input type="text" name="txtEstoque"/></td>
-                        <td><input type="text" name="txtSituacao"/></td>
+                    <!--    <td><input type="text" name="txtDescricao"/></td> -->
+                        <td><input type="text" name="Valor"/></td>
+                        <td><input type="text" name="Estoque"/></td>
+                        <td><input type="text" name="Situacao"/></td>
                     </tr>
                 </tbody>
             </table>

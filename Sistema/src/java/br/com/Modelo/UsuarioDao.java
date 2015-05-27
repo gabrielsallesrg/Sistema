@@ -127,6 +127,7 @@ public class UsuarioDao {
 					u.setId_Log(rs.getInt("idUsuario"));
 					u.setNome(rs.getString("nome"));
 					u.setSenha(rs.getString("senha"));
+                                        u.setTipo(rs.getString("tipo"));
 					
 				}
                                
@@ -169,7 +170,7 @@ public class UsuarioDao {
 		
 	// Metodo para alterar/atualizar Usuario no banco de dados
 		public void alteraUsuario(Usuario usuario) {
-			String SQL = "UPDATE usuario SET senha=? "
+			String SQL = "UPDATE usuario SET senha = ? "
 					+ " WHERE idUsuario = ?  ";
 			try {
 				PreparedStatement st = conn.prepareStatement(SQL);

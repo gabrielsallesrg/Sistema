@@ -57,7 +57,7 @@ public class DAO {
             
             while(rs.next()){
                 client.setIdCliente(rs.getInt("idCliente"));
-               client.setCidade(rs.getString("cidade"));
+                client.setCidade(rs.getString("cidade"));
                 client.setEmail(rs.getString("Email"));
                 client.setEndereco(rs.getString("endereco"));
                 client.setNome(rs.getString("nome"));
@@ -401,6 +401,27 @@ public class DAO {
             PreparedStatement ps = conn.prepareStatement(SQL);
             ps.setInt(1, Produto.getEstoque());
             ps.setInt(2, Produto.getIdProduto());
+            ps.execute();
+            ps.close();
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        } //catch
+    } //alteraProduto
+    
+    public void alteraCliente (cliente cli) {
+        String SQL = "UPDATE cliente SET nome = ?, sobrenome = ?, Endereco = ?, "+
+                    " telefone = ?, cidade = ?, email = ? WHERE idCliente = ? ";
+        try {
+            PreparedStatement ps = conn.prepareStatement(SQL);
+            ps.setString(1, cli.getNome());
+            ps.setString(2, cli.getSobrenome());
+            ps.setString(3, cli.getEndereco());
+            ps.setString(4, cli.getTelefone());
+            ps.setString(5, cli.getCidade());
+            ps.setString(6, cli.getEmail());
+            ps.setInt(7, cli.getIdCliente());
+            
             ps.execute();
             ps.close();
         }
