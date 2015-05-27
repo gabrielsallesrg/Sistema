@@ -66,18 +66,7 @@ public class DAO {
         String SQL;  
         listap.toArray(); //converte a lista em array        
         try {                 
-           /* for (int i=0; i<listap.size(); i++) { //carregando o preço de cada produto por idProduto
-                pedido p = new pedido(); //o objeto é criado dentro do loop de modo a ser destruido e reconstruido a cada volta
-                SQL = "SELECT valor FROM Produtos WHERE idProduto LIKE ?";
-                PreparedStatement ps = this.conn.prepareStatement(SQL);
-                ps.setInt(1,listap.get(i).idProduto);
-                ResultSet rs = ps.executeQuery();
-                listap.get(i).valor = rs.getDouble("valor") * listap.get(i).quantidade; //valor do pedido é o preço do produto * quantidade desejada.
-                rs.close();
-                ps.close(); 
-                SQL = "";
-            } //for
-                   */
+ 
             GeraToken gt = new GeraToken();
             String token = gt.TOKEN(); //carrega o token da função gt.TOKEN().
 //            token = verificaToken(token); //função que verifica no banco de dados a existencia do token gerado.
@@ -97,26 +86,7 @@ public class DAO {
                 }
                 
                 PreparedStatement ps = conn.prepareStatement(SQL);
-             //   ps.setInt(1, listap.get(0).idProduto);
-             //   ps.setInt(2, listap.get(0).quantidade);
-//                ps.setDouble(3, listap.get(0).valor);
-            //    ps.setInt(3, listap.get(0).idProduto);
-            //    ps.setString(4,listap.get(0).pagamento);                
-             //   int index=5; //index para utilizar no ps.setType(index, parameter)
-             /*  
-                for (int i=1; i<listap.size(); i++){ //concatenação da string SQL para cada objeto do tipo listap.
-                   SQL += ", (?,?,?,'A',"+listap.get(0).idCliente+","+token+","+data+",?)";
-                   ps.setInt(index, listap.get(0).idProduto);
-                   index++;
-                   ps.setInt(index, listap.get(0).quantidade);
-                   index++;
-                   //ps.setDouble(index, listap.get(0).valor);
-                   ps.setInt(index, listap.get(0).idProduto);
-                   index++;
-                   ps.setString(index,listap.get(0).pagamento);
-                   index++;
-                }
-            */
+
                 ps.execute();
                 ps.close();
         } //try
