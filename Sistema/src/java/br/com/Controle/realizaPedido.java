@@ -33,7 +33,9 @@ public class realizaPedido extends HttpServlet {
             try {
                 int idCliente = Integer.parseInt(session.getAttribute("idCliente").toString());                          
                 String[] checado = (request.getParameterValues("checado")); //recebe os parâmetros como string
-                int[] quantidades = Integer.parseInt((request.getParameterValues("quantidade")));
+                int[] quantidades = new int[checado.length];
+                for (int i=0; i<checado.length; i++)
+                    quantidades[i] = Integer.parseInt(request.getParameter("txt"+Integer.parseInt(checado[i])));                                                 
                 List<pedido> listap = new ArrayList<pedido>();
                 pedido p = new pedido();
                 for (int i=0; i<checado.length; i++) {
